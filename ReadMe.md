@@ -30,8 +30,6 @@ They can book an appointment or they can simply look at the prescription, lab ra
 
 ###### If they are a doctor:
 They can see their schedule, they can adjust it (saying I am free for this hour or I am not free this hour)
-**BY DEFAULT** a doctor is available from Monday to Friday from 8am till 5pm. So a doctor needs to change that and can set it to always.
-
 
 ### Control
 Includes all the control and coordination between the model and view.
