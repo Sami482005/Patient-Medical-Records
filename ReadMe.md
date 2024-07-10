@@ -6,7 +6,7 @@ This repository was created for the purpose of collecting code from the four con
 MySQl server installed from Wamp Server.
 We are using Java through NetBeans Distribution.
 JDK>8 (Using 22)
-Installing the appropriate JDBC ()
+Add [JDBC](/home/sami/Patient_Medical_Records/mysql-connector-j-9.0.0.jar) to the Java Project
 
 # Explaining the Repository
 ### Schema
