@@ -1,6 +1,6 @@
-MedicalFacility (F_ID, Fname, location, contactInfo)
+MedicalFacility (F_ID, Fname, location)
 
-Doctor (Doctor-ID, first-name, last-name, email, phone_nb, title, office_nb, specialty, starting_Year #F_ID)
+Doctor (Doctor-ID, first-name, last-name, email, phone_nb, title, specialty, starting_Year #F_ID)
 
 Patients (P_SSN, P_ID, DOB, first-name, last-name, address, gender, email, phone_nb, medical_history)
 
@@ -12,7 +12,7 @@ Medical_File (MF_ID, dateOfcreation, #P_SSN, #Doctor-ID, prescription, desc, dat
 
 LabTest (LT_ID, report, type, reason, #MF_ID)
 
-Radiology (R_ID, type, report, reason, imagesFiles, #MF_ID)
+Radiology (R_ID, type, report, reason, #MF_ID)
 
 Surgery (S_ID, Surgery_name, aim)
 

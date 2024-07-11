@@ -2,7 +2,6 @@ CREATE TABLE MEDICAL_FACILITY(
     Medical_Facility_ID INTEGER,
     Facility_Name VARCHAR (30),
     Facility_Location VARCHAR(70),
-    ContactInformation VARCHAR(100),
     PRIMARY KEY (Medical_Facility_ID)
     );
 
@@ -11,11 +10,10 @@ CREATE TABLE DOCTOR(
     First_Name VARCHAR(30) NOT NULL,
     Last_Name VARCHAR(30) NOT NULL,
     email VARCHAR(30) NOT NULL UNIQUE,
-	Phone_Number VARCHAR(12) NOT NULL UNIQUE,
+	Phone_Number VARCHAR(12) NOT NULL UNIQUE CHECK Phone_Number LIKE "+961--------",
     Title VARCHAR(10),
     Specialty VARCHAR(50),
     Starting_Year INTEGER,
-    Office_Number INTEGER,
     Medical_Facility_ID INTEGER,
     PRIMARY KEY (Doctor_ID),
     CONSTRAINT FID FOREIGN KEY (Medical_Facility_ID) REFERENCES MEDICAL_FACILTIY(Medical_Facility_ID)    
@@ -30,7 +28,7 @@ CREATE TABLE PATIENTS(
     First_Name VARCHAR(30) NOT NULL,
     Last_Name VARCHAR(30) NOT NULL,
     email VARCHAR(30) NOT NULL UNIQUE,
-	Phone_Number VARCHAR(8) NOT NULL UNIQUE,
+	Phone_Number VARCHAR(12) NOT NULL UNIQUE  CHECK Phone_Number LIKE "+961--------",
     Address VARCHAR(80),
     Gender CHAR(1) NOT NULL,
 	Medical_History VARCHAR (50000),
