@@ -74,6 +74,43 @@ public class DBAccess {
         return pstmt.executeQuery();
     }
 }
+// Method to retrieve appointments by doctor ID
+    public List<Appointment> getAppointmentsByDoctorId(int doctorId) {
+        List<Appointment> appointments = new ArrayList<>();
+        String query = "SELECT * FROM Appointments WHERE Doctor_ID = ?";
+        
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, doctorId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Appointment appointment = new Appointment();
+                appointment.setAppointmentId(rs.getInt("Appointment_ID"));
+                appointment.setDoctorId(rs.getInt("Doctor_ID"));
+                appointment.setPatientId(rs.getInt("Patient_ID"));
+                appointment.setAppointmentDate(rs.getDate("Appointment_Date"));
+                // Set other appointment details as needed
+                
+                appointments.add(appointment);
+            }
+            
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return appointments;
+    }
 
+   
+    public void close() {
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
    
 }
