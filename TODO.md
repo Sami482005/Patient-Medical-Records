@@ -6,7 +6,7 @@
 
 - [x] Create the Model Package Contents
 
-- [ ] Create the Main Page Interface: Patient/Doctor choice
+- [x] Create the Main Page Interface: Patient/Doctor choice
 
 - [ ] Patient Interface: Create new File? Login?
 
