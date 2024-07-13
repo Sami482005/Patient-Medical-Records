@@ -3,6 +3,7 @@ package Control;
 import Model.Doctor;
 import Model.Patient;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,12 +35,12 @@ public class DBAccess {
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE,null, ex);
         }
     }
-
+    
     public void addNewDoctor(Doctor d) {
         String query = "INSERT INTO DOCTOR VALUES (" + d.getDoctorId() + ", '" + d.getFirstName() 
                 + "', '" + d.getLastName() + "', '" + d.getEmail() + "', '" + d.getPhoneNumber() 
                 + "', '" + d.getTitle() + "', '" + d.getSpecialty() + "', " + d.getStartingYear() 
-                + ", " + d.getMedicalFacilityId() + ")";
+                + ", " + d.getMedicalFacilityId()+ ")";
         try {
             connect();
             stmt.executeUpdate(query);
@@ -48,57 +49,76 @@ public class DBAccess {
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ResultSet getDoctorsBySpecialty(String specialty) throws SQLException {
-        String query = "SELECT first_name, last_name FROM DOCTOR WHERE specialty = ?";
-        connect();
-        PreparedStatement pstmt = con.prepareStatement(query);
-        pstmt.setString(1, specialty);
-        return pstmt.executeQuery();
-    }
-
-    public ResultSet getDoctorByIdOrName(int doctorId, String firstName, String lastName) throws SQLException {
-        String query = "SELECT * FROM DOCTOR WHERE doctor_id = ? OR (first_name = ? AND last_name = ?)";
-        connect();
-        PreparedStatement pstmt = con.prepareStatement(query);
-        pstmt.setInt(1, doctorId);
-        pstmt.setString(2, firstName);
-        pstmt.setString(3, lastName);
-        return pstmt.executeQuery();
-    }
-
-    public ResultSet getPatientById(int patientId) throws SQLException {
-        String query = "SELECT * FROM PATIENT WHERE patient_id = ?";
-        connect();
-        PreparedStatement pstmt = con.prepareStatement(query);
-        pstmt.setInt(1, patientId);
-        return pstmt.executeQuery();
-    }
-}
-// Method to retrieve appointments by doctor ID
-    public List<Appointment> getAppointmentsByDoctorId(int doctorId) {
-        List<Appointment> appointments = new ArrayList<>();
-        String query = "SELECT * FROM Appointments WHERE Doctor_ID = ?";
-        
-        try (PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setInt(1, doctorId);
-            ResultSet rs = stmt.executeQuery();
-            
-            while (rs.next()) {
-                Appointment appointment = new Appointment();
-                appointment.setAppointmentId(rs.getInt("Appointment_ID"));
-                appointment.setDoctorId(rs.getInt("Doctor_ID"));
-                appointment.setPatientId(rs.getInt("Patient_ID"));
-                appointment.setAppointmentDate(rs.getDate("Appointment_Date"));
-                // Set other appointment details as needed
-                
-                appointments.add(appointment);
+    
+    public ArrayList<String> getDoctorsBySpecialty(String specialty) throws SQLException {
+        String query = "First_Name, Last_Name FROM DOCTOR WHERE specialty = " + specialty;
+        ArrayList<String> DIDList = new ArrayList<>();
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()){
+                DIDList.add(res.getString("First_Name" + "Last_Name"));
             }
-            
-            rs.close();
-        } catch (SQLException ex) {
+            close();
+        }catch(SQLException ex){
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return appointments;
+        return DIDList;
     }
+    
+    public ArrayList<String> getAllSpecialties() throws SQLException{
+        String q = "SELECT Specialty FROM DOCTOR";
+        ArrayList<String> specialties = new ArrayList<>();
+        
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            while(res.next()){
+                specialties.add(res.getString("Specialty"));
+            }
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return specialties;
+    }
+    
+    public ArrayList<Integer> getApptsIDFromDoctor(String doc){
+        int DID = getIDFromName(doc);
+        String q = "SELECT Appointment_ID FROM IS_AVAILABLE WHERE Doctor_ID = " + DID;
+        ArrayList<Integer> ApptID = new ArrayList<>();
+        
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            close();
+            while (res.next())
+                ApptID.add(res.getInt("Appointment_ID"));
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ApptID;
+    }
+
+    private int getIDFromName(String doc) {
+        String[] fl = doc.split(" ");
+        String fname = fl[0];
+        String lname = fl[1];
+        int DID = 0;
+        String q = "SELECT Doctor_ID FROM DOCTOR WHERE First_Name = '" + fname 
+                + "', AND Last_Name = '" + lname + "';";
+       
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            DID = res.getInt("Doctor_ID");
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return DID;
+    }
+    
+//    public ArrayList<String> getApptInfoFromID(int ID){
+//        String q = "SELECT Day, Start_Time, End_Time"
+//    }
 }
