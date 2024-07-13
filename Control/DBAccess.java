@@ -34,10 +34,21 @@ public class DBAccess {
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE,null, ex);
         }
     }
-//    
-//    public void addNewDoctor(Doctor d){
-//        String query = "INSERT INTO DOCTOR VALUES (" + d.getDoctorId() + ", '" + d.getFirstName() 
-//                + "', '" +d.getLastName() + "', '" 
-//    }
+
+    public void addNewDoctor(Doctor d){
+    String query = "INSERT INTO DOCTOR VALUES (" + d.getDoctorId() + ", '" + d.getFirstName() 
+            + "', '" + d.getFatherName() + "', '" + d.getLastName() + "', '" + d.getPhoneNumber()
+            + "', '" + d.getMedicalLicenseNumber() + "', '" + d.getSpecialty() + "', '" 
+            + d.getDepartment() + "', '" + d.getOfficeLocation() + "', " 
+            + d.getMortalityRate() + ", '" + d.getRanking() + "')";
+    try{
+        connect();
+        stmt.executeUpdate(query);
+        close();
+    }catch(SQLException ex){
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE,null, ex);
+    }
+}
+
    
 }
