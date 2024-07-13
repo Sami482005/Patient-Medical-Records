@@ -18,7 +18,9 @@ Surgery (S_ID, Surgery_name, aim)
 
 Treatments (T_ID, name, reason, startDate, endDate, #MF_ID)
 
-Appointment (A_ID, day, to, from, reasonOfvisit, statusOfappt, #P_SSN)
+Appointment (A_ID, day, to, from)
+
+Book_Appointment(#Patient_SSN, #Appointment_ID, reasonOfvisit)
 
 Perform_Surgery (#Doctor_ID, #Facility_ID, #P_SSN, #Surgery_ID, price, successful?, Date)
 
