@@ -8,9 +8,9 @@
 
 - [x] Create the Main Page Interface: Patient/Doctor choice
 
-- [ ] Patient Interface: Create new File? Login?
+- [x] Patient Interface: Create new File? Login?
 
-- [ ] Creating new Medical_File: patient is assigned a new Medical_File_ID, need fill out information about Insurance plan, personal info, and emergency contacts, and fill out any medical history that they have before entering our hospital.
+- [x] Creating new Medical_File: patient is assigned a new Medical_File_ID, need fill out information about Insurance plan, personal info, and emergency contacts, and fill out any medical history that they have before entering our hospital.
 
 - [ ] The medical History is another tab that has several options to either click or not. Options are the name of several common diseases that if a person checks the box, it means that they have had that disease.
 
