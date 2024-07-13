@@ -48,6 +48,32 @@ public class DBAccess {
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public ResultSet getDoctorsBySpecialty(String specialty) throws SQLException {
+        String query = "SELECT first_name, last_name FROM DOCTOR WHERE specialty = ?";
+        connect();
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, specialty);
+        return pstmt.executeQuery();
+    }
+
+    public ResultSet getDoctorByIdOrName(int doctorId, String firstName, String lastName) throws SQLException {
+        String query = "SELECT * FROM DOCTOR WHERE doctor_id = ? OR (first_name = ? AND last_name = ?)";
+        connect();
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setInt(1, doctorId);
+        pstmt.setString(2, firstName);
+        pstmt.setString(3, lastName);
+        return pstmt.executeQuery();
+    }
+
+    public ResultSet getPatientById(int patientId) throws SQLException {
+        String query = "SELECT * FROM PATIENT WHERE patient_id = ?";
+        connect();
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setInt(1, patientId);
+        return pstmt.executeQuery();
+    }
+}
 
    
 }
