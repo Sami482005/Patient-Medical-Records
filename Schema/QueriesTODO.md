@@ -1,0 +1,15 @@
+- [ ] 1-	Create a new Patient File: information, insurance information, Emergency information
+- [ ] 2-	Create a file for a new Doctor
+- [ ] 3-	Allow a patient to book a new appointment
+- [ ] 4-	Allow a doctor to create a certain schedule during which they are available
+- [ ] 5-	A doctor should view his schedule with the surgeries that he has to do and the appointments he has
+- [ ] 6-	Retrieve the insurance details for patients, including the company and coverage information.
+- [ ] 7-	Get the list of medications prescribed to a patient: dosage, dates, and frequency.
+- [ ] 8-	Retrieve all tests, radio, and treatments patients have on their medical file: each with the associated attributes.
+- [ ] 9-	List all doctors in a specific department and their specialties.
+- [ ] 10-	Updating a patient’s file with a radio image they did
+- [ ] 11-	Updating a patient's file with a lab test they did
+- [ ] 12-	Change any of the patient’s information: Phone number, Emergency Contacts, Insurance plan, address
+- [ ] 13-	A patient wants to know if their insurance plan covers their treatment, radio image, lab test and what is the percentage
+- [ ] 14-	A patient’s medical file is updated by a treatment they had
+- [ ] 15-	A doctor wants to update the medical file of a patient

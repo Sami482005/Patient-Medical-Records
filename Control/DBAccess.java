@@ -35,11 +35,11 @@ public class DBAccess {
         }
     }
 
-    ppublic void addNewDoctor(Doctor d) {
+    public void addNewDoctor(Doctor d) {
         String query = "INSERT INTO DOCTOR VALUES (" + d.getDoctorId() + ", '" + d.getFirstName() 
                 + "', '" + d.getLastName() + "', '" + d.getEmail() + "', '" + d.getPhoneNumber() 
                 + "', '" + d.getTitle() + "', '" + d.getSpecialty() + "', " + d.getStartingYear() 
-                + ", " + d.getFID() + ")";
+                + ", " + d.getMedicalFacilityId() + ")";
         try {
             connect();
             stmt.executeUpdate(query);
@@ -101,16 +101,4 @@ public class DBAccess {
         
         return appointments;
     }
-
-   
-    public void close() {
-        try {
-            if (con != null) {
-                con.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-   
 }
