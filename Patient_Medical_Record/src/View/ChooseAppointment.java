@@ -74,7 +74,7 @@ public class ChooseAppointment extends javax.swing.JFrame {
         });
 
         inputSSN.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        inputSSN.setForeground(new java.awt.Color(0, 255, 255));
+        inputSSN.setForeground(new java.awt.Color(0, 0, 255));
         inputSSN.setText("Input your SSN");
         inputSSN.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         inputSSN.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -90,7 +90,7 @@ public class ChooseAppointment extends javax.swing.JFrame {
         });
 
         inputReason.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        inputReason.setForeground(new java.awt.Color(153, 255, 255));
+        inputReason.setForeground(new java.awt.Color(0, 0, 204));
         inputReason.setText("Input Your Reason");
 
         Patient_SSN.setBackground(new java.awt.Color(255, 255, 255));
@@ -117,25 +117,27 @@ public class ChooseAppointment extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(318, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(ok, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(131, 131, 131))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(inputSSN, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputReason, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(102, 102, 102)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Appointments, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(11, 11, 11)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(Patient_SSN, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Reason, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(431, 431, 431)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(ok, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(inputSSN, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputReason, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(102, 102, 102)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Appointments, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Patient_SSN, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Reason, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(431, 431, 431))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,6 +183,7 @@ public class ChooseAppointment extends javax.swing.JFrame {
         ba.setPatient_SSN(Integer.parseInt(Patient_SSN.getText().toString()));
         ba.setReason(Reason.getText().toString());
         d.addAppttoBookAppt(ba);
+        this.dispose();
     }//GEN-LAST:event_okActionPerformed
 
     private void ReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReasonActionPerformed
@@ -238,24 +241,20 @@ public class ChooseAppointment extends javax.swing.JFrame {
     private javax.swing.JButton ok;
     // End of variables declaration//GEN-END:variables
 
-    private void fillAppts() {
+    private ArrayList<Appointment> fillAppts() {
         Appointments.removeAllItems();
         DBAccess d = new DBAccess();
-        ChooseDoctor cd = new ChooseDoctor();
-        ArrayList<Integer> apptsID = d.getApptsIDFromDoctor(cd.getChosenDoctor());
-        for (int i = 0; i < apptsID.size(); i++){
-            String apptinformation = d.getApptInfoFromID(apptsID.get(i)).toString();
-            Appointments.addItem(apptinformation);
-        }
+        ChooseDoctor cd= new ChooseDoctor();
+        String[] name = cd.getChosenDoctor().split(" ");
+        ArrayList<Appointment> appts = d.getApptInfoFromDoctor(name[0], name[1]);
+        for (int i = 0; i < appts.size(); i++)
+            Appointments.addItem(""+appts.get(i));
+        return appts;
     }
     
     public Appointment getChosenAppt(){
-        String info = Appointments.getSelectedItem().toString();
-        String[] infos = info.split(" ");
-        int id = Integer.parseInt(infos[1]);
-        Appointment appt = null;
-        DBAccess d = new DBAccess();
-        appt = d.getApptInfoFromID(id);
+        int index = Appointments.getSelectedIndex();
+        Appointment appt = fillAppts().get(index);
         return appt;
     }
     

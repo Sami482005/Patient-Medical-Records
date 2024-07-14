@@ -121,8 +121,8 @@ CREATE TABLE TREATMENT(
 CREATE TABLE APPOINTMENT(
     Appointment_ID INTEGER,
     Day VARCHAR(10),
-    Start_Time TIME,
-    End_Time TIME,
+    Start_Time VARCHAR(4),
+    End_Time VARCHAR(4),
     PRIMARY KEY (Appointment_ID),
 );
 
