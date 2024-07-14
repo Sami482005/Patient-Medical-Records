@@ -1,27 +1,26 @@
 package Model;
 
-import java.time.LocalTime;
 
 public class Appointment {
     private int appointmentId;
     private String day;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private int patientSSN;
-    private String reason;
-    private String statusOfAppointment;
-
+    private String startTime;
+    private String endTime;
+    
     // Constructor
-    public Appointment(int appointmentId, String day, LocalTime startTime, LocalTime endTime, int patientSSN, String reason, String statusOfAppointment) {
+    public Appointment(int appointmentId, String day, String startTime, String endTime) {
         this.appointmentId = appointmentId;
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.patientSSN = patientSSN;
-        this.reason = reason;
-        this.statusOfAppointment = statusOfAppointment;
     }
 
+    public Appointment(){
+        this.appointmentId = -3;
+        this.day = null;
+        this.startTime = null;
+        this.endTime = null;
+    }
     // Getters and Setters
     public int getAppointmentId() {
         return appointmentId;
@@ -39,43 +38,28 @@ public class Appointment {
         this.day = day;
     }
 
-    public LocalTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    public int getPatientSSN() {
-        return patientSSN;
-    }
-
-    public void setPatientSSN(int patientSSN) {
-        this.patientSSN = patientSSN;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public String getStatusOfAppointment() {
-        return statusOfAppointment;
-    }
-
-    public void setStatusOfAppointment(String statusOfAppointment) {
-        this.statusOfAppointment = statusOfAppointment;
+    @Override
+    public String toString(){
+        String s = "Appointment_ID: " + getAppointmentId();
+        s += "Day: " + getDay();
+        s += "At: " + getStartTime();
+        s += "Till: " + getEndTime();
+        return s;
     }
 }
