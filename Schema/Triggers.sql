@@ -44,10 +44,16 @@ CREATE TRIGGER NoSameName
 BEFORE INSERT ON DOCTOR
 FOR EACH ROW
 BEGIN
-  IF NEW.First_Name IN (SELECT First_Name FROM DOCTOR) AND NEW.Last_Name IN (SELECT LAB_TEST FROM DOCTOR) THEN
-    UPDATE NEW SET First_Name = NEW.First_Name + "2.0" AND SET Last_Name = NEW.Last_Name + "2.0";
+  DECLARE count_names INT;
+  SELECT COUNT(*) INTO count_names
+  FROM DOCTOR
+  WHERE First_Name = NEW.First_Name AND Last_Name = NEW.Last_Name;
+  IF count_names > 0 THEN
+    SET NEW.First_Name = CONCAT(NEW.First_Name, '2.0');
+    SET NEW.Last_Name = CONCAT(NEW.Last_Name, '2.0');
   END IF;
 END;
+
 $$
 
 DELIMITER $$

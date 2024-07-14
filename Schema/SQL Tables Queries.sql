@@ -1,16 +1,16 @@
 CREATE TABLE MEDICAL_FACILITY(
-    Medical_Facility_ID INTEGER,
+    Medical_Facility_ID INTEGER AUTO_INCREMENT UNIQUE NOT NULL,
     Facility_Name VARCHAR (30),
     Facility_Location VARCHAR(70),
     PRIMARY KEY (Medical_Facility_ID)
     );
 
 CREATE TABLE DOCTOR(
-    Doctor_ID INTEGER,
+    Doctor_ID INTEGER AUTO_INCREMENT,
     First_Name VARCHAR(30) NOT NULL,
     Last_Name VARCHAR(30) NOT NULL,
     email VARCHAR(30) NOT NULL UNIQUE,
-	Phone_Number VARCHAR(12) NOT NULL UNIQUE CHECK Phone_Number LIKE "+961--------",
+	Phone_Number VARCHAR(12) NOT NULL UNIQUE CHECK (Phone_Number LIKE "+961--------"),
     Title VARCHAR(10),
     Specialty VARCHAR(50),
     Starting_Year INTEGER,
@@ -28,7 +28,7 @@ CREATE TABLE PATIENTS(
     First_Name VARCHAR(30) NOT NULL,
     Last_Name VARCHAR(30) NOT NULL,
     email VARCHAR(30) NOT NULL UNIQUE,
-	Phone_Number VARCHAR(12) NOT NULL UNIQUE  CHECK Phone_Number LIKE "+961--------",
+	Phone_Number VARCHAR(12) NOT NULL UNIQUE CHECK (Phone_Number LIKE "+961--------"),
     Address VARCHAR(80),
     Gender CHAR(1) NOT NULL,
 	Medical_History VARCHAR (50000),
@@ -55,7 +55,7 @@ CREATE TABLE EMERGENCY_CONTACTS(
 );
 
 CREATE TABLE MEDICAL_FILE(
-    Medical_File_ID INTEGER,
+    Medical_File_ID INTEGER AUTO_INCREMENT,
     Date_Of_Creation DATE,
     Patient_SSN INTEGER UNIQUE,
     Doctor_ID INTEGER,
@@ -72,7 +72,7 @@ CREATE TABLE MEDICAL_FILE(
 
 
 CREATE TABLE LAB_TEST(
-    Test_ID INTEGER,
+    Test_ID INTEGER AUTO_INCREMENT,
     Test_Name VARCHAR(30),
     Date DATE,
     Report VARCHAR(1000),
@@ -85,7 +85,7 @@ CREATE TABLE LAB_TEST(
 );
 
 CREATE TABLE RADIOLOGY(
-    Radiology_ID INTEGER,
+    Radiology_ID INTEGER AUTO_INCREMENT,
     Radiology_Name VARCHAR(30),
     Date DATE,
     Report VARCHAR(1000),
@@ -98,7 +98,7 @@ CREATE TABLE RADIOLOGY(
 );
 
 CREATE TABLE SURGERY(
-    Surgery_ID INTEGER,
+    Surgery_ID INTEGER AUTO_INCREMENT,
     Surgery_Name VARCHAR(30),
     Date DATE,
     Aim VARCHAR(100),
@@ -106,7 +106,7 @@ CREATE TABLE SURGERY(
 );
 
 CREATE TABLE TREATMENT(
-    Treatment_ID INTEGER,
+    Treatment_ID INTEGER AUTO_INCREMENT,
     Treatment_Name VARCHAR(30),
     Reason VARCHAR(100),
     Start_Date DATE,
@@ -119,18 +119,18 @@ CREATE TABLE TREATMENT(
 );
 
 CREATE TABLE APPOINTMENT(
-    Appointment_ID INTEGER,
+    Appointment_ID INTEGER AUTO_INCREMENT,
     Day VARCHAR(10),
-    Start_Time VARCHAR(4),
-    End_Time VARCHAR(4),
-    PRIMARY KEY (Appointment_ID),
+    Start_Time VARCHAR(5),
+    End_Time VARCHAR(5),
+    PRIMARY KEY (Appointment_ID)
 );
 
 CREATE TABLE BOOK_APPOINTMENT(
     Patient_SSN INTEGER, 
     Appointment_ID INTEGER,
     Reason VARCHAR(100),
-    PRIMARY KEY (Patient_SSN, Appointment_ID)
+    PRIMARY KEY (Patient_SSN, Appointment_ID),
     CONSTRAINT PSSN FOREIGN KEY (Patient_SSN) REFERENCES PATIENTS(Patient_SSN)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
