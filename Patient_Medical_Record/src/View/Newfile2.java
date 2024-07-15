@@ -1,5 +1,8 @@
 package view;
 
+import Control.DBAccess;
+import Model.Insurance_Plan;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -45,12 +48,12 @@ public class Newfile2 extends javax.swing.JFrame {
         startdate = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jPanel19 = new javax.swing.JPanel();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        Diabetes = new javax.swing.JCheckBox();
+        Chol = new javax.swing.JCheckBox();
+        Asthma = new javax.swing.JCheckBox();
+        HD = new javax.swing.JCheckBox();
+        Cancer = new javax.swing.JCheckBox();
+        Hyper = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,35 +224,35 @@ public class Newfile2 extends javax.swing.JFrame {
 
         jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Disease", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
 
-        jCheckBox7.setText("Diabetes");
-        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+        Diabetes.setText("Diabetes");
+        Diabetes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox7ActionPerformed(evt);
+                DiabetesActionPerformed(evt);
             }
         });
 
-        jCheckBox3.setText("High Cholesterol");
-        jCheckBox3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+        Chol.setText("High Cholesterol");
+        Chol.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
+        Chol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
+                CholActionPerformed(evt);
             }
         });
 
-        jCheckBox4.setText("Asthma");
-        jCheckBox4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
+        Asthma.setText("Asthma");
+        Asthma.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
 
-        jCheckBox6.setText("Heart Disease");
-        jCheckBox6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
+        HD.setText("Heart Disease");
+        HD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
 
-        jCheckBox5.setText("Cancer");
-        jCheckBox5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
+        Cancer.setText("Cancer");
+        Cancer.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
 
-        jCheckBox2.setText("Hypertension");
-        jCheckBox2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        Hyper.setText("Hypertension");
+        Hyper.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
+        Hyper.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                HyperActionPerformed(evt);
             }
         });
 
@@ -260,16 +263,16 @@ public class Newfile2 extends javax.swing.JFrame {
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox2))
+                    .addComponent(Asthma)
+                    .addComponent(Hyper))
                 .addGap(200, 200, 200)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox6))
+                    .addComponent(Chol)
+                    .addComponent(HD))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox5))
+                    .addComponent(Diabetes)
+                    .addComponent(Cancer))
                 .addGap(114, 114, 114))
         );
         jPanel19Layout.setVerticalGroup(
@@ -277,14 +280,14 @@ public class Newfile2 extends javax.swing.JFrame {
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5))
+                    .addComponent(Chol)
+                    .addComponent(Asthma)
+                    .addComponent(Cancer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox7))
+                    .addComponent(Hyper)
+                    .addComponent(HD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Diabetes))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -323,12 +326,16 @@ public class Newfile2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void HyperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HyperActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_HyperActionPerformed
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
-        // TODO add your handling code here:
+        addInsuranceFile();
+        updateMedicalHistory();
+        Medical_Record_Number show = new Medical_Record_Number;
+        show.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_createActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -338,7 +345,7 @@ public class Newfile2 extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void classsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classsActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_classsActionPerformed
 
     private void companyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyActionPerformed
@@ -353,13 +360,13 @@ public class Newfile2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_startdateActionPerformed
 
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+    private void CholActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CholActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+    }//GEN-LAST:event_CholActionPerformed
 
-    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
+    private void DiabetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiabetesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox7ActionPerformed
+    }//GEN-LAST:event_DiabetesActionPerformed
 
     private void enddateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enddateActionPerformed
         // TODO add your handling code here:
@@ -402,6 +409,12 @@ public class Newfile2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox Asthma;
+    private javax.swing.JCheckBox Cancer;
+    private javax.swing.JCheckBox Chol;
+    private javax.swing.JCheckBox Diabetes;
+    private javax.swing.JCheckBox HD;
+    private javax.swing.JCheckBox Hyper;
     private javax.swing.JTextField ID;
     private javax.swing.JButton back;
     private javax.swing.JTextField classs;
@@ -409,12 +422,6 @@ public class Newfile2 extends javax.swing.JFrame {
     private javax.swing.JButton create;
     private javax.swing.JTextField enddate;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JLabel jLabel129;
     private javax.swing.JLabel jLabel130;
     private javax.swing.JLabel jLabel131;
@@ -427,4 +434,23 @@ public class Newfile2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JTextField startdate;
     // End of variables declaration//GEN-END:variables
+
+    public void addInsuranceFile() {
+        Insurance_Plan ip = new Insurance_Plan();
+        ip.setCompanyProvider(company.getText().toString());
+        ip.setEndDate(enddate.getText().toString());
+        ip.setInsuranceClass(classs.getText().toString());
+        ip.setInsurancePlanId(Integer.parseInt(ID.getText().toString()));
+        ip.setIssuingDate(startdate.getText().toString());
+        NewFile nf = new NewFile();
+        ip.setPatientSSN(nf.createNewPatientFile().getPatient_SSN());
+        DBAccess d= new DBAccess();
+        d.createNewInsurancePlan(ip);
+        
+
+    }
+
+    public void updateMedicalHistory() {
+        
+    }
 }

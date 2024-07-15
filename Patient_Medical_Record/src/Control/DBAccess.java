@@ -3,6 +3,7 @@ package Control;
 import Model.Appointment;
 import Model.Book_Appointment;
 import Model.Doctor;
+import Model.Insurance_Plan;
 import Model.Patient;
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class DBAccess {
     
     public void addNewPatient(Patient p){
         String query = "INSERT INTO PATIENT VALUES (" + p.getPatient_SSN() + ", " + p.getPatient_ID()
-                + ", " + p.getDate_Of_Birth() + ", '" + p.getFirst_Name() + "', '" +
+                + ", '" + p.getDate_Of_Birth() + "', '" + p.getFirst_Name() + "', '" +
                 p.getLast_Name() + "', '" + p.getEmail() +"', '" + p.getPhone_Number()
                 + "', '" + p.getAddress() + "', '" + p.getGender() + "', '" +
                 p.getMedical_History() + "')";
@@ -84,31 +85,6 @@ public class DBAccess {
         }
         return specialties;
     }
-   
-//     public Doctor getDoctorFromName(String fn, String ln){
-//        String q = "SELECT * FROM DOCTOR WHERE First_Name = '" + fn 
-//                + "', AND Last_Name = '" + ln +"';";
-//        Doctor d = null;
-//        try {
-//            connect();
-//            ResultSet res = stmt.executeQuery(q);
-//            if (res.next()){
-//                d.setDoctorId(res.getInt("Doctor_ID"));
-//                d.setEmail(res.getString("email"));
-//                d.setFirstName(fn);
-//                d.setLastName(ln);
-//                d.setMedicalFacilityId(res.getInt("Medical_Facility_ID"));
-//                d.setPhoneNumber(res.getString("Phone_Number"));
-//                d.setSpecialty(res.getString("Specialty"));
-//                d.setStartingYear(res.getInt("Starting_Year"));
-//                d.setTitle(res.getString("Title"));
-//            }
-//            close();
-//        }catch(SQLException ex){
-//            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return d;
-//    }
     
     public ArrayList<Appointment> getApptInfoFromDoctor(String fn, String ln){
         String q = "SELECT * FROM APPOINTMENT WHERE Appointment_ID IN (SELECT Appointment_ID FROM IS_AVAILABLE NATURAL JOIN DOCTOR d WHERE d.First_Name = '" + fn + "', AND Last_Name = '" + ln + "';";
@@ -216,4 +192,22 @@ public class DBAccess {
         }
         return true;
     }
+
+    public void createNewInsurancePlan(Insurance_Plan ip) {
+        String q = "INSERT INTO INSURANCE_PLAN VALUES (" + ip.getInsurancePlanId()
+                + ", '" + ip.getCompanyProvider() + "', '" + ip.getClass()
+                + "', '" + ip.getIssuingDate() + "', '" + ip.getEndDate()
+                + "', " + ip.getPatientSSN() + ";";
+        try{
+            connect();
+            stmt.executeUpdate(q);
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+    
+    public Patient getPatient
+
 }

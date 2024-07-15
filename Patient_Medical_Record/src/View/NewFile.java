@@ -1,6 +1,8 @@
 package view;
 
+import Control.DBAccess;
 import Model.Patient;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -49,6 +51,8 @@ public class NewFile extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         SSN = new javax.swing.JTextField();
         address = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        MRN = new javax.swing.JOptionPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +86,7 @@ public class NewFile extends javax.swing.JFrame {
 
         jLabel5.setText("Gender");
 
-        gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male", " " }));
+        gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male" }));
         gender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 genderActionPerformed(evt);
@@ -115,17 +119,20 @@ public class NewFile extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("YYYY-MM-DD");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
@@ -182,7 +189,9 @@ public class NewFile extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(phonenb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -206,13 +215,15 @@ public class NewFile extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(MRN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(233, 233, 233)
                         .addComponent(back)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(next)
@@ -223,11 +234,16 @@ public class NewFile extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(53, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(next)
-                    .addComponent(back))
-                .addGap(41, 41, 41))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(next)
+                            .addComponent(back)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MRN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -253,7 +269,7 @@ public class NewFile extends javax.swing.JFrame {
         // TODO add your handling code here:
         main_page main = new main_page();
         main.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_backActionPerformed
 
     private void genderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderActionPerformed
@@ -261,7 +277,8 @@ public class NewFile extends javax.swing.JFrame {
     }//GEN-LAST:event_genderActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        createNewPatientFile();
+        Patient p = createNewPatientFile();
+        JOptionPane.showMessageDialog(null, "Your Medical Record Number is " + p.getPatient_ID());
         Newfile2 newfile = new Newfile2();
         newfile.setVisible(true);
     }//GEN-LAST:event_nextActionPerformed
@@ -303,6 +320,7 @@ public class NewFile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DOB;
+    private javax.swing.JOptionPane MRN;
     private javax.swing.JTextField SSN;
     private javax.swing.JTextField address;
     private javax.swing.JButton back;
@@ -317,6 +335,7 @@ public class NewFile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField lname;
@@ -324,11 +343,22 @@ public class NewFile extends javax.swing.JFrame {
     private javax.swing.JTextField phonenb;
     // End of variables declaration//GEN-END:variables
 
-    private void createNewPatientFile() {
+    public Patient createNewPatientFile() {
         Patient p = new Patient();
         p.setAddress(address.getText().toString());
-        p.setDate_Of_Birth(Date(DOB.getText().toString()));
+        p.setDate_Of_Birth(DOB.getText().toString());
+        p.setEmail(email.getText().toString());
+        p.setFirst_Name(fname.getText().toString());
+        if (gender.getSelectedItem().toString() == "Female")
+            p.setGender('F');
+        else
+            p.setGender('M');
+        p.setLast_Name(lname.getText().toString());
+        p.setPatient_SSN(Integer.parseInt(SSN.getText().toString()));
+        p.setPhone_Number(phonenb.getText().toString());
+        DBAccess d = new DBAccess();
+        d.addNewPatient(p);
         
-
+        return p;
     }
 }

@@ -10,6 +10,7 @@ public class Insurance_Plan {
     private int patientSSN;
 
     // Constructor
+    public Insurance_Plan(){};
     public Insurance_Plan(int insurancePlanId, String companyProvider, String insuranceClass, String issuingDate, String endDate, int patientSSN) {
         this.insurancePlanId = insurancePlanId;
         this.companyProvider = companyProvider;

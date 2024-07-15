@@ -104,7 +104,7 @@ public class ChoosingDepartment extends javax.swing.JFrame {
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
        ChooseDoctor cd = new ChooseDoctor();
        cd.setVisible(true);
-       this.dispose();
+       this.setVisible(false);
     }//GEN-LAST:event_okActionPerformed
 
     /**

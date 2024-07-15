@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/Model/Patient.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/Newfile2.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/NewFile.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/Medical_Record_Number.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/BookAppoinment.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/ChooseAppointment.java</file>
         </group>
     </open-files>
 </project-private>
