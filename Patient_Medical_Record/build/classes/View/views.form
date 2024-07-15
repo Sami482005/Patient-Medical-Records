@@ -1,0 +1,222 @@
+public class Main {
+import Control.DBAccess;
+import Model.Doctor;
+import Model.Patient;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Doctor and Patient Management System");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 600);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(8, 2, 10, 10));
+
+        // Doctor search by specialty
+        JLabel specialtyLabel = new JLabel("Enter Specialty:");
+        JTextField specialtyField = new JTextField(20);
+        JButton searchBySpecialtyButton = new JButton("Search by Specialty");
+
+        // Doctor search by ID or name
+        JLabel idLabel = new JLabel("Enter Doctor ID:");
+        JTextField idField = new JTextField(20);
+        JLabel nameLabel = new JLabel("Enter Doctor First and Last Name:");
+        JTextField firstNameField = new JTextField(20);
+        JTextField lastNameField = new JTextField(20);
+        JButton searchByIdOrNameButton = new JButton("Search by ID or Name");
+
+        // Patient search by ID
+        JLabel patientIdLabel = new JLabel("Enter Patient ID:");
+        JTextField patientIdField = new JTextField(20);
+        JButton searchPatientByIdButton = new JButton("Search Patient by ID");
+
+        // Add new Doctor
+        JLabel doctorIdLabel = new JLabel("Doctor ID:");
+        JTextField doctorIdField = new JTextField(20);
+        JLabel doctorFirstNameLabel = new JLabel("First Name:");
+        JTextField doctorFirstNameField = new JTextField(20);
+        JLabel doctorLastNameLabel = new JLabel("Last Name:");
+        JTextField doctorLastNameField = new JTextField(20);
+        JLabel doctorEmailLabel = new JLabel("Email:");
+        JTextField doctorEmailField = new JTextField(20);
+        JLabel doctorPhoneLabel = new JLabel("Phone Number:");
+        JTextField doctorPhoneField = new JTextField(20);
+        JLabel doctorTitleLabel = new JLabel("Title:");
+        JTextField doctorTitleField = new JTextField(20);
+        JLabel doctorSpecialtyLabel = new JLabel("Specialty:");
+        JTextField doctorSpecialtyField = new JTextField(20);
+        JLabel doctorStartYearLabel = new JLabel("Starting Year:");
+        JTextField doctorStartYearField = new JTextField(20);
+        JLabel doctorFIDLabel = new JLabel("FID:");
+        JTextField doctorFIDField = new JTextField(20);
+        JButton addDoctorButton = new JButton("Add Doctor");
+
+        // Add new Patient
+        JLabel patientSSNLabel = new JLabel("SSN:");
+        JTextField patientSSNField = new JTextField(20);
+        JLabel patientIdLabel2 = new JLabel("Patient ID:");
+        JTextField patientIdField2 = new JTextField(20);
+        JLabel patientDOBLabel = new JLabel("Date of Birth:");
+        JTextField patientDOBField = new JTextField(20);
+        JLabel patientFirstNameLabel = new JLabel("First Name:");
+        JTextField patientFirstNameField = new JTextField(20);
+        JLabel patientLastNameLabel = new JLabel("Last Name:");
+        JTextField patientLastNameField = new JTextField(20);
+        JLabel patientEmailLabel = new JLabel("Email:");
+        JTextField patientEmailField = new JTextField(20);
+        JLabel patientPhoneLabel = new JLabel("Phone Number:");
+        JTextField patientPhoneField = new JTextField(20);
+        JLabel patientAddressLabel = new JLabel("Address:");
+        JTextField patientAddressField = new JTextField(20);
+        JLabel patientGenderLabel = new JLabel("Gender:");
+        JTextField patientGenderField = new JTextField(20);
+        JLabel patientMedicalHistoryLabel = new JLabel("Medical History:");
+        JTextField patientMedicalHistoryField = new JTextField(20);
+        JButton addPatientButton = new JButton("Add Patient");
+
+        // Result area
+        JTextArea resultArea = new JTextArea(20, 50);
+        resultArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(resultArea);
+
+        // Adding action listeners for buttons
+        searchBySpecialtyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String specialty = specialtyField.getText();
+                DBAccess dbAccess = new DBAccess();
+                try {
+                    ResultSet rs = dbAccess.getDoctorsBySpecialty(specialty);
+                    resultArea.setText("");
+                    while (rs.next()) {
+                        String firstName = rs.getString("first_name");
+                        String lastName = rs.getString("last_name");
+                        resultArea.append("Doctor: " + firstName + " " + lastName + "\n");
+                    }
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        searchByIdOrNameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String idText = idField.getText();
+                int doctorId = idText.isEmpty() ? -1 : Integer.parseInt(idText);
+                String firstName = firstNameField.getText();
+                String lastName = lastNameField.getText();
+                DBAccess dbAccess = new DBAccess();
+                try {
+                    ResultSet rs = dbAccess.getDoctorByIdOrName(doctorId, firstName, lastName);
+                    resultArea.setText("");
+                    while (rs.next()) {
+                        resultArea.append("Doctor ID: " + rs.getInt("doctor_id") + "\n");
+                        resultArea.append("First Name: " + rs.getString("first_name") + "\n");
+                        resultArea.append("Last Name: " + rs.getString("last_name") + "\n");
+                        resultArea.append("Email: " + rs.getString("email") + "\n");
+                        resultArea.append("Phone Number: " + rs.getString("phone_nb") + "\n");
+                        resultArea.append("Title: " + rs.getString("title") + "\n");
+                        resultArea.append("Specialty: " + rs.getString("specialty") + "\n");
+                        resultArea.append("Starting Year: " + rs.getInt("starting_year") + "\n");
+                        resultArea.append("FID: " + rs.getInt("F_ID") + "\n\n");
+                    }
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        searchPatientByIdButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String idText = patientIdField.getText();
+                int patientId = Integer.parseInt(idText);
+                DBAccess dbAccess = new DBAccess();
+                try {
+                    ResultSet rs = dbAccess.getPatientById(patientId);
+                    resultArea.setText("");
+                    while (rs.next()) {
+                        resultArea.append("Patient ID: " + rs.getInt("patient_id") + "\n");
+                        resultArea.append("SSN: " + rs.getInt("ssn") + "\n");
+                        resultArea.append("Date of Birth: " + rs.getDate("dob") + "\n");
+                        resultArea.append("First Name: " + rs.getString("first_name") + "\n");
+                        resultArea.append("Last Name: " + rs.getString("last_name") + "\n");
+                        resultArea.append("Email: " + rs.getString("email") + "\n");
+                        resultArea.append("Phone Number: " + rs.getString("phone_nb") + "\n");
+                        resultArea.append("Address: " + rs.getString("address") + "\n");
+                        resultArea.append("Gender: " + rs.getString("gender") + "\n");
+                        resultArea.append("Medical History: " + rs.getString("medical_history") + "\n\n");
+                    }
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        addDoctorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Doctor doctor = new Doctor();
+                doctor.setDoctorId(Integer.parseInt(doctorIdField.getText()));
+                doctor.setFirstName(doctorFirstNameField.getText());
+                doctor.setLastName(doctorLastNameField.getText());
+                doctor.setEmail(doctorEmailField.getText());
+                doctor.setPhoneNumber(doctorPhoneField.getText());
+                doctor.setTitle(doctorTitleField.getText());
+                doctor.setSpecialty(doctorSpecialtyField.getText());
+                doctor.setStartingYear(Integer.parseInt(doctorStartYearField.getText()));
+                doctor.setFID(Integer.parseInt(doctorFIDField.getText()));
+
+                DBAccess dbAccess = new DBAccess();
+                dbAccess.addNewDoctor(doctor);
+                JOptionPane.showMessageDialog(null, "Doctor added successfully!");
+            }
+        });
+
+        addPatientButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Patient patient = new Patient();
+                patient.setPatient_SSN(Integer.parseInt(patientSSNField.getText()));
+                patient.setPatient_ID(Integer.parseInt(patientIdField2.getText()));
+                patient.setDate_Of_Birth(patientDOBField.getText());
+                patient.setFirst_Name(patientFirstNameField.getText());
+                patient.setLast_Name(patientLastNameField.getText());
+                patient.setEmail(patientEmailField.getText());
+                patient.setPhone_Number(patientPhoneField.getText());
+                patient.setAddress(patientAddressField.getText());
+                patient.setGender(patientGenderField.getText());
+                patient.setMedical_History(patientMedicalHistoryField.getText());
+
+                DBAccess dbAccess = new DBAccess();
+                dbAccess.addNewPatient(patient);
+                JOptionPane.showMessageDialog(null, "Patient added successfully!");
+            }
+        });
+
+        // Adding components to the panel
+        panel.add(specialtyLabel);
+        panel.add(specialtyField);
+        panel.add(searchBySpecialtyButton);
+        panel.add(new JLabel()); // Empty label for spacing
+
+        panel.add(idLabel);
+        panel.add(idField);
+        panel.add(nameLabel);
+        panel.add(new JLabel()); // Empty label for spacing
+
+        panel
+    
+}

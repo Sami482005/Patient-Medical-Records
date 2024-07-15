@@ -1,19 +1,17 @@
 package Model;
 
-import java.math.BigDecimal;
-import java.util.Date;
 
 public class Perform_Surgery {
     private int doctorId;
     private int medicalFacilityId;
     private int patientSSN;
     private int surgeryId;
-    private BigDecimal price;
+    private float price;
     private boolean successful;
-    private Date date;
+    private String date;
 
     // Constructor
-    public Perform_Surgery(int doctorId, int medicalFacilityId, int patientSSN, int surgeryId, BigDecimal price, boolean successful, Date date) {
+    public Perform_Surgery(int doctorId, int medicalFacilityId, int patientSSN, int surgeryId, float price, boolean successful, String date) {
         this.doctorId = doctorId;
         this.medicalFacilityId = medicalFacilityId;
         this.patientSSN = patientSSN;
@@ -56,11 +54,11 @@ public class Perform_Surgery {
         this.surgeryId = surgeryId;
     }
 
-    public BigDecimal getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -72,11 +70,11 @@ public class Perform_Surgery {
         this.successful = successful;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

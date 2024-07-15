@@ -1,12 +1,12 @@
 CREATE TABLE MEDICAL_FACILITY(
-    Medical_Facility_ID INTEGER AUTO_INCREMENT UNIQUE NOT NULL,
+    Medical_Facility_ID NUMERIC(5,0) AUTO_INCREMENT UNIQUE NOT NULL,
     Facility_Name VARCHAR (30),
     Facility_Location VARCHAR(70),
     PRIMARY KEY (Medical_Facility_ID)
     );
 
 CREATE TABLE DOCTOR(
-    Doctor_ID INTEGER AUTO_INCREMENT,
+    Doctor_ID NUMERIC(5,0) AUTO_INCREMENT,
     First_Name VARCHAR(30) NOT NULL,
     Last_Name VARCHAR(30) NOT NULL,
     email VARCHAR(30) NOT NULL UNIQUE,
@@ -23,7 +23,7 @@ CREATE TABLE DOCTOR(
 
 CREATE TABLE PATIENTS(
     Patient_SSN INTEGER,
-    Patient_ID INTEGER NOT NULL UNIQUE AUTO_INCREMENT,
+    Patient_ID NUMERIC(5,0) NOT NULL UNIQUE AUTO_INCREMENT,
     Date_Of_Birth DATE NOT NULL,
     First_Name VARCHAR(30) NOT NULL,
     Last_Name VARCHAR(30) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE PATIENTS(
 );
 
 CREATE TABLE INSURANCE_PLAN(
-    Insurance_Plan_ID INTEGER AUTO_INCREMENT,
+    Insurance_Plan_ID NUMERIC(5,0) AUTO_INCREMENT,
     Company_Provider VARCHAR(30) NOT NULL,
     Class VARCHAR(3) NOT NULL,
     ISSUING_DATE DATE NOT NULL,
@@ -55,13 +55,13 @@ CREATE TABLE EMERGENCY_CONTACTS(
 );
 
 CREATE TABLE MEDICAL_FILE(
-    Medical_File_ID INTEGER AUTO_INCREMENT,
+    Medical_File_ID NUMERIC(5,0) AUTO_INCREMENT,
     Date_Of_Creation DATE,
     Patient_SSN INTEGER UNIQUE,
-    Doctor_ID INTEGER,
+    Doctor_ID NUMERIC(5,0),
     Prescription VARCHAR(500),
     Description VARCHAR(500),
-    Date DATE,
+    Update_Date DATE, 
     PRIMARY KEY (Medical_File_ID, Patient_SSN),
     CONSTRAINT SSN FOREIGN KEY (Patient_SSN) REFERENCES PATIENTS(Patient_SSN)
     ON DELETE SET NULL,
@@ -72,12 +72,12 @@ CREATE TABLE MEDICAL_FILE(
 
 
 CREATE TABLE LAB_TEST(
-    Test_ID INTEGER AUTO_INCREMENT,
+    Test_ID NUMERIC(5,0) AUTO_INCREMENT,
     Test_Name VARCHAR(30),
     Date DATE,
     Report VARCHAR(1000),
     Reason VARCHAR(500),
-    Medical_File_ID INTEGER,
+    Medical_File_ID NUMERIC(5,0),
     PRIMARY KEY (Test_ID),
     CONSTRAINT MFID FOREIGN KEY (Medical_File_ID) REFERENCES MEDICAL_FILE(Medical_File_ID)
     ON DELETE CASCADE
@@ -85,12 +85,12 @@ CREATE TABLE LAB_TEST(
 );
 
 CREATE TABLE RADIOLOGY(
-    Radiology_ID INTEGER AUTO_INCREMENT,
+    Radiology_ID NUMERIC(5,0) AUTO_INCREMENT,
     Radiology_Name VARCHAR(30),
     Date DATE,
     Report VARCHAR(1000),
     Reason VARCHAR(500),
-    Medical_File_ID INTEGER,
+    Medical_File_ID NUMERIC(5,0),
     PRIMARY KEY (Radiology_ID),
     CONSTRAINT MFID FOREIGN KEY (Medical_File_ID) REFERENCES MEDICAL_FILE(Medical_File_ID)
     ON DELETE CASCADE
@@ -98,7 +98,7 @@ CREATE TABLE RADIOLOGY(
 );
 
 CREATE TABLE SURGERY(
-    Surgery_ID INTEGER AUTO_INCREMENT,
+    Surgery_ID NUMERIC(5,0) AUTO_INCREMENT,
     Surgery_Name VARCHAR(30),
     Date DATE,
     Aim VARCHAR(100),
@@ -106,12 +106,12 @@ CREATE TABLE SURGERY(
 );
 
 CREATE TABLE TREATMENT(
-    Treatment_ID INTEGER AUTO_INCREMENT,
+    Treatment_ID NUMERIC(5,0) AUTO_INCREMENT,
     Treatment_Name VARCHAR(30),
     Reason VARCHAR(100),
     Start_Date DATE,
     END_DATE DATE,
-    Medical_File_ID INTEGER,
+    Medical_File_ID NUMERIC(5,0),
     PRIMARY KEY (Treatment_ID),
     CONSTRAINT MFID FOREIGN KEY (Medical_File_ID) REFERENCES MEDICAL_FILE(Medical_File_ID)
     ON DELETE CASCADE
@@ -119,7 +119,7 @@ CREATE TABLE TREATMENT(
 );
 
 CREATE TABLE APPOINTMENT(
-    Appointment_ID INTEGER AUTO_INCREMENT,
+    Appointment_ID NUMERIC(5,0) AUTO_INCREMENT,
     Day VARCHAR(10),
     Start_Time VARCHAR(5),
     End_Time VARCHAR(5),
@@ -128,7 +128,7 @@ CREATE TABLE APPOINTMENT(
 
 CREATE TABLE BOOK_APPOINTMENT(
     Patient_SSN INTEGER, 
-    Appointment_ID INTEGER,
+    Appointment_ID NUMERIC(5,0),
     Reason VARCHAR(100),
     PRIMARY KEY (Patient_SSN, Appointment_ID),
     CONSTRAINT PSSN FOREIGN KEY (Patient_SSN) REFERENCES PATIENTS(Patient_SSN)
@@ -139,10 +139,10 @@ CREATE TABLE BOOK_APPOINTMENT(
     ON UPDATE CASCADE 
 );
 CREATE TABLE PERFORM_SURGERY(
-    Doctor_ID INTEGER,
-    Medical_Facility_ID INTEGER,
-    Patient_SSN INTEGER,
-    Surgery_ID INTEGER,
+    Doctor_ID NUMERIC(5,0),
+    Medical_Facility_ID NUMERIC(5,0),
+    Patient_SSN NUMERIC(5,0),
+    Surgery_ID NUMERIC(5,0),
     Price DECIMAL(10,2),
     Successful BOOLEAN,
     Date DATE,
@@ -161,8 +161,8 @@ CREATE TABLE PERFORM_SURGERY(
 );
 
 CREATE TABLE IS_AVAILABLE(
-    Doctor_ID INTEGER,
-    Appointment_ID INTEGER,
+    Doctor_ID NUMERIC(5,0),
+    Appointment_ID NUMERIC(5,0),
     PRIMARY KEY (Doctor_ID, Appointment_ID),
     CONSTRAINT DID FOREIGN KEY (Doctor_ID) REFERENCES DOCTOR(Doctor_ID)
     ON DELETE CASCADE
@@ -173,8 +173,8 @@ CREATE TABLE IS_AVAILABLE(
 );
 
 CREATE TABLE COVERS_SURGERY(
-    Insurance_Plan_ID INTEGER,
-    Surgery_ID INTEGER,
+    Insurance_Plan_ID NUMERIC(5,0),
+    Surgery_ID NUMERIC(5,0),
     Percentages DECIMAL(3,2), 
     PRIMARY KEY (Insurance_Plan_ID, Surgery_ID),
     CONSTRAINT IPID FOREIGN KEY (Insurance_Plan_ID) REFERENCES INSURANCE_PLAN(Insurance_Plan_ID)
@@ -185,8 +185,8 @@ CREATE TABLE COVERS_SURGERY(
 );
 
 CREATE TABLE COVERS_TREATMENT(
-    Insurance_Plan_ID INTEGER,
-    Treatment_ID INTEGER,
+    Insurance_Plan_ID NUMERIC(5,0),
+    Treatment_ID NUMERIC(5,0),
     Percentages DECIMAL(3,2),
     PRIMARY KEY (Insurance_Plan_ID, Treatment_ID),
     CONSTRAINT IPID FOREIGN KEY (Insurance_Plan_ID) REFERENCES INSURANCE_PLAN(Insurance_Plan_ID)
@@ -197,8 +197,8 @@ CREATE TABLE COVERS_TREATMENT(
 );
 
 CREATE TABLE COVERS_RADIO(
-    Insurance_Plan_ID INTEGER,
-    Radiology_ID INTEGER,
+    Insurance_Plan_ID NUMERIC(5,0),
+    Radiology_ID NUMERIC(5,0),
     Percentages DECIMAL(3,2),
     PRIMARY KEY (Insurance_Plan_ID, Radiology_ID),
     CONSTRAINT IPID FOREIGN KEY (Insurance_Plan_ID) REFERENCES INSURANCE_PLAN(Insurance_Plan_ID)
@@ -209,8 +209,8 @@ CREATE TABLE COVERS_RADIO(
 );
 
 CREATE TABLE COVERS_TEST(
-    Insurance_Plan_ID INTEGER,
-    Test_ID INTEGER,
+    Insurance_Plan_ID NUMERIC(5,0),
+    Test_ID NUMERIC(5,0),
     Percentages DECIMAL(3,2),
     PRIMARY KEY (Insurance_Plan_ID, Test_ID),
     CONSTRAINT IPID FOREIGN KEY (Insurance_Plan_ID) REFERENCES INSURANCE_PLAN(Insurance_Plan_ID)
@@ -233,8 +233,8 @@ CREATE TABLE HAS_EMERGENCY_CONTACTS(
 );
 
 CREATE TABLE ADMITS(
-    Insurance_Plan_ID INTEGER,
-    Medical_Facility_ID INTEGER,
+    Insurance_Plan_ID NUMERIC(5,0),
+    Medical_Facility_ID NUMERIC(5,0),
     PRIMARY KEY (Insurance_Plan_ID, Medical_Facility_ID),
     CONSTRAINT IPID FOREIGN KEY (Insurance_Plan_ID) REFERENCES INSURANCE_PLAN(Insurance_Plan_ID)
     ON DELETE CASCADE,

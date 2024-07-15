@@ -1,17 +1,16 @@
 package Model;
 
-import java.util.Date;
 
 public class Insurance_Plan {
     private int insurancePlanId;
     private String companyProvider;
     private String insuranceClass;
-    private Date issuingDate;
-    private Date endDate;
+    private String issuingDate;
+    private String endDate;
     private int patientSSN;
 
     // Constructor
-    public Insurance_Plan(int insurancePlanId, String companyProvider, String insuranceClass, Date issuingDate, Date endDate, int patientSSN) {
+    public Insurance_Plan(int insurancePlanId, String companyProvider, String insuranceClass, String issuingDate, String endDate, int patientSSN) {
         this.insurancePlanId = insurancePlanId;
         this.companyProvider = companyProvider;
         this.insuranceClass = insuranceClass;
@@ -45,19 +44,19 @@ public class Insurance_Plan {
         this.insuranceClass = insuranceClass;
     }
 
-    public Date getIssuingDate() {
+    public String getIssuingDate() {
         return issuingDate;
     }
 
-    public void setIssuingDate(Date issuingDate) {
+    public void setIssuingDate(String issuingDate) {
         this.issuingDate = issuingDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

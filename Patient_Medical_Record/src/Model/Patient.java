@@ -1,15 +1,15 @@
 package Model;
 
-import java.util.Date;
-
 public class Patient {
     private int Patient_SSN;
     private int Patient_ID;
-    private Date Date_Of_Birth;
+    private String Date_Of_Birth;
     private String First_Name, Last_Name, email, Phone_Number, Address, Medical_History;
     private char Gender;
 
-    public Patient(int Patient_SSN, int Patient_ID, Date Date_Of_Birth, String First_Name, String Last_Name, String email, String Phone_Number, String Address, String Medical_History, char Gender) {
+    public Patient(){
+    }
+    public Patient(int Patient_SSN, int Patient_ID, String Date_Of_Birth, String First_Name, String Last_Name, String email, String Phone_Number, String Address, String Medical_History, char Gender) {
         this.Patient_SSN = Patient_SSN;
         this.Patient_ID = Patient_ID;
         this.Date_Of_Birth = Date_Of_Birth;
@@ -38,11 +38,11 @@ public class Patient {
         this.Patient_ID = Patient_ID;
     }
 
-    public Date getDate_Of_Birth() {
+    public String getDate_Of_Birth() {
         return Date_Of_Birth;
     }
 
-    public void setDate_Of_Birth(Date Date_Of_Birth) {
+    public void setDate_Of_Birth(String Date_Of_Birth) {
         this.Date_Of_Birth = Date_Of_Birth;
     }
 

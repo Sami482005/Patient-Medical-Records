@@ -1,25 +1,22 @@
 package Model;
 
-import java.util.Date;
 
 public class Medical_File {
     private int medicalFileId;
-    private Date dateOfCreation;
     private int patientSSN;
     private int doctorId;
     private String prescription;
     private String description;
-    private Date date;
+    private String UpdateDate ;
 
     // Constructor
-    public Medical_File(int medicalFileId, Date dateOfCreation, int patientSSN, int doctorId, String prescription, String description, Date date) {
+    public Medical_File(int medicalFileId, int patientSSN, int doctorId, String prescription, String description, String UpdateDate) {
         this.medicalFileId = medicalFileId;
-        this.dateOfCreation = dateOfCreation;
         this.patientSSN = patientSSN;
         this.doctorId = doctorId;
         this.prescription = prescription;
         this.description = description;
-        this.date = date;
+        this.UpdateDate = UpdateDate;
     }
 
     // Getters and Setters
@@ -29,14 +26,6 @@ public class Medical_File {
 
     public void setMedicalFileId(int medicalFileId) {
         this.medicalFileId = medicalFileId;
-    }
-
-    public Date getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(Date dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
     }
 
     public int getPatientSSN() {
@@ -71,11 +60,12 @@ public class Medical_File {
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
+    public String getUpdateDate() {
+        return UpdateDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setUpdateDate(String UpdateDate) {
+        this.UpdateDate = UpdateDate;
     }
+
 }

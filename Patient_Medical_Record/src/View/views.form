@@ -1,5 +1,5 @@
 public class Main {
-    mport Control.DBAccess;
+import Control.DBAccess;
 import Model.Doctor;
 import Model.Patient;
 

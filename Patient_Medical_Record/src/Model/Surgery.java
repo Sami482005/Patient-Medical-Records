@@ -1,15 +1,14 @@
 package Model;
 
-import java.util.Date;
 
 public class Surgery {
     private int surgeryId;
     private String surgeryName;
-    private Date date;
+    private String date;
     private String aim;
 
     // Constructor
-    public Surgery(int surgeryId, String surgeryName, Date date, String aim) {
+    public Surgery(int surgeryId, String surgeryName, String date, String aim) {
         this.surgeryId = surgeryId;
         this.surgeryName = surgeryName;
         this.date = date;
@@ -33,11 +32,11 @@ public class Surgery {
         this.surgeryName = surgeryName;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
