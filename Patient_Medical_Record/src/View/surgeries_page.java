@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+package View;
+import Control.DBAccess;
+import Model.Treatment;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author dalaa
- */
 public class surgeries_page extends javax.swing.JFrame {
 
     /**
@@ -14,6 +11,7 @@ public class surgeries_page extends javax.swing.JFrame {
      */
     public surgeries_page() {
         initComponents();
+         addSurgeriesofPatients();
     }
 
     /**
@@ -28,10 +26,10 @@ public class surgeries_page extends javax.swing.JFrame {
         canvas1 = new java.awt.Canvas();
         canvas2 = new java.awt.Canvas();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        surgeries = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,8 +113,8 @@ public class surgeries_page extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -153,6 +151,22 @@ public class surgeries_page extends javax.swing.JFrame {
             }
         });
     }
+     public void addSurgeries(Surgery s){
+        DefaultTableModel model = (DefaultTableModel) surgeries.getModel();
+        model.addRow(new Object[]{s.getSurgeryId(), s.getSurgeryName(), s.getDoctor(), s.getAim(),s.getDate(),s.getIsSuccessful()});
+    }
+    
+     private void addSurgeriessofPatients() {
+        DBAccess d = new DBAccess();
+        patientpage pg = new patientpage();
+        ArrayList<Surgery> sr = d.retrieveSurgeriesbyMRN(pg.getMRNFromSignin());
+        for (Surgery sg : sr){
+            addSurgeries(sg);
+        }
+
+
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Canvas canvas1;
