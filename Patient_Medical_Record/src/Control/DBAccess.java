@@ -169,7 +169,7 @@ public class DBAccess {
     
     public void addAppttoAvailable(Appointment chosen){
         String q = "INSERT INTO IS_AVAILABLE VALUES (" + chosen.getAppointmentId() + ", '" + chosen.getDay()
-                + "', '" + chosen.getStartTime() + "', '" + chosen.getEndTime() + "';";
+                + "', '" + chosen.getStartTime() + "', '" + chosen.getEndTime() + "');";
         try{
             connect();
             stmt.executeUpdate(q);
@@ -180,7 +180,7 @@ public class DBAccess {
     }
     
     public boolean exists(int SSN){
-        String q = "SELECT * FROM PATIENTS WHERE Patient_SSN = " + SSN;
+        String q = "SELECT * FROM PATIENTS WHERE Patient_SSN = " + SSN + ";";
         try{
             connect();
             ResultSet res = stmt.executeQuery(q);
@@ -197,7 +197,7 @@ public class DBAccess {
         String q = "INSERT INTO INSURANCE_PLAN VALUES (" + ip.getInsurancePlanId()
                 + ", '" + ip.getCompanyProvider() + "', '" + ip.getClass()
                 + "', '" + ip.getIssuingDate() + "', '" + ip.getEndDate()
-                + "', " + ip.getPatientSSN() + ";";
+                + "', " + ip.getPatientSSN() + ");";
         try{
             connect();
             stmt.executeUpdate(q);

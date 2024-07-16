@@ -336,7 +336,11 @@ public class Newfile2 extends javax.swing.JFrame {
     }//GEN-LAST:event_HyperActionPerformed
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
-        addInsuranceFile();
+        Insurance_Plan ip = addInsuranceFile();
+        NewFile nf = new NewFile();
+        DBAccess d= new DBAccess();
+        d.createNewInsurancePlan(ip);
+        ip.setPatientSSN(d.getSSNFromMRN(nf.MRNs()))
         updateMedicalHistory();
         this.setVisible(false);
     }//GEN-LAST:event_createActionPerformed
@@ -442,18 +446,14 @@ public class Newfile2 extends javax.swing.JFrame {
     private javax.swing.JTextField startdate;
     // End of variables declaration//GEN-END:variables
 
-    public void addInsuranceFile() {
+    public Insurance_Plan addInsuranceFile() {
         Insurance_Plan ip = new Insurance_Plan();
         ip.setCompanyProvider(company.getText().toString());
         ip.setEndDate(enddate.getText().toString());
         ip.setInsuranceClass(classs.getText().toString());
         ip.setInsurancePlanId(Integer.parseInt(ID.getText().toString()));
         ip.setIssuingDate(startdate.getText().toString());
-        NewFile nf = new NewFile();
-        DBAccess d= new DBAccess();
-        ip.setPatientSSN(d.getSSNFromMRN(nf.MRNs()));
-        d.createNewInsurancePlan(ip);
-        
+        return ip;        
 
     }
 
