@@ -1,5 +1,6 @@
 package View;
 import Control.DBAccess;
+import Model.Surgery;
 import Model.Treatment;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -29,28 +30,28 @@ public class surgeries_page extends javax.swing.JFrame {
         surgeries = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        surgeries.setAutoCreateRowSorter(true);
+        surgeries.setForeground(new java.awt.Color(255, 255, 255));
+        surgeries.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Doctor ", "Aim", "Price", "Date", "IsSuccessfull"
+                "ID", "Name", "Doctor ", "Aim", "Date", "IsSuccessfull"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(surgeries);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 204));
@@ -96,8 +97,7 @@ public class surgeries_page extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel2)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(340, 340, 340)
@@ -156,7 +156,7 @@ public class surgeries_page extends javax.swing.JFrame {
         model.addRow(new Object[]{s.getSurgeryId(), s.getSurgeryName(), s.getDoctor(), s.getAim(),s.getDate(),s.getIsSuccessful()});
     }
     
-     private void addSurgeriessofPatients() {
+     private void addSurgeriesofPatients() {
         DBAccess d = new DBAccess();
         patientpage pg = new patientpage();
         ArrayList<Surgery> sr = d.retrieveSurgeriesbyMRN(pg.getMRNFromSignin());
@@ -175,6 +175,6 @@ public class surgeries_page extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable surgeries;
     // End of variables declaration//GEN-END:variables
 }
