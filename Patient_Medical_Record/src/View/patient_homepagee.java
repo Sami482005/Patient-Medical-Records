@@ -1,14 +1,5 @@
-package view;
+package View;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author user
- */
 public class patient_homepagee extends javax.swing.JFrame {
 
     /**
@@ -205,13 +196,14 @@ public class patient_homepagee extends javax.swing.JFrame {
     private void surgeryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surgeryActionPerformed
         // TODO add your handling code here:
         surgeries_page surgeries = new surgeries_page();
+        addSurgeriesofPatient();
         surgeries.setVisible(true);
     }//GEN-LAST:event_surgeryActionPerformed
 
     private void treatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_treatmentActionPerformed
         // TODO add your handling code here:
         treatment_page treatments = new treatment_page();
-        treatrments.setVisible(true);
+        treatments.setVisible(true);
     }//GEN-LAST:event_treatmentActionPerformed
 
     private void labresultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labresultActionPerformed
@@ -297,4 +289,6 @@ public class patient_homepagee extends javax.swing.JFrame {
     private javax.swing.JButton surgery;
     private javax.swing.JButton treatment;
     // End of variables declaration//GEN-END:variables
+
+   
 }

@@ -46,7 +46,6 @@ public class Newfile2 extends javax.swing.JFrame {
         classs = new javax.swing.JTextField();
         enddate = new javax.swing.JTextField();
         startdate = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel19 = new javax.swing.JPanel();
         Diabetes = new javax.swing.JCheckBox();
         Chol = new javax.swing.JCheckBox();
@@ -179,30 +178,20 @@ public class Newfile2 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jCheckBox1.setText("Diabetes");
-        jCheckBox1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
-
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jCheckBox1))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1)))
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -337,11 +326,12 @@ public class Newfile2 extends javax.swing.JFrame {
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         Insurance_Plan ip = addInsuranceFile();
-        NewFile nf = new NewFile();
+        
         DBAccess d= new DBAccess();
         d.createNewInsurancePlan(ip);
-        ip.setPatientSSN(d.getSSNFromMRN(nf.MRNs()))
         updateMedicalHistory();
+        NewFile n = new NewFile();
+        d.updateMedicalHistory(n.MRNs(), updateMedicalHistory());
         this.setVisible(false);
     }//GEN-LAST:event_createActionPerformed
 
@@ -432,7 +422,6 @@ public class Newfile2 extends javax.swing.JFrame {
     private javax.swing.JTextField company;
     private javax.swing.JButton create;
     private javax.swing.JTextField enddate;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel129;
     private javax.swing.JLabel jLabel130;
     private javax.swing.JLabel jLabel131;
@@ -453,11 +442,14 @@ public class Newfile2 extends javax.swing.JFrame {
         ip.setInsuranceClass(classs.getText().toString());
         ip.setInsurancePlanId(Integer.parseInt(ID.getText().toString()));
         ip.setIssuingDate(startdate.getText().toString());
+        NewFile nf = new NewFile();
+        DBAccess d= new DBAccess();
+        ip.setPatientSSN(d.getSSNFromMRN(nf.MRNs()));
         return ip;        
 
     }
 
-    public void updateMedicalHistory() {
+    public String updateMedicalHistory() {
         String disease = "Past Experiences of: ";
         if(Asthma.isSelected())
             disease += "Asthma";
@@ -471,8 +463,6 @@ public class Newfile2 extends javax.swing.JFrame {
             disease += "Heart Diseases";
         if(Hyper.isSelected())
             disease += "HyperTension";
-        DBAccess d = new DBAccess();
-        NewFile n = new NewFile();
-        d.updateMedicalHistory(n.MRNs(), disease);
+        return disease;
     }
 }

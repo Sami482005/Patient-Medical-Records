@@ -14,6 +14,7 @@ public class radio_page extends javax.swing.JFrame {
      */
     public radio_page() {
         initComponents();
+        
     }
 
     /**

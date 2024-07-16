@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/main_page.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/UpdateFile1.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/appoint_page.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/patient_homepagee.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/Newfile2.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/Model/Insurance_Plan.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/Control/DBAccess.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/patientpage.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/treatment_page.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/radio_page.java</file>
         </group>
     </open-files>
 </project-private>
