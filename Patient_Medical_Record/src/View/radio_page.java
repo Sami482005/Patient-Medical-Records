@@ -1,4 +1,10 @@
 package View
+    
+import Control.DBAccess;
+import Model.Treatment;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 public class radio_page extends javax.swing.JFrame {
 
     /**
@@ -6,7 +12,7 @@ public class radio_page extends javax.swing.JFrame {
      */
     public radio_page() {
         initComponents();
-        
+        addRadiologyofPatients();
     }
 
     /**
@@ -19,9 +25,9 @@ public class radio_page extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        radiology = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -29,16 +35,16 @@ public class radio_page extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel2.setText("HealthTracker");
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        radiology.setAutoCreateRowSorter(true);
+        radiology.setForeground(new java.awt.Color(255, 255, 255));
+        radiology.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -105,8 +111,8 @@ public class radio_page extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -142,6 +148,21 @@ public class radio_page extends javax.swing.JFrame {
                 new radio_page().setVisible(true);
             }
         });
+    }
+       public void addRadiology(Radiology t){
+        DefaultTableModel model = (DefaultTableModel) radiology.getModel();
+        model.addRow(new Object[]{t.getRadiologyId(), t.getRadiologytName(), t.getReport(), t.getReason()});
+    }
+    
+     private void addRadiologyofPatients() {
+        DBAccess d = new DBAccess();
+        patientpage pg = new patientpage();
+        ArrayList<Radiology> tr = d.retrieveRadiologybyMRN(pg.getMRNFromSignin());
+        for (Radiology t : tr){
+            addRadiology(t);
+        }
+
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
