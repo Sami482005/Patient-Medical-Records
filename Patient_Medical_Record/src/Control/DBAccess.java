@@ -142,7 +142,7 @@ public class DBAccess {
         try{
             connect();
             ResultSet res = stmt.executeQuery(q);
-            if (res.next()){
+            while (res.next()){
                 appt = new Appointment();
                 appt.setAppointmentId(res.getInt("Appointment_ID"));
                 appt.setDay(res.getString("Day"));
@@ -208,6 +208,66 @@ public class DBAccess {
         }
     }
     
-    public Patient getPatient
+    public void updateMedicalHistory(int MRN, String MedHis){
+        String q = "UPDATE PATIENTS SET Medical_History = " + MedHis
+                + "WHERE Patient_ID = " + MRN;
+        try{
+            connect();
+            stmt.executeUpdate(q);
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
 
+        }
+    }
+
+    public int getSSNFromMRN(int MRNs) {
+        String q = "SELECT Patient_SSN FROM PATIENTS WHERE Patient_ID = " + MRNs;
+        int SSNN = 10;
+        try{
+            connect();
+            ResultSet id = stmt.executeQuery(q);
+            SSNN = id.getInt("Patient_ID");
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return SSNN;
+    }
+
+    public Patient getPatientFromMRN(int MRN) {
+        String q = "SELECT * FROM PATIENTS WHERE Patient_ID = " + MRN;
+        Patient p = null;
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next()){
+                p = new Patient();
+                p.setPatient_SSN(res.getInt("Patient_SSN"));
+                p.setPatient_ID(MRN);
+                p.setDate_Of_Birth(res.getString("Date_Of_Birth"));
+                p.setFirst_Name(res.getString("First_Name"));
+                p.setLast_Name(res.getString("Last_Name"));
+                p.setEmail(res.getString("email"));
+                p.setPhone_Number(res.getString("Phone_Number"));
+                p.setAddress(res.getString("Address"));
+            }
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return p;
+    }
+
+    public void updatePatientBySSN(Patient p) {
+        String q = "UPDATE PATIENTS SET Patient_SSN = " + p.getPatient_SSN()
+                + ", Patient_ID = " + p.getPatient_ID() + ", Date = '" + p.getDate_Of_Birth()
+                + "', First_Name = '" + p.getFirst_Name() + "', Last_Name = " + 
+                p.getLast_Name() + "', email = '" + p.getEmail() + "', Phone_Number = '" +
+                p.getPhone_Number() + "', Address = '" + p.getAddress() + "', Gender = '"
+                + p.getGender() + "';";
+        
+
+
+    }
 }

@@ -308,7 +308,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Common Disease">
+            <TitledBorder title="Disease History">
               <Font PropertyName="font" name="Helvetica Neue" size="24" style="1"/>
               <Color PropertyName="color" blue="ff" green="33" red="33" type="rgb"/>
             </TitledBorder>
@@ -396,6 +396,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AsthmaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="HD">
           <Properties>

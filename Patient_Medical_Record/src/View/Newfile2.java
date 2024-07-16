@@ -1,4 +1,4 @@
-package view;
+package View;
 
 import Control.DBAccess;
 import Model.Insurance_Plan;
@@ -222,7 +222,7 @@ public class Newfile2 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Disease", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
+        jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Disease History", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
 
         Diabetes.setText("Diabetes");
         Diabetes.addActionListener(new java.awt.event.ActionListener() {
@@ -241,6 +241,11 @@ public class Newfile2 extends javax.swing.JFrame {
 
         Asthma.setText("Asthma");
         Asthma.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
+        Asthma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AsthmaActionPerformed(evt);
+            }
+        });
 
         HD.setText("Heart Disease");
         HD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
@@ -333,14 +338,12 @@ public class Newfile2 extends javax.swing.JFrame {
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         addInsuranceFile();
         updateMedicalHistory();
-        Medical_Record_Number show = new Medical_Record_Number;
-        show.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_createActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        main_page main = new main_page();
+        NewFile main = new NewFile();
         main.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
@@ -371,6 +374,10 @@ public class Newfile2 extends javax.swing.JFrame {
     private void enddateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enddateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enddateActionPerformed
+
+    private void AsthmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AsthmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AsthmaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,14 +450,29 @@ public class Newfile2 extends javax.swing.JFrame {
         ip.setInsurancePlanId(Integer.parseInt(ID.getText().toString()));
         ip.setIssuingDate(startdate.getText().toString());
         NewFile nf = new NewFile();
-        ip.setPatientSSN(nf.createNewPatientFile().getPatient_SSN());
         DBAccess d= new DBAccess();
+        ip.setPatientSSN(d.getSSNFromMRN(nf.MRNs()));
         d.createNewInsurancePlan(ip);
         
 
     }
 
     public void updateMedicalHistory() {
-        
+        String disease = "Past Experiences of: ";
+        if(Asthma.isSelected())
+            disease += "Asthma";
+        if(Cancer.isSelected())
+            disease += "Cancer";
+        if(Chol.isSelected())
+            disease += "High Cholesterol Levels";
+        if(Diabetes.isSelected())
+            disease += "Diabetes";
+        if(HD.isSelected())
+            disease += "Heart Diseases";
+        if(Hyper.isSelected())
+            disease += "HyperTension";
+        DBAccess d = new DBAccess();
+        NewFile n = new NewFile();
+        d.updateMedicalHistory(n.MRNs(), disease);
     }
 }

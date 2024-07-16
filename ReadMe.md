@@ -44,3 +44,8 @@ Includes all the internal information representation.
 get*Type*(): to extract the info into the correct type from a **ResultSet**
 
 **this.dispose()** #makes a tab close without killing the program
+
+
+# Doctor Page:
+The doctor logs in
+A combo bo
