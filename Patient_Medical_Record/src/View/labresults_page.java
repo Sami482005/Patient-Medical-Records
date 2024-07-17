@@ -6,6 +6,7 @@ public class labresults_page extends javax.swing.JFrame {
      */
     public labresults_page() {
         initComponents();
+        addLabofPatients();
     }
 
     /**
@@ -18,9 +19,9 @@ public class labresults_page extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        lab = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -28,10 +29,10 @@ public class labresults_page extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel2.setText("HealthTracker");
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
 
@@ -52,7 +53,7 @@ public class labresults_page extends javax.swing.JFrame {
                 "ID", "Type", "Report", "Reason"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(lab);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 204));
@@ -97,8 +98,8 @@ public class labresults_page extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -135,7 +136,21 @@ public class labresults_page extends javax.swing.JFrame {
             }
         });
     }
+public void addLab(Lab_Test t){
+        DefaultTableModel model = (DefaultTableModel) lab.getModel();
+        model.addRow(new Object[]{t.getTestId(), t.getTestName(), t.getReport(), t.getReason()});
+    }
+    
+     private void addLabofPatients() {
+        DBAccess d = new DBAccess();
+        patientpage pg = new patientpage();
+        ArrayList<Lab_Test> tr = d.retrieveLabbyMRN(pg.getMRNFromSignin());
+        for (Treatment t : tr){
+            addLab(t);
+        }
 
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
