@@ -104,6 +104,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Manage Appointments"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewappActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bookapp">
           <Properties>
@@ -115,6 +118,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Book Appointment"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bookappActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

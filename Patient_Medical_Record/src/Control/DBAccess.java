@@ -270,4 +270,38 @@ public class DBAccess {
 
 
     }
+
+    public Insurance_Plan getInsuranceInfoFromMRN(int mrn) {
+        String q = "SELECT * FROM INSURANCE_PLAN WHERE Patient_SSN = "
+                + "(SELECT PATIENT_SSN FROM PATIENTS WHERE PATIENT_ID = " + mrn
+                + ";";
+        Insurance_Plan ip = null;
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            close();
+            if (res.next()){
+                ip = new Insurance_Plan();
+                ip.setInsurancePlanId(res.getInt("Insurance_Plan_ID"));
+                ip.setCompanyProvider(res.getString("Company_Provider"));
+                ip.setInsuranceClass(res.getString("Class"));
+                ip.setIssuingDate(res.getString("Issuring_Date"));
+                ip.setEndDate(res.getString("End_Date"));
+                ip.setPatientSSN(res.getInt("Patient_SSN"));
+            }          
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+        return ip;
+    }
+
+    public void UpdateInsurancePlan(Insurance_Plan ip) {
+        String q = "UPDATE INSURANCE_PLAN SET Company_Provider = '" + ip.getCompanyProvider()
+                + "', Class  = '" + ip.getInsuranceClass() + "', Issuing_Date = '"
+                + ip.getIssuingDate() + "', End_Date = '" + ip.getEndDate() + "', Patient_SSN = "
+                + ip.getPatientSSN()
+                + "WHERE Insurance_Plan_ID = " + ip.getInsurancePlanId() + ";"; 
+        
+
+    }
 }

@@ -39,7 +39,7 @@ public class ViewAppointment extends javax.swing.JFrame {
         InputSSN = new javax.swing.JLabel();
         appts = new javax.swing.JComboBox<>();
         Cancel = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Back = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -117,7 +117,12 @@ public class ViewAppointment extends javax.swing.JFrame {
                 .addGap(60, 60, 60))
         );
 
-        jButton3.setText("Back");
+        Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("HealthTracker");
@@ -130,7 +135,7 @@ public class ViewAppointment extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(Back)
                         .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -148,7 +153,7 @@ public class ViewAppointment extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jButton3)
+                .addComponent(Back)
                 .addGap(48, 48, 48))
         );
 
@@ -174,6 +179,10 @@ public class ViewAppointment extends javax.swing.JFrame {
         appts.removeAllItems();
 
     }//GEN-LAST:event_CancelActionPerformed
+
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_BackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,12 +220,12 @@ public class ViewAppointment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Back;
     private javax.swing.JButton Cancel;
     private javax.swing.JLabel InputSSN;
     private javax.swing.JTextField SSN;
     private javax.swing.JComboBox<String> appts;
     private javax.swing.JLabel chooseLabel;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

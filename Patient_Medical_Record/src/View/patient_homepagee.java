@@ -116,7 +116,7 @@ public class patient_homepagee extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(perscription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(appointments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(appointments, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE))
                 .addGap(78, 78, 78))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -164,7 +164,7 @@ public class patient_homepagee extends javax.swing.JFrame {
                                 .addGap(15, 15, 15)))
                         .addGap(33, 33, 33))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -196,7 +196,6 @@ public class patient_homepagee extends javax.swing.JFrame {
     private void surgeryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surgeryActionPerformed
         // TODO add your handling code here:
         surgeries_page surgeries = new surgeries_page();
-        addSurgeriesofPatient();
         surgeries.setVisible(true);
     }//GEN-LAST:event_surgeryActionPerformed
 
@@ -209,7 +208,8 @@ public class patient_homepagee extends javax.swing.JFrame {
     private void labresultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labresultActionPerformed
         // TODO add your handling code here:
         labresults_page labresults = new labresults_page();
-        labresults.setvisible(true);
+        labresults.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_labresultActionPerformed
 
     private void radiologyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiologyActionPerformed
@@ -234,6 +234,7 @@ public class patient_homepagee extends javax.swing.JFrame {
         // TODO add your handling code here:
         main_page main = new main_page();
         main.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_signoutActionPerformed
 
     private void appointments1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointments1ActionPerformed

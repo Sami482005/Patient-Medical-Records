@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package View;
+
 
 /**
  *
@@ -45,10 +46,20 @@ public class appoint_page extends javax.swing.JFrame {
         viewapp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         viewapp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/apoint.jpg"))); // NOI18N
         viewapp.setText("Manage Appointments");
+        viewapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewappActionPerformed(evt);
+            }
+        });
 
         bookapp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bookapp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/bookapp.jpg"))); // NOI18N
         bookapp.setText("Book Appointment");
+        bookapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookappActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,7 +112,20 @@ public class appoint_page extends javax.swing.JFrame {
         // TODO add your handling code here:
         patient_homepagee home = new patient_homepagee();
         home.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_backActionPerformed
+
+    private void bookappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookappActionPerformed
+        BookAppoinment book = new BookAppoinment();
+        book.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bookappActionPerformed
+
+    private void viewappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewappActionPerformed
+        ViewAppointment manage = new ViewAppointment();
+        manage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_viewappActionPerformed
 
     /**
      * @param args the command line arguments

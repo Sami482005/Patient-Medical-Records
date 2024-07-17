@@ -1,4 +1,4 @@
-package View
+package View;
 public class radio_page extends javax.swing.JFrame {
 
     /**
