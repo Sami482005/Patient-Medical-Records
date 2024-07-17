@@ -5,6 +5,8 @@ import Model.Book_Appointment;
 import Model.Doctor;
 import Model.Insurance_Plan;
 import Model.Patient;
+import Model.Perform_Surgery;
+import Model.Surgery;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,7 +17,7 @@ public class DBAccess {
     private Statement stmt;
     
     private void connect() throws SQLException{
-        con= DriverManager.getConnection("jdbc:mysql://localhost/pmr", "root", "");
+        con= DriverManager.getConnection("jdbc:mysql://localhost/patient medical records", "root", "");
         stmt=con.createStatement();
     }
     
@@ -25,7 +27,7 @@ public class DBAccess {
     }
     
     public void addNewPatient(Patient p){
-        String query = "INSERT INTO PATIENT VALUES (" + p.getPatient_SSN() + ", " + p.getPatient_ID()
+        String query = "INSERT INTO PATIENTS VALUES (" + p.getPatient_SSN() + ", " + p.getPatient_ID()
                 + ", '" + p.getDate_Of_Birth() + "', '" + p.getFirst_Name() + "', '" +
                 p.getLast_Name() + "', '" + p.getEmail() +"', '" + p.getPhone_Number()
                 + "', '" + p.getAddress() + "', '" + p.getGender() + "', '" +
@@ -195,7 +197,7 @@ public class DBAccess {
 
     public void createNewInsurancePlan(Insurance_Plan ip) {
         String q = "INSERT INTO INSURANCE_PLAN VALUES (" + ip.getInsurancePlanId()
-                + ", '" + ip.getCompanyProvider() + "', '" + ip.getClass()
+                + ", '" + ip.getCompanyProvider() + "', '" + ip.getInsuranceClass()
                 + "', '" + ip.getIssuingDate() + "', '" + ip.getEndDate()
                 + "', " + ip.getPatientSSN() + ");";
         try{
@@ -209,8 +211,8 @@ public class DBAccess {
     }
     
     public void updateMedicalHistory(int MRN, String MedHis){
-        String q = "UPDATE PATIENTS SET Medical_History = " + MedHis
-                + "WHERE Patient_ID = " + MRN;
+        String q = "UPDATE PATIENTS SET Medical_History = '" + MedHis
+                + "' WHERE Patient_ID = " + MRN;
         try{
             connect();
             stmt.executeUpdate(q);
@@ -222,12 +224,13 @@ public class DBAccess {
     }
 
     public int getSSNFromMRN(int MRNs) {
-        String q = "SELECT Patient_SSN FROM PATIENTS WHERE Patient_ID = " + MRNs;
-        int SSNN = 10;
+        String q = "SELECT Patient_SSN FROM PATIENTS WHERE Patient_ID = " + MRNs + ";";
+        int SSNN = 0;
         try{
             connect();
             ResultSet id = stmt.executeQuery(q);
-            SSNN = id.getInt("Patient_ID");
+            if (id.next())
+                SSNN = id.getInt("Patient_SSN");
             close();
         }catch(SQLException ex){
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
@@ -303,5 +306,48 @@ public class DBAccess {
                 + "WHERE Insurance_Plan_ID = " + ip.getInsurancePlanId() + ";"; 
         
 
+    }
+
+    public Perform_Surgery getPerformFromSurgery(Surgery s) {
+        String q = "SELECT * FROM PERFORM_SURGERY WHERE Surgery_ID = "
+                + "(SELECT SURGERY_ID FROM SURGERY WHERE SURGERY_ID = "
+                + s.getSurgeryId();
+        Perform_Surgery su = null;
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if(res.next()){
+                su = new Perform_Surgery();
+                su.setDoctorId(res.getInt("Doctor_ID"));
+                su.setMedicalFacilityId(res.getInt("Medical_Facility_ID"));
+                su.setPatientSSN(res.getInt("Patient_SSN"));
+                su.setSurgeryId(res.getInt("Surgery_ID"));
+                su.setSuccessful(res.getBoolean("Successful"));
+                su.setDate(res.getString("Date"));
+            }
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);                        
+        }
+        return su;
+    }
+
+    public ArrayList<Surgery> retrieveSurgeriesbyMRN(int mrnFromSignin) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int getMRNFromSSN(Patient p) {
+        String q = "SELECT Patient_ID FROM PATIENTS WHERE Patient_SSN = " + p.getPatient_SSN() + ";";
+        int MRN = 0;
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next())
+                MRN = res.getInt("Patient_ID");
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);                                    
+        }
+        return MRN;
     }
 }

@@ -152,7 +152,9 @@ public class main_page extends javax.swing.JFrame {
     }//GEN-LAST:event_signinActionPerformed
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
-        // TODO add your handling code here:
+        NewFile nf = new NewFile();
+        nf.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_createActionPerformed
 
     /**

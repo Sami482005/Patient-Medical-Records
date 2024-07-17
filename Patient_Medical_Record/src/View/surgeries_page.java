@@ -1,7 +1,7 @@
 package View;
 import Control.DBAccess;
+import Model.Perform_Surgery;
 import Model.Surgery;
-import Model.Treatment;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,6 +38,29 @@ public class surgeries_page extends javax.swing.JFrame {
         surgeries.setForeground(new java.awt.Color(255, 255, 255));
         surgeries.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -153,7 +176,9 @@ public class surgeries_page extends javax.swing.JFrame {
     }
      public void addSurgeries(Surgery s){
         DefaultTableModel model = (DefaultTableModel) surgeries.getModel();
-        model.addRow(new Object[]{s.getSurgeryId(), s.getSurgeryName(), s.getDoctor(), s.getAim(),s.getDate(),s.getIsSuccessful()});
+        DBAccess d = new DBAccess();
+        Perform_Surgery s1 = d.getPerformFromSurgery(s);
+        model.addRow(new Object[]{s.getSurgeryId(), s.getSurgeryName(), s1.getDoctorId(), s.getAim(),s1.getDate(),s1.isSuccessful()});
     }
     
      private void addSurgeriesofPatients() {
@@ -163,8 +188,6 @@ public class surgeries_page extends javax.swing.JFrame {
         for (Surgery sg : sr){
             addSurgeries(sg);
         }
-
-
     }
     
 

@@ -2,6 +2,7 @@ package View;
 
 import Control.DBAccess;
 import Model.Insurance_Plan;
+import static View.NewFile.MRNOfPatient;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -46,6 +47,8 @@ public class Newfile2 extends javax.swing.JFrame {
         classs = new javax.swing.JTextField();
         enddate = new javax.swing.JTextField();
         startdate = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
         Diabetes = new javax.swing.JCheckBox();
         Chol = new javax.swing.JCheckBox();
@@ -112,6 +115,10 @@ public class Newfile2 extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("YYYY-MM-DD");
+
+        jLabel10.setText("YYYY-MM-DD");
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
@@ -134,18 +141,22 @@ public class Newfile2 extends javax.swing.JFrame {
                             .addComponent(classs, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(204, 204, 204)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel132)
-                            .addComponent(jLabel133))
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(startdate, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(enddate, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel132)
+                                    .addComponent(jLabel133))
+                                .addGap(77, 77, 77)
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(startdate, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enddate, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9))))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel16Layout.createSequentialGroup()
@@ -165,10 +176,15 @@ public class Newfile2 extends javax.swing.JFrame {
                             .addComponent(jLabel133)))
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(jLabel132)))
+                        .addComponent(jLabel132)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(28, 28, 28)))
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel10)
+                        .addGap(72, 72, 72)
                         .addComponent(jLabel134))
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -189,9 +205,9 @@ public class Newfile2 extends javax.swing.JFrame {
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -257,17 +273,17 @@ public class Newfile2 extends javax.swing.JFrame {
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Asthma)
-                    .addComponent(Hyper))
-                .addGap(200, 200, 200)
+                    .addComponent(Asthma, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Hyper, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(147, 147, 147)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Chol)
-                    .addComponent(HD))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Diabetes)
-                    .addComponent(Cancer))
-                .addGap(114, 114, 114))
+                    .addComponent(Chol, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HD, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Cancer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Diabetes, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,11 +294,14 @@ public class Newfile2 extends javax.swing.JFrame {
                     .addComponent(Asthma)
                     .addComponent(Cancer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Hyper)
-                    .addComponent(HD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Diabetes))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Hyper)
+                        .addComponent(HD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(Diabetes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(3, 3, 3)))
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,7 +329,7 @@ public class Newfile2 extends javax.swing.JFrame {
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(create)
                     .addComponent(back))
@@ -326,19 +345,21 @@ public class Newfile2 extends javax.swing.JFrame {
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         Insurance_Plan ip = addInsuranceFile();
-        
-        DBAccess d= new DBAccess();
+        DBAccess d = new DBAccess();
         d.createNewInsurancePlan(ip);
         updateMedicalHistory();
-        NewFile n = new NewFile();
-        d.updateMedicalHistory(n.MRNs(), updateMedicalHistory());
+        d.updateMedicalHistory(MRNOfPatient, updateMedicalHistory());
         this.setVisible(false);
+        
+        main_page main = new main_page();
+        main.setVisible(true);
     }//GEN-LAST:event_createActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
         NewFile main = new NewFile();
         main.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
     private void classsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classsActionPerformed
@@ -422,12 +443,14 @@ public class Newfile2 extends javax.swing.JFrame {
     private javax.swing.JTextField company;
     private javax.swing.JButton create;
     private javax.swing.JTextField enddate;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel129;
     private javax.swing.JLabel jLabel130;
     private javax.swing.JLabel jLabel131;
     private javax.swing.JLabel jLabel132;
     private javax.swing.JLabel jLabel133;
     private javax.swing.JLabel jLabel134;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
@@ -437,14 +460,16 @@ public class Newfile2 extends javax.swing.JFrame {
 
     public Insurance_Plan addInsuranceFile() {
         Insurance_Plan ip = new Insurance_Plan();
-        ip.setCompanyProvider(company.getText().toString());
-        ip.setEndDate(enddate.getText().toString());
-        ip.setInsuranceClass(classs.getText().toString());
-        ip.setInsurancePlanId(Integer.parseInt(ID.getText().toString()));
-        ip.setIssuingDate(startdate.getText().toString());
-        NewFile nf = new NewFile();
-        DBAccess d= new DBAccess();
-        ip.setPatientSSN(d.getSSNFromMRN(nf.MRNs()));
+        if (ID.getText().toString() != ""){
+            ip.setCompanyProvider(company.getText().toString());
+            ip.setEndDate(enddate.getText().toString());
+            ip.setInsuranceClass(classs.getText().toString());
+            ip.setInsurancePlanId(Integer.parseInt(ID.getText().toString()));
+            ip.setIssuingDate(startdate.getText().toString());
+            NewFile nf = new NewFile();
+            DBAccess d= new DBAccess();
+            ip.setPatientSSN(d.getSSNFromMRN(MRNOfPatient));
+        }
         return ip;        
 
     }

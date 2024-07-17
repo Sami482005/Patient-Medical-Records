@@ -11,6 +11,7 @@ public class Perform_Surgery {
     private String date;
 
     // Constructor
+    public Perform_Surgery(){};
     public Perform_Surgery(int doctorId, int medicalFacilityId, int patientSSN, int surgeryId, float price, boolean successful, String date) {
         this.doctorId = doctorId;
         this.medicalFacilityId = medicalFacilityId;

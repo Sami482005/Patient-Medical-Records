@@ -8,6 +8,7 @@ public class Surgery {
     private String aim;
 
     // Constructor
+    public Surgery(){};
     public Surgery(int surgeryId, String surgeryName, String date, String aim) {
         this.surgeryId = surgeryId;
         this.surgeryName = surgeryName;

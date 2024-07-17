@@ -5,6 +5,9 @@
         <group>
             <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/labresults_page.java</file>
             <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/appoint_page.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/Model/Perform_Surgery.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/Control/DBAccess.java</file>
+            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/Model/Surgery.java</file>
             <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/Patient_Medical_Record/src/View/radio_page.java</file>
         </group>
     </open-files>

@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 public class NewFile extends javax.swing.JFrame {
 
+    public static int MRNOfPatient;
     public NewFile() {
         initComponents();
     }
@@ -220,6 +221,7 @@ public class NewFile extends javax.swing.JFrame {
 
         jLabel10.setText("Medical_Record_Number");
 
+        MRN.setEditable(false);
         MRN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MRNActionPerformed(evt);
@@ -288,7 +290,7 @@ public class NewFile extends javax.swing.JFrame {
         // TODO add your handling code here:
         main_page main = new main_page();
         main.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
     private void genderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderActionPerformed
@@ -296,7 +298,7 @@ public class NewFile extends javax.swing.JFrame {
     }//GEN-LAST:event_genderActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        
+        this.setVisible(false);
         Newfile2 newfile = new Newfile2();
         newfile.setVisible(true);
     }//GEN-LAST:event_nextActionPerformed
@@ -306,7 +308,11 @@ public class NewFile extends javax.swing.JFrame {
     }//GEN-LAST:event_MRNActionPerformed
 
     private void GetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetActionPerformed
-        getPatientMRN();
+        Patient p = createNewPatientFile();
+        DBAccess d = new DBAccess();
+        int mrn = d.getMRNFromSSN(p);
+        MRN.setText("" + mrn);
+        MRNOfPatient = mrn;
     }//GEN-LAST:event_GetActionPerformed
 
     /**
@@ -389,15 +395,9 @@ public class NewFile extends javax.swing.JFrame {
         
         return p;
     }
-    
-    public void getPatientMRN(){
-        Patient p = createNewPatientFile();
-        int MRNS = p.getPatient_ID();
-        MRN.setText("" + MRNS);
-    }
-    
+     
     public int MRNs(){
-        return Integer.parseInt(MRN.getText().toString());
+        return MRNOfPatient;
     }
 
     private void getPatientFromMRN() {
