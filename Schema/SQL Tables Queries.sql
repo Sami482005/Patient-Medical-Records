@@ -48,7 +48,7 @@ CREATE TABLE INSURANCE_PLAN(
 );
 
 CREATE TABLE EMERGENCY_CONTACTS(
-    Phone_Number VARCHAR (13) UNIQUE,
+    Phone_Number VARCHAR (13) UNIQUE CHECK (Phone_Number LIKE '+961________'),
     Name VARCHAR(30),
     Relationship VARCHAR(12),
     PRIMARY KEY (Phone_Number)

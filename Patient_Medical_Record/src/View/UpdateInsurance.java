@@ -184,8 +184,8 @@ public class UpdateInsurance extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back)
                     .addComponent(create))
@@ -225,7 +225,8 @@ public class UpdateInsurance extends javax.swing.JFrame {
         Insurance_Plan ip = addInsuranceFile();
         DBAccess d= new DBAccess();
         d.UpdateInsurancePlan(ip);
-        this.setVisible(false);
+        patient_homepagee hp = new patient_homepagee();
+        hp.setVisible(true);
     }//GEN-LAST:event_createActionPerformed
 
     /**
@@ -270,9 +271,8 @@ public class UpdateInsurance extends javax.swing.JFrame {
         ip.setInsuranceClass(classs.getText().toString());
         ip.setInsurancePlanId(Integer.parseInt(ID.getText().toString()));
         ip.setIssuingDate(startdate.getText().toString());
-        patientpage pg = new patientpage();
         DBAccess d= new DBAccess();
-        ip.setPatientSSN(d.getSSNFromMRN(pg.getMRNFromSignin()));
+        ip.setPatientSSN(d.getSSNFromMRN(patientpage.getMRNOfPatient()));
         return ip;
     }
     
@@ -295,8 +295,13 @@ public class UpdateInsurance extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void fillInsuranceInfo() {
-        patientpage pg = new patientpage();
         DBAccess d = new DBAccess();
-        Insurance_Plan ip = d.getInsuranceInfoFromMRN(pg.getMRNFromSignin());
+        Insurance_Plan ip = d.getInsuranceInfoFromMRN(patientpage.getMRNOfPatient());
+        ID.setText(""+ip.getInsurancePlanId());
+        classs.setText(ip.getInsuranceClass().toString());
+        company.setText(ip.getCompanyProvider());
+        enddate.setText(ip.getEndDate());
+        startdate.setText(ip.getIssuingDate());
+        
     }
 }

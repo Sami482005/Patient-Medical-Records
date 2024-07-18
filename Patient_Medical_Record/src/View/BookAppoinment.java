@@ -1,6 +1,7 @@
 package View;
 import Control.DBAccess;
 import Model.Appointment;
+import Model.Book_Appointment;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -33,14 +34,15 @@ public class BookAppoinment extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        confirm = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         Specialties = new javax.swing.JComboBox<>();
         DepLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Doctors = new javax.swing.JComboBox<>();
         Appointments = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        Reason = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -48,12 +50,10 @@ public class BookAppoinment extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Book Appointment", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 36), new java.awt.Color(0, 51, 204))); // NOI18N
 
-        jButton1.setText("Confirm");
-
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        confirm.setText("Confirm");
+        confirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                confirmActionPerformed(evt);
             }
         });
 
@@ -78,28 +78,37 @@ public class BookAppoinment extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel5.setText("Reason");
+
+        Reason.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReasonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(confirm)
                 .addGap(31, 31, 31))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(85, 85, 85)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DepLabel)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(159, 159, 159)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Appointments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Doctors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Specialties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(313, Short.MAX_VALUE))
+                    .addComponent(Specialties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Reason, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,10 +125,12 @@ public class BookAppoinment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(Appointments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jLabel5)
+                    .addComponent(Reason, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(confirm)
                 .addGap(21, 21, 21))
         );
 
@@ -133,7 +144,7 @@ public class BookAppoinment extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(798, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton3)
@@ -142,28 +153,23 @@ public class BookAppoinment extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(14, 14, 14))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 98, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void DoctorsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DoctorsKeyPressed
         fillDoctors();
@@ -173,6 +179,27 @@ public class BookAppoinment extends javax.swing.JFrame {
         fillAppts();
     }//GEN-LAST:event_AppointmentsKeyPressed
 
+    private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
+    Appointment app = getChosenAppt();
+        DBAccess d = new DBAccess();
+        
+        d.removeApptFromAvailability(app.getAppointmentId());
+        Book_Appointment ba = new Book_Appointment();
+        ba.setAppointment_ID(app.getAppointmentId());
+        ba.setPatient_SSN(d.getSSNFromMRN(patientpage.getMRNOfPatient()));
+        ba.setReason(Reason.getText().toString());
+        d.addAppttoBookAppt(ba);
+        this.dispose();
+    }//GEN-LAST:event_confirmActionPerformed
+ 
+     public Appointment getChosenAppt(){
+        int index = Appointments.getSelectedIndex();
+        Appointment appt = fillAppts().get(index);
+        return appt;
+    }
+    private void ReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReasonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReasonActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -212,13 +239,14 @@ public class BookAppoinment extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Appointments;
     private javax.swing.JLabel DepLabel;
     private javax.swing.JComboBox<String> Doctors;
+    private javax.swing.JTextField Reason;
     private javax.swing.JComboBox<String> Specialties;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton confirm;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
      
@@ -273,9 +301,5 @@ public class BookAppoinment extends javax.swing.JFrame {
         return appts;
     }
     
-    public Appointment getChosenAppt(){
-        int index = Appointments.getSelectedIndex();
-        Appointment appt = fillAppts().get(index);
-        return appt;
-    }
+ 
 }

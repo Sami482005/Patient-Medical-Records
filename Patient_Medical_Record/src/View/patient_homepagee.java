@@ -2,9 +2,6 @@ package View;
 
 public class patient_homepagee extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MedicalRecord
-     */
     public patient_homepagee() {
         initComponents();
     }
@@ -27,7 +24,7 @@ public class patient_homepagee extends javax.swing.JFrame {
         radiology = new javax.swing.JButton();
         appointments = new javax.swing.JButton();
         perscription = new javax.swing.JButton();
-        appointments1 = new javax.swing.JButton();
+        update = new javax.swing.JButton();
         signout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,12 +88,12 @@ public class patient_homepagee extends javax.swing.JFrame {
             }
         });
 
-        appointments1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        appointments1.setForeground(new java.awt.Color(204, 0, 102));
-        appointments1.setText("Update Medical File");
-        appointments1.addActionListener(new java.awt.event.ActionListener() {
+        update.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        update.setForeground(new java.awt.Color(204, 0, 102));
+        update.setText("Update Medical File");
+        update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                appointments1ActionPerformed(evt);
+                updateActionPerformed(evt);
             }
         });
 
@@ -120,14 +117,14 @@ public class patient_homepagee extends javax.swing.JFrame {
                 .addGap(78, 78, 78))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(appointments1)
+                .addComponent(update)
                 .addGap(65, 65, 65))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(appointments1)
+                .addComponent(update)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(perscription, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,8 +223,8 @@ public class patient_homepagee extends javax.swing.JFrame {
 
     private void perscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perscriptionActionPerformed
         // TODO add your handling code here:
-        persc_page perscription = new persc_page();
-        prescription.setVisible(true);
+        prescription p = new prescription();
+        p.setVisible(true);
     }//GEN-LAST:event_perscriptionActionPerformed
 
     private void signoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutActionPerformed
@@ -237,9 +234,12 @@ public class patient_homepagee extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_signoutActionPerformed
 
-    private void appointments1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointments1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_appointments1ActionPerformed
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        UpdateFile1 uf = new UpdateFile1();
+        uf.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,11 +275,13 @@ public class patient_homepagee extends javax.swing.JFrame {
                 new patient_homepagee().setVisible(true);
             }
         });
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton appointments;
-    private javax.swing.JButton appointments1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -289,6 +291,7 @@ public class patient_homepagee extends javax.swing.JFrame {
     private javax.swing.JButton signout;
     private javax.swing.JButton surgery;
     private javax.swing.JButton treatment;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 
    

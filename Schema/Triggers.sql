@@ -70,7 +70,7 @@ BEGIN
 END;
 $$
 
-CREATE TRIGGER check_dob_before_insert
+CREATE TRIGGER check_Starting_Year_before_insert
 BEFORE INSERT ON doctor
 FOR EACH ROW
 BEGIN
@@ -81,7 +81,7 @@ BEGIN
 END;
 $$
 
-CREATE TRIGGER check_dob_before_update
+CREATE TRIGGER check_Starting_Year_before_update
 BEFORE UPDATE ON doctor
 FOR EACH ROW
 BEGIN
@@ -92,7 +92,7 @@ BEGIN
 END;
 $$
 
-CREATE TRIGGER NoSameName
+CREATE TRIGGER NoSameNamePatients
 BEFORE INSERT ON PATIENTS
 FOR EACH ROW
 BEGIN

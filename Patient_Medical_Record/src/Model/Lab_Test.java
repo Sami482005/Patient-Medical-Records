@@ -10,6 +10,7 @@ public class Lab_Test {
     private int medicalFileId;
 
     // Constructor
+    public Lab_Test(){};
     public Lab_Test(int testId, String testName, String date, String report, String reason, int medicalFileId) {
         this.testId = testId;
         this.testName = testName;

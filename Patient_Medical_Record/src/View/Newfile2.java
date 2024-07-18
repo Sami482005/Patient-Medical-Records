@@ -477,17 +477,17 @@ public class Newfile2 extends javax.swing.JFrame {
     public String updateMedicalHistory() {
         String disease = "Past Experiences of: ";
         if(Asthma.isSelected())
-            disease += "Asthma";
+            disease += "\nAsthma";
         if(Cancer.isSelected())
-            disease += "Cancer";
+            disease += "\nCancer";
         if(Chol.isSelected())
-            disease += "High Cholesterol Levels";
+            disease += "\nHigh Cholesterol Levels";
         if(Diabetes.isSelected())
-            disease += "Diabetes";
+            disease += "\nDiabetes";
         if(HD.isSelected())
-            disease += "Heart Diseases";
+            disease += "\nHeart Diseases";
         if(Hyper.isSelected())
-            disease += "HyperTension";
+            disease += "\nHyperTension";
         return disease;
     }
 }

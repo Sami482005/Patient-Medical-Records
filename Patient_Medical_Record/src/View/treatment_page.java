@@ -158,8 +158,7 @@ public class treatment_page extends javax.swing.JFrame {
     
      private void addTreatmentsofPatients() {
         DBAccess d = new DBAccess();
-        patientpage pg = new patientpage();
-        ArrayList<Treatment> tr = d.retrieveTreatmentsbyMRN(pg.getMRNFromSignin());
+        ArrayList<Treatment> tr = d.retrieveTreatmentsbyMRN(patientpage.getMRNOfPatient());
         for (Treatment t : tr){
             addTreatments(t);
         }

@@ -10,9 +10,7 @@ package View;
  */
 public class patientpage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form patientpage
-     */
+    public static int MRNOfPatient;
     public patientpage() {
         initComponents();
     }
@@ -135,6 +133,7 @@ public class patientpage extends javax.swing.JFrame {
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         patient_homepagee ph = new patient_homepagee();
+        getMRNFromSignin();
         ph.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_nextActionPerformed
@@ -181,11 +180,19 @@ public class patientpage extends javax.swing.JFrame {
             }
         });
     }
-    public int getMRNFromSignin(){
+    public void getMRNFromSignin(){
         int mrn = Integer.parseInt(MRNS.getText().toString());
-        return mrn;
+        setMRNOfPatient(mrn);
     }
 
+    public static int getMRNOfPatient() {
+        return MRNOfPatient;
+    }
+
+    public static void setMRNOfPatient(int MRNOfPatient) {
+        patientpage.MRNOfPatient = MRNOfPatient;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField EMAIL;
     private javax.swing.JTextField MRNS;

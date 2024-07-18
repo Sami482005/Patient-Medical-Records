@@ -10,6 +10,7 @@ public class Treatment {
     private int medicalFileId;
 
     // Constructor
+    public Treatment(){};
     public Treatment(int treatmentId, String treatmentName, String reason, String startDate, String endDate, int medicalFileId) {
         this.treatmentId = treatmentId;
         this.treatmentName = treatmentName;

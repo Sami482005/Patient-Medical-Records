@@ -1,6 +1,7 @@
 package View;
     
 import Control.DBAccess;
+import Model.Radiology;
 import Model.Treatment;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +28,7 @@ public class radio_page extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        radiology = new javax.swing.JTable();
+        radio = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,9 +43,9 @@ public class radio_page extends javax.swing.JFrame {
             }
         });
 
-        radiology.setAutoCreateRowSorter(true);
-        radiology.setForeground(new java.awt.Color(255, 255, 255));
-        radiology.setModel(new javax.swing.table.DefaultTableModel(
+        radio.setAutoCreateRowSorter(true);
+        radio.setForeground(new java.awt.Color(255, 255, 255));
+        radio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,7 +60,7 @@ public class radio_page extends javax.swing.JFrame {
                 "ID", "Type", "Report", "Reason"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(radio);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 204));
@@ -78,7 +79,7 @@ public class radio_page extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(793, 793, 793)
-                            .addComponent(jButton1)
+                            .addComponent(back)
                             .addGap(37, 37, 37))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(65, 65, 65)
@@ -97,14 +98,12 @@ public class radio_page extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(13, 13, 13)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
                         .addGroup(layout.createSequentialGroup()
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addGap(412, 412, 412)))
-                    .addComponent(jButton1)
+                            .addComponent(jLabel1)))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(back)
                     .addGap(14, 14, 14)))
         );
 
@@ -149,27 +148,25 @@ public class radio_page extends javax.swing.JFrame {
             }
         });
     }
-       public void addRadiology(Radiology t){
-        DefaultTableModel model = (DefaultTableModel) radiology.getModel();
-        model.addRow(new Object[]{t.getRadiologyId(), t.getRadiologytName(), t.getReport(), t.getReason()});
-    }
-    
+//       public void addRadiology(Radiology t){
+//        
+//    }
+//    
      private void addRadiologyofPatients() {
         DBAccess d = new DBAccess();
-        patientpage pg = new patientpage();
-        ArrayList<Radiology> tr = d.retrieveRadiologybyMRN(pg.getMRNFromSignin());
+        ArrayList<Radiology> tr = d.retrieveRadiologybyMRN(patientpage.getMRNOfPatient());
+        DefaultTableModel model = (DefaultTableModel) radio.getModel();
         for (Radiology t : tr){
-            addRadiology(t);
+            System.out.println(t.getRadiologyId());
+            model.addRow(new Object[]{t.getRadiologyId(), t.getRadiologyName(), t.getReport(), t.getReason()});
         }
-
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable radio;
     // End of variables declaration//GEN-END:variables
 }

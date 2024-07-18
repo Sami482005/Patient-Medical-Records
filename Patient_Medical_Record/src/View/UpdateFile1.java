@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
 import Control.DBAccess;
@@ -18,9 +15,8 @@ public class UpdateFile1 extends javax.swing.JFrame {
      */
     public UpdateFile1() {
         initComponents();
-        patientpage pg = new patientpage();
         DBAccess d = new DBAccess();
-        Patient p = d.getPatientFromMRN(pg.getMRNFromSignin());
+        Patient p = d.getPatientFromMRN(patientpage.getMRNOfPatient());
         fillboxes(p);
     }
 
@@ -269,6 +265,7 @@ public class UpdateFile1 extends javax.swing.JFrame {
         d.updatePatientBySSN(getPatientInfo());
         UpdateInsurance newfile = new UpdateInsurance();
         newfile.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_nextActionPerformed
 
     private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed

@@ -10,6 +10,7 @@ public class Radiology {
     private int medicalFileId;
 
     // Constructor
+    public Radiology(){};
     public Radiology(int radiologyId, String radiologyName, String date, String report, String reason, int medicalFileId) {
         this.radiologyId = radiologyId;
         this.radiologyName = radiologyName;

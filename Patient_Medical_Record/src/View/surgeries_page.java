@@ -1,7 +1,6 @@
 package View;
 import Control.DBAccess;
-import Model.Perform_Surgery;
-import Model.Surgery;
+import Model.Surgeries;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,7 +11,7 @@ public class surgeries_page extends javax.swing.JFrame {
      */
     public surgeries_page() {
         initComponents();
-         addSurgeriesofPatients();
+        addSurgeriesofPatients();
     }
 
     /**
@@ -30,7 +29,7 @@ public class surgeries_page extends javax.swing.JFrame {
         surgeries = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,10 +82,10 @@ public class surgeries_page extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel2.setText("HealthTracker");
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
 
@@ -102,7 +101,7 @@ public class surgeries_page extends javax.swing.JFrame {
                 .addContainerGap(90, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(back)
                 .addGap(59, 59, 59))
             .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
@@ -129,7 +128,7 @@ public class surgeries_page extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
-                .addComponent(jButton1)
+                .addComponent(back)
                 .addGap(26, 26, 26))
         );
 
@@ -174,27 +173,27 @@ public class surgeries_page extends javax.swing.JFrame {
             }
         });
     }
-     public void addSurgeries(Surgery s){
-        DefaultTableModel model = (DefaultTableModel) surgeries.getModel();
-        DBAccess d = new DBAccess();
-        Perform_Surgery s1 = d.getPerformFromSurgery(s);
-        model.addRow(new Object[]{s.getSurgeryId(), s.getSurgeryName(), s1.getDoctorId(), s.getAim(),s1.getDate(),s1.isSuccessful()});
+     public void addSurgeries(Surgeries s){
+        DefaultTableModel model = (DefaultTableModel) surgeries.getModel();       
+        model.addRow(new Object[]{s.getSurgery_ID(), s.getSurgery_Name(), s.getDoctor_ID(), s.getAim(), s.getDate(), s.isSuccessful()});
     }
     
      private void addSurgeriesofPatients() {
         DBAccess d = new DBAccess();
-        patientpage pg = new patientpage();
-        ArrayList<Surgery> sr = d.retrieveSurgeriesbyMRN(pg.getMRNFromSignin());
-        for (Surgery sg : sr){
-            addSurgeries(sg);
+        int MRN = patientpage.getMRNOfPatient();
+        ArrayList<Surgeries> sr = d.retrieveSurgeriesbyMRN(MRN);
+        if(sr != null){
+            for (Surgeries sg : sr){
+                addSurgeries(sg);
+            }        
         }
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private java.awt.Canvas canvas1;
     private java.awt.Canvas canvas2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;

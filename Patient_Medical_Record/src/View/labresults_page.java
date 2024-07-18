@@ -1,4 +1,10 @@
 package View;
+
+import Control.DBAccess;
+import Model.Lab_Test;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 public class labresults_page extends javax.swing.JFrame {
 
     /**
@@ -22,7 +28,7 @@ public class labresults_page extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         lab = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -36,28 +42,66 @@ public class labresults_page extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        lab.setAutoCreateRowSorter(true);
+        lab.setForeground(new java.awt.Color(255, 255, 255));
+        lab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Type", "Report", "Reason"
+                "ID", "Type", "Report", "Reason", "Date"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(lab);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel1.setText("Lab Tests ");
+        label.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        label.setForeground(new java.awt.Color(0, 51, 204));
+        label.setText("Lab Tests ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,7 +109,7 @@ public class labresults_page extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(91, 91, 91)
-                .addComponent(jLabel1)
+                .addComponent(label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(16, 16, 16))
@@ -75,7 +119,7 @@ public class labresults_page extends javax.swing.JFrame {
                 .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(back)
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -84,14 +128,14 @@ public class labresults_page extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jLabel1))
+                        .addComponent(label))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(back)
                 .addGap(19, 19, 19))
         );
 
@@ -99,7 +143,8 @@ public class labresults_page extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       this.setVisible(false);
+       patient_homepagee ph = new patient_homepagee();
+       ph.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -136,26 +181,24 @@ public class labresults_page extends javax.swing.JFrame {
             }
         });
     }
-public void addLab(Lab_Test t){
-        DefaultTableModel model = (DefaultTableModel) lab.getModel();
-        model.addRow(new Object[]{t.getTestId(), t.getTestName(), t.getReport(), t.getReason()});
+    public void addLab(Lab_Test t){
+            DefaultTableModel model = (DefaultTableModel) lab.getModel();
+            model.addRow(new Object[]{t.getTestId(), t.getTestName(), t.getReport(), t.getReason(), t.getDate()});
     }
-    
-     private void addLabofPatients() {
+
+    private void addLabofPatients() {
         DBAccess d = new DBAccess();
         patientpage pg = new patientpage();
-        ArrayList<Lab_Test> tr = d.retrieveLabbyMRN(pg.getMRNFromSignin());
-        for (Treatment t : tr){
+        ArrayList<Lab_Test> tr = d.retrieveLabbyMRN(patientpage.getMRNOfPatient());
+        for (Lab_Test t : tr){
             addLab(t);
         }
-
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton back;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable lab;
+    private javax.swing.JLabel label;
     // End of variables declaration//GEN-END:variables
 }
