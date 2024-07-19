@@ -490,29 +490,72 @@ public class DBAccess {
     }
 
 
-    public int getDocIDFromApptID(int appointmentId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   public int getDocIDFromApptID(int appointmentId) {
+        String q = "SELECT Doctor_ID FROM IS_AVAILABLE WHERE Appointment_ID = " + appointmentId;
+        int doctorId = 0;
+        try {
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next()) {
+                doctorId = res.getInt("Doctor_ID");
+            }
+            close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return doctorId;
     }
-//    complete this please
-    public void addAppttoAvailable(Appointment chosen, int doc_ID){
-//        String q = "INSERT INTO IS_AVAILABLE VALUES (" + chosen.getAppointmentId() + ", 
-//        try{
-//            connect();
-//            stmt.executeUpdate(q);
-//            close();
-//        }catch(SQLException ex){
-//            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
+
+    public void addAppttoAvailable(Appointment chosen, int doc_ID) {
+        String q = "INSERT INTO IS_AVAILABLE (Appointment_ID, Doctor_ID) VALUES (" 
+                + chosen.getAppointmentId() + ", " + doc_ID + ")";
+        try {
+            connect();
+            stmt.executeUpdate(q);
+            close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    //once ure done remove the comment
-    //make sure u are always following the order of the attributes mentioneed in the sql queries file on github
+
 
     public int getDocIDFromDoc(Doctor d) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String q = "SELECT Doctor_ID FROM DOCTOR WHERE First_Name = '" + d.getFirstName() 
+                + "' AND Last_Name = '" + d.getLastName() + "'";
+        int doctorId = 0;
+        try {
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next()) {
+                doctorId = res.getInt("Doctor_ID");
+            }
+            close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return doctorId;
     }
 
+
     public ArrayList<Medical_Facility> getAllMedicalFacilities() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String q = "SELECT * FROM MEDICAL_FACILITY";
+        ArrayList<Medical_Facility> facilities = new ArrayList<>();
+        try {
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            while (res.next()) {
+                Medical_Facility facility = new Medical_Facility();
+                facility.setMedicalFacilityId(res.getInt("Medical_Facility_ID"));
+                facility.setName(res.getString("Name"));
+                facility.setAddress(res.getString("Address"));
+                facilities.add(facility);
+            }
+            close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return facilities;
     }
 
     public ArrayList<Surgeries> getSurgeriesFromMRN(int mrnOfPatient) {
