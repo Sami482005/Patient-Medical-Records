@@ -559,7 +559,29 @@ public class DBAccess {
     }
 
     public ArrayList<Surgeries> getSurgeriesFromMRN(int mrnOfPatient) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    String q = "SELECT * FROM SURGERY NATURAL JOIN PERFORM_SURGERY WHERE Patient_SSN = (SELECT Patient_SSN FROM PATIENTS WHERE Patient_ID = " + mrnOfPatient + ");";
+    ArrayList<Surgeries> surgeries = new ArrayList<>();
+
+    try {
+        connect();
+        ResultSet res = stmt.executeQuery(q);
+        while (res.next()) {
+            Surgeries surgery = new Surgeries();
+            surgery.setSurgery_ID(res.getInt("Surgery_ID"));
+            surgery.setSurgery_Name(res.getString("Surgery_Name"));
+            surgery.setAim(res.getString("Aim"));
+            surgery.setDate(res.getString("Date"));
+            surgery.setDoctor_ID(res.getInt("Doctor_ID"));
+            surgery.setPatient_ID(mrnOfPatient);
+            surgery.setSuccessful(res.getBoolean("Successful"));
+            surgeries.add(surgery);
+        }
+        close();
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
     }
+
+    return surgeries;
+}
     
 }
