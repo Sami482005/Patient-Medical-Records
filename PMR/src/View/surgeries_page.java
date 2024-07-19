@@ -11,7 +11,7 @@ public class surgeries_page extends javax.swing.JFrame {
      */
     public surgeries_page() {
         initComponents();
-        addSurgeriesofPatients();
+        addSurgeriesofPatients(getSurgeriesOfPatients());
     }
 
     /**
@@ -25,13 +25,27 @@ public class surgeries_page extends javax.swing.JFrame {
 
         canvas1 = new java.awt.Canvas();
         canvas2 = new java.awt.Canvas();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        surgeries = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        surgeries = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel1.setText("Surgery Overview");
+
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel2.setText("HealthTracker");
+
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         surgeries.setAutoCreateRowSorter(true);
         surgeries.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,39 +89,23 @@ public class surgeries_page extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(surgeries);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel1.setText("Surgery Overview");
-
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        jLabel2.setText("HealthTracker");
-
-        back.setText("Back");
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(138, 138, 138)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(184, 184, 184)
                 .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(back)
-                .addGap(59, 59, 59))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(back)
+                    .addComponent(jLabel2))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -125,11 +123,11 @@ public class surgeries_page extends javax.swing.JFrame {
                         .addGap(340, 340, 340)
                         .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17)
                 .addComponent(back)
-                .addGap(26, 26, 26))
+                .addContainerGap())
         );
 
         pack();
@@ -173,19 +171,20 @@ public class surgeries_page extends javax.swing.JFrame {
             }
         });
     }
-     public void addSurgeries(Surgeries s){
-        DefaultTableModel model = (DefaultTableModel) surgeries.getModel();       
-        model.addRow(new Object[]{s.getSurgery_ID(), s.getSurgery_Name(), s.getDoctor_ID(), s.getAim(), s.getDate(), s.isSuccessful()});
+    public ArrayList<Surgeries> getSurgeriesOfPatients(){
+        DBAccess d = new DBAccess();
+        ArrayList<Surgeries> s = d.getSurgeriesFromMRN(patientpage.getMRNOfPatient());
+        return s;
     }
     
-     private void addSurgeriesofPatients() {
-        DBAccess d = new DBAccess();
-        int MRN = patientpage.getMRNOfPatient();
-        ArrayList<Surgeries> sr = d.retrieveSurgeriesbyMRN(MRN);
-        if(sr != null){
-            for (Surgeries sg : sr){
-                addSurgeries(sg);
-            }        
+    private void addSurgeriesofPatients(ArrayList<Surgeries> s) {
+        for (int row = 0; row < s.size(); row++){
+            surgeries.setValueAt(s.get(row).getSurgery_ID(), row, 0);
+            surgeries.setValueAt(s.get(row).getSurgery_Name(), row, 1);
+            surgeries.setValueAt(s.get(row).getDoctor_ID(), row, 2);
+            surgeries.setValueAt(s.get(row).getAim(), row, 3);
+            surgeries.setValueAt(s.get(row).getDate(), row, 4);
+            surgeries.setValueAt(s.get(row).isSuccessful(), row, 5);
         }
     }
     

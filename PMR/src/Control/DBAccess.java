@@ -506,5 +506,9 @@ public class DBAccess {
     public ArrayList<Medical_Facility> getAllMedicalFacilities() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public ArrayList<Surgeries> getSurgeriesFromMRN(int mrnOfPatient) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
