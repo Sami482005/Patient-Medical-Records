@@ -140,7 +140,7 @@ CREATE TABLE TREATMENT(
 
 CREATE TABLE APPOINTMENT(
     Appointment_ID INTEGER AUTO_INCREMENT,
-    Day VARCHAR(10),
+    Day DATE,
     Start_Time VARCHAR(5),
     End_Time VARCHAR(5),
     PRIMARY KEY (Appointment_ID)
