@@ -478,9 +478,17 @@ public class DBAccess {
     }
 
     public void createApptInAppointment(Appointment a) {
-        //should not insertt the value of the appointment_ID so u need to list the values being inserted and NOT NOT NOT INSERT THE APPOINTMENT_id DO NOT
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String q = "INSERT INTO APPOINTMENT (Day, Start_Time, End_Time) VALUES ('" 
+                + a.getDay() + "', '" + a.getStartTime() + "', '" + a.getEndTime() + "')";
+        try {
+            connect();
+            stmt.executeUpdate(q);
+            close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
 
     public int getDocIDFromApptID(int appointmentId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
