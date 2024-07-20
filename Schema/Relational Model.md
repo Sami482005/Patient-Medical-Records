@@ -18,14 +18,12 @@ Surgery (S_ID, Surgery_name, aim)
 
 Treatments (T_ID, name, reason, startDate, endDate, #MF_ID)
 
-Appointment (A_ID, day, to, from,#P_SSN)
-
-Book_Appointment(#Patient_SSN, #Appointment_ID, reasonOfvisit)
+Appointment (A_ID, day, to, from,#P_SSN,reason)
 
 Perform_Surgery (#Doctor_ID, #Facility_ID, #P_SSN, #Surgery_ID, price, successful?, Date)
 
-hasAvailability (#Doctor_ID, #Availability_ID)
+hasAvailability (#Doctor_ID, #A_ID)
 
 Has_Emergency_Contacts ( #P_SSN, #EC_phoneNb)
 
-Admits (#IP_ID, #F_ID)
+Admits (#P_SSN, #MF_ID)
