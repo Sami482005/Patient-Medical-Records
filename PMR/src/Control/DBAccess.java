@@ -678,8 +678,21 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
    }
 
     public void addEmergencyContactToMRN(Emergency_Contacts ec, int mrnOfPatient) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    String q = "INSERT INTO EMERGENCY_CONTACT (First_Name, Last_Name, Phone_Number, Email, Relationship, Medical_File_ID) VALUES ('"
+            + ec.getFirstName() + "', '"
+            + ec.getLastName() + "', '"
+            + ec.getPhoneNumber() + "', '"
+            + ec.getEmail() + "', '"
+            + ec.getRelationship() + "', "
+            + mrnOfPatient + ")";
+    try {
+        connect();
+        stmt.executeUpdate(q);
+    close();
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } 
+}
 
 
 
