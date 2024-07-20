@@ -48,7 +48,7 @@ public class surgeries_page extends javax.swing.JFrame {
         });
 
         surgeries.setAutoCreateRowSorter(true);
-        surgeries.setForeground(new java.awt.Color(255, 255, 255));
+        surgeries.setForeground(new java.awt.Color(0, 0, 0));
         surgeries.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -178,15 +178,24 @@ public class surgeries_page extends javax.swing.JFrame {
     }
     
     private void addSurgeriesofPatients(ArrayList<Surgeries> s) {
-        for (int row = 0; row < s.size(); row++){
-            surgeries.setValueAt(s.get(row).getSurgery_ID(), row, 0);
-            surgeries.setValueAt(s.get(row).getSurgery_Name(), row, 1);
-            surgeries.setValueAt(s.get(row).getDoctor_ID(), row, 2);
-            surgeries.setValueAt(s.get(row).getAim(), row, 3);
-            surgeries.setValueAt(s.get(row).getDate(), row, 4);
-            surgeries.setValueAt(s.get(row).isSuccessful(), row, 5);
+    DefaultTableModel model = (DefaultTableModel) surgeries.getModel();
+    model.setRowCount(0);
+
+    if (s.size()>0){
+        for (Surgeries surgery : s) {
+            Object[] rowData = {
+                surgery.getSurgery_ID(),
+                surgery.getSurgery_Name(),
+                surgery.getDoctor_ID(),
+                surgery.getAim(),
+                surgery.getDate(),
+                surgery.isSuccessful()
+            };
+            model.addRow(rowData);
         }
     }
+}
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

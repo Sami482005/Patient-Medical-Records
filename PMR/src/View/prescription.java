@@ -1,6 +1,7 @@
 package View;
         
 import Control.DBAccess;
+import Model.Surgeries;
 import Model.Treatment;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -26,9 +27,10 @@ public class prescription extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         prescription = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,8 +44,14 @@ public class prescription extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel1.setText("Prescription");
+
+        jScrollPane2.setForeground(new java.awt.Color(0, 0, 0));
+
         prescription.setAutoCreateRowSorter(true);
-        prescription.setForeground(new java.awt.Color(255, 255, 255));
+        prescription.setForeground(new java.awt.Color(0, 0, 0));
         prescription.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -61,9 +69,7 @@ public class prescription extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(prescription);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel1.setText("Prescription");
+        jScrollPane1.setViewportView(jScrollPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,16 +78,14 @@ public class prescription extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(91, 91, 91)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 489, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(16, 16, 16))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(back)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(back))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -94,9 +98,9 @@ public class prescription extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)))
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(back)
                 .addGap(19, 19, 19))
         );
@@ -142,21 +146,27 @@ public class prescription extends javax.swing.JFrame {
             }
         });
     }
-        public void addPresc(String t){
-        DefaultTableModel model = (DefaultTableModel) prescription.getModel();
-        model.addRow(new Object[]{t});
-    }
     
      private void addPrescsofPatients() {
         DBAccess d = new DBAccess();
         String s = d.retrievePrescriptionFromMedicalFile(patientpage.getMRNOfPatient());
-        addPresc(s);
+        DefaultTableModel model = (DefaultTableModel) prescription.getModel();
+        model.setRowCount(0);
+
+        if (s != null){
+            Object[] rowData = {
+                s
+            };
+            model.addRow(rowData);
+            
+        }
      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable prescription;
     // End of variables declaration//GEN-END:variables

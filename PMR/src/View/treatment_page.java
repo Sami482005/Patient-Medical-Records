@@ -1,6 +1,7 @@
 package View;
 
 import Control.DBAccess;
+import Model.Surgeries;
 import Model.Treatment;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +28,7 @@ public class treatment_page extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         treatments = new javax.swing.JTable();
 
@@ -47,9 +49,10 @@ public class treatment_page extends javax.swing.JFrame {
         });
 
         treatments.setAutoCreateRowSorter(true);
-        treatments.setForeground(new java.awt.Color(255, 255, 255));
+        treatments.setForeground(new java.awt.Color(0, 0, 0));
         treatments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -73,6 +76,8 @@ public class treatment_page extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(treatments);
 
+        jScrollPane1.setViewportView(jScrollPane2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,16 +85,14 @@ public class treatment_page extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(91, 91, 91)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 485, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(16, 16, 16))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(back)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 864, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(back))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -102,9 +105,9 @@ public class treatment_page extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(back)
                 .addGap(19, 19, 19))
         );
@@ -151,25 +154,31 @@ public class treatment_page extends javax.swing.JFrame {
         });
     }
 
-    public void addTreatments(Treatment t){
-        DefaultTableModel model = (DefaultTableModel) treatments.getModel();
-        model.addRow(new Object[]{t.getTreatmentId(), t.getTreatmentName(), t.getReason(), t.getStartDate(), t.getEndDate()});
-    }
-    
      private void addTreatmentsofPatients() {
         DBAccess d = new DBAccess();
         ArrayList<Treatment> tr = d.retrieveTreatmentsbyMRN(patientpage.getMRNOfPatient());
-        for (Treatment t : tr){
-            addTreatments(t);
+        DefaultTableModel model = (DefaultTableModel) treatments.getModel();
+        model.setRowCount(0);
+
+        if (tr.size()>0){
+            for (Treatment t : tr) {
+                Object[] rowData = {
+                    t.getTreatmentId(),
+                    t.getTreatmentName(),
+                    t.getReason(),
+                    t.getStartDate(),
+                    t.getEndDate()
+                };
+                model.addRow(rowData);
+            }
         }
-
-
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable treatments;
     // End of variables declaration//GEN-END:variables

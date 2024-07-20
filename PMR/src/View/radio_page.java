@@ -2,6 +2,7 @@ package View;
     
 import Control.DBAccess;
 import Model.Radiology;
+import Model.Surgeries;
 import Model.Treatment;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -27,9 +28,10 @@ public class radio_page extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         radio = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,8 +45,12 @@ public class radio_page extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel1.setText("Radiology Overview");
+
         radio.setAutoCreateRowSorter(true);
-        radio.setForeground(new java.awt.Color(255, 255, 255));
+        radio.setForeground(new java.awt.Color(0, 0, 0));
         radio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -57,23 +63,21 @@ public class radio_page extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Type", "Report", "Reason"
+                "ID", "Name", "Report", "Reason"
             }
         ));
         jScrollPane2.setViewportView(radio);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel1.setText("Radiology Overview");
+        jScrollPane1.setViewportView(jScrollPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 946, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,10 +94,10 @@ public class radio_page extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(13, 13, 13)
@@ -151,11 +155,20 @@ public class radio_page extends javax.swing.JFrame {
 
      private void addRadiologyofPatients() {
         DBAccess d = new DBAccess();
-        ArrayList<Radiology> tr = d.retrieveRadiologybyMRN(patientpage.getMRNOfPatient());
+        ArrayList<Radiology> rad = d.retrieveRadiologybyMRN(patientpage.getMRNOfPatient());
         DefaultTableModel model = (DefaultTableModel) radio.getModel();
-        for (Radiology t : tr){
-            System.out.println(t.getRadiologyId());
-            model.addRow(new Object[]{t.getRadiologyId(), t.getRadiologyName(), t.getReport(), t.getReason()});
+        model.setRowCount(0);
+
+        if (rad.size()>0){
+            for (Radiology r : rad) {
+                Object[] rowData = {
+                    r.getRadiologyId(),
+                    r.getRadiologyName(),
+                    r.getReport(),
+                    r.getReason()
+                };
+                model.addRow(rowData);
+            }
         }
     }
 
@@ -163,6 +176,7 @@ public class radio_page extends javax.swing.JFrame {
     private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable radio;
     // End of variables declaration//GEN-END:variables

@@ -7,9 +7,7 @@ package View;
  */
 public class doctor_homepage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form doctor_homepage
-     */
+    private static int patientMRN;
     public doctor_homepage() {
         initComponents();
     }
@@ -26,7 +24,7 @@ public class doctor_homepage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         schedule = new javax.swing.JButton();
-        surgeries = new javax.swing.JButton();
+        availability = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         MRN = new javax.swing.JTextField();
@@ -46,9 +44,14 @@ public class doctor_homepage extends javax.swing.JFrame {
             }
         });
 
-        surgeries.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        surgeries.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/availability.jpg"))); // NOI18N
-        surgeries.setText("Create Availability");
+        availability.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        availability.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/availability.jpg"))); // NOI18N
+        availability.setText("Create Availability");
+        availability.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                availabilityActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
@@ -72,7 +75,7 @@ public class doctor_homepage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(surgeries, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(availability, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(schedule, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(150, 150, 150)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +106,7 @@ public class doctor_homepage extends javax.swing.JFrame {
                         .addComponent(search))
                     .addComponent(schedule))
                 .addGap(18, 18, 18)
-                .addComponent(surgeries, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(availability, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -154,12 +157,21 @@ public class doctor_homepage extends javax.swing.JFrame {
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         int mrn = Integer.parseInt(MRN.getText().toString());
-        
+        setPatientMRN(mrn);
+        doctortopatient dd = new doctortopatient();
+        dd.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_searchActionPerformed
 
     private void scheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleActionPerformed
         
     }//GEN-LAST:event_scheduleActionPerformed
+
+    private void availabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availabilityActionPerformed
+        availability a = new availability();
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_availabilityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,8 +208,19 @@ public class doctor_homepage extends javax.swing.JFrame {
         });
     }
 
+    public static int getPatientMRN() {
+        return patientMRN;
+    }
+
+    public static void setPatientMRN(int patientMRN) {
+        doctor_homepage.patientMRN = patientMRN;
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField MRN;
+    private javax.swing.JButton availability;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -205,6 +228,5 @@ public class doctor_homepage extends javax.swing.JFrame {
     private javax.swing.JButton schedule;
     private javax.swing.JButton search;
     private javax.swing.JButton signout;
-    private javax.swing.JButton surgeries;
     // End of variables declaration//GEN-END:variables
 }

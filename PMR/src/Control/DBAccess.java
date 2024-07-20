@@ -546,9 +546,9 @@ public class DBAccess {
             ResultSet res = stmt.executeQuery(q);
             while (res.next()) {
                 Medical_Facility facility = new Medical_Facility();
-                facility.setMedicalFacilityId(res.getInt("Medical_Facility_ID"));
-                facility.setName(res.getString("Name"));
-                facility.setAddress(res.getString("Address"));
+                facility.setMedical_Facility_ID(res.getInt("Medical_Facility_ID"));
+                facility.setFacility_Name(res.getString("Facility_Name"));
+                facility.setFacility_Location(res.getString("Facility_Location"));
                 facilities.add(facility);
             }
             close();
@@ -583,5 +583,21 @@ public class DBAccess {
 
     return surgeries;
 }
-    
+
+    public void updateMedicalFileWithNewPrescriptionUsingMRN(int patientMRN, String NewPres) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void addNewSurgery(int patientMRN, Surgeries s) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void addNewTreatment(int patientMRN, Treatment t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

@@ -2,6 +2,7 @@ package View;
 
 import Control.DBAccess;
 import Model.Lab_Test;
+import Model.Surgeries;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -43,7 +44,7 @@ public class labresults_page extends javax.swing.JFrame {
         });
 
         lab.setAutoCreateRowSorter(true);
-        lab.setForeground(new java.awt.Color(255, 255, 255));
+        lab.setForeground(new java.awt.Color(0, 0, 0));
         lab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -181,17 +182,25 @@ public class labresults_page extends javax.swing.JFrame {
             }
         });
     }
-    public void addLab(Lab_Test t){
-            DefaultTableModel model = (DefaultTableModel) lab.getModel();
-            model.addRow(new Object[]{t.getTestId(), t.getTestName(), t.getReport(), t.getReason(), t.getDate()});
-    }
-
+    
     private void addLabofPatients() {
         DBAccess d = new DBAccess();
         patientpage pg = new patientpage();
-        ArrayList<Lab_Test> tr = d.retrieveLabbyMRN(patientpage.getMRNOfPatient());
-        for (Lab_Test t : tr){
-            addLab(t);
+        ArrayList<Lab_Test> labs = d.retrieveLabbyMRN(patientpage.getMRNOfPatient());
+        DefaultTableModel model = (DefaultTableModel) lab.getModel();
+        model.setRowCount(0);
+
+        if (labs.size()>0){
+            for (Lab_Test l : labs) {
+                Object[] rowData = {
+                    l.getTestId(),
+                    l.getTestName(),
+                    l.getReport(),
+                    l.getReason(),
+                    l.getDate()
+                };
+                model.addRow(rowData);
+            }
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

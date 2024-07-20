@@ -8,11 +8,12 @@ public class Surgeries {
     private String Date;
     private boolean Successful;
     private int Patient_ID;
+    private int Price;
 
     public Surgeries() {
     }
 
-    public Surgeries(String Surgery_Name, int Surgery_ID, String Aim, int Doctor_ID, String Date, boolean Successful, int Patient_ID) {
+    public Surgeries(String Surgery_Name, int Surgery_ID, String Aim, int Doctor_ID, String Date, boolean Successful, int Patient_ID, int Price) {
         this.Surgery_Name = Surgery_Name;
         this.Surgery_ID = Surgery_ID;
         this.Aim = Aim;
@@ -20,9 +21,16 @@ public class Surgeries {
         this.Date = Date;
         this.Successful = Successful;
         this.Patient_ID = Patient_ID;
+        this.Price = Price;
     }
 
-   
+    public int getPrice() {
+        return Price;
+    }
+
+    public void setPrice(int Price) {
+        this.Price = Price;
+    }
 
     public String getSurgery_Name() {
         return Surgery_Name;
