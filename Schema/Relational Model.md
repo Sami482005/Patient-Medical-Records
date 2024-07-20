@@ -4,11 +4,11 @@ Doctor (Doctor-ID, first-name, last-name, email, phone_nb, title, specialty, sta
 
 Patients (P_SSN, P_ID, DOB, first-name, last-name, address, gender, email, phone_nb, medical_history)
 
-InsurancePlan (IP_ID, class, company_provider, issuing_date, end_date, #P_ID)
+InsurancePlan (IP_ID, class, company_provider, issuing_date, end_date, #P_SSN)
 
 EmergencyContacts (phone_nb, name, relationship)
 
-Medical_File (MF_ID, dateOfcreation, #P_SSN, #Doctor-ID, prescription, desc, date)
+Medical_File (MF_ID,#P_SSN, #Doctor-ID, prescription, desc, date)
 
 LabTest (LT_ID, report, type, reason, #MF_ID)
 
