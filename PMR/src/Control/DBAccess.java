@@ -478,90 +478,90 @@ public class DBAccess {
     }
 
     public void createApptInAppointment(Appointment a) {
-        String q = "INSERT INTO APPOINTMENT (Day, Start_Time, End_Time) VALUES ('" 
-                + a.getDay() + "', '" + a.getStartTime() + "', '" + a.getEndTime() + "')";
-        try {
-            connect();
-            stmt.executeUpdate(q);
-            close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    String q = "INSERT INTO APPOINTMENT (Day, Start_Time, End_Time) VALUES ('" 
+            + a.getDay() + "', '" + a.getStartTime() + "', '" + a.getEndTime() + "')";
+    try {
+        connect();
+        stmt.executeUpdate(q);
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
+}
 
-
-   public int getDocIDFromApptID(int appointmentId) {
-        String q = "SELECT Doctor_ID FROM IS_AVAILABLE WHERE Appointment_ID = " + appointmentId;
-        int doctorId = 0;
-        try {
-            connect();
-            ResultSet res = stmt.executeQuery(q);
-            if (res.next()) {
-                doctorId = res.getInt("Doctor_ID");
-            }
-            close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+public int getDocIDFromApptID(int appointmentId) {
+    String q = "SELECT Doctor_ID FROM IS_AVAILABLE WHERE Appointment_ID = " + appointmentId;
+    int doctorId = 0;
+    try {
+        connect();
+        ResultSet res = stmt.executeQuery(q);
+        if (res.next()) {
+            doctorId = res.getInt("Doctor_ID");
         }
-        return doctorId;
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
+    return doctorId;
+}
 
+public void addAppttoAvailable(Appointment chosen, int doc_ID) {
+    String q = "INSERT INTO IS_AVAILABLE (Appointment_ID, Doctor_ID) VALUES (" 
+            + chosen.getAppointmentId() + ", " + doc_ID + ")";
+    try {
+        connect();
+        stmt.executeUpdate(q);
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
+    }
+}
 
-    public void addAppttoAvailable(Appointment chosen, int doc_ID) {
-        String q = "INSERT INTO IS_AVAILABLE (Appointment_ID, Doctor_ID) VALUES (" 
-                + chosen.getAppointmentId() + ", " + doc_ID + ")";
-        try {
-            connect();
-            stmt.executeUpdate(q);
-            close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+public int getDocIDFromDoc(Doctor d) {
+    String q = "SELECT Doctor_ID FROM DOCTOR WHERE First_Name = '" + d.getFirstName() 
+            + "' AND Last_Name = '" + d.getLastName() + "'";
+    int doctorId = 0;
+    try {
+        connect();
+        ResultSet res = stmt.executeQuery(q);
+        if (res.next()) {
+            doctorId = res.getInt("Doctor_ID");
         }
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
+    return doctorId;
+}
 
-
-    public int getDocIDFromDoc(Doctor d) {
-        String q = "SELECT Doctor_ID FROM DOCTOR WHERE First_Name = '" + d.getFirstName() 
-                + "' AND Last_Name = '" + d.getLastName() + "'";
-        int doctorId = 0;
-        try {
-            connect();
-            ResultSet res = stmt.executeQuery(q);
-            if (res.next()) {
-                doctorId = res.getInt("Doctor_ID");
-            }
-            close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+public ArrayList<Medical_Facility> getAllMedicalFacilities() {
+    String q = "SELECT * FROM MEDICAL_FACILITY";
+    ArrayList<Medical_Facility> facilities = new ArrayList<>();
+    try {
+        connect();
+        ResultSet res = stmt.executeQuery(q);
+        while (res.next()) {
+            Medical_Facility facility = new Medical_Facility();
+            facility.setMedical_Facility_ID(res.getInt("Medical_Facility_ID"));
+            facility.setFacility_Name(res.getString("Facility_Name"));
+            facility.setFacility_Location(res.getString("Facility_Location"));
+            facilities.add(facility);
         }
-        return doctorId;
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
+    return facilities;
+}
 
-
-    public ArrayList<Medical_Facility> getAllMedicalFacilities() {
-        String q = "SELECT * FROM MEDICAL_FACILITY";
-        ArrayList<Medical_Facility> facilities = new ArrayList<>();
-        try {
-            connect();
-            ResultSet res = stmt.executeQuery(q);
-            while (res.next()) {
-                Medical_Facility facility = new Medical_Facility();
-                facility.setMedical_Facility_ID(res.getInt("Medical_Facility_ID"));
-                facility.setFacility_Name(res.getString("Facility_Name"));
-                facility.setFacility_Location(res.getString("Facility_Location"));
-                facilities.add(facility);
-            }
-            close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return facilities;
-    }
-
-    public ArrayList<Surgeries> getSurgeriesFromMRN(int mrnOfPatient) {
-    String q = "SELECT * FROM SURGERY NATURAL JOIN PERFORM_SURGERY WHERE Patient_SSN = (SELECT Patient_SSN FROM PATIENTS WHERE Patient_ID = " + mrnOfPatient + ");";
+public ArrayList<Surgeries> getSurgeriesFromMRN(int mrnOfPatient) {
+    String q = "SELECT * FROM SURGERY NATURAL JOIN PERFORM_SURGERY WHERE Patient_SSN = (SELECT Patient_SSN FROM PATIENTS WHERE Patient_ID = " + mrnOfPatient + ")";
     ArrayList<Surgeries> surgeries = new ArrayList<>();
-
     try {
         connect();
         ResultSet res = stmt.executeQuery(q);
@@ -576,102 +576,89 @@ public class DBAccess {
             surgery.setSuccessful(res.getBoolean("Successful"));
             surgeries.add(surgery);
         }
-        close();
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
-
     return surgeries;
 }
 
-    public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
-        String query = "INSERT INTO RADIOLOGY (Radiology_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
-
-        try{
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-}
-
-    public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
-    String query = "INSERT INTO RADIOLOGY (Radiology_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
-    
-    try (Connection conn = connect();
-         PreparedStatement pstmt = conn.prepareStatement(query)) {
-        
-        pstmt.setString(1, r.getRadiologyName());
-        pstmt.setDate(2, new java.sql.Date(r.getDate().getTime()));
-        pstmt.setString(3, r.getReport());
-        pstmt.setString(4, r.getReason());
-        pstmt.setInt(5, patientMRN);
-        pstmt.executeUpdate();
-        
+public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
+    String q = "INSERT INTO RADIOLOGY (Radiology_Name, Date, Report, Reason, Medical_File_ID) VALUES ('" 
+            + r.getRadiologyName() + "', '" 
+            + new java.sql.Date(r.getDate().getTime()) + "', '" 
+            + r.getReport() + "', '" 
+            + r.getReason() + "', " 
+            + patientMRN + ")";
+    try {
+        connect();
+        stmt.executeUpdate(q);
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
 }
 
-
-   public void addNewSurgery(int patientMRN, Surgeries s) {
-    String query = "INSERT INTO PERFORM_SURGERY (Doctor_ID, Medical_Facility_ID, Patient_SSN, Surgery_ID, Successful, Date) VALUES (?, ?, ?, ?, ?, ?)";
-    
-    try (Connection conn = connect();
-         PreparedStatement pstmt = conn.prepareStatement(query)) {
-        
-        pstmt.setInt(1, s.getDoctorID()); // Assuming Surgeries class has getDoctorID() method
-        pstmt.setInt(2, s.getMedicalFacilityID()); // Assuming Surgeries class has getMedicalFacilityID() method
-        pstmt.setInt(3, patientMRN); // Using patientMRN as Patient_SSN
-        pstmt.setInt(4, s.getSurgeryID());
-        pstmt.setBoolean(5, s.isSuccessful());
-        pstmt.setDate(6, new java.sql.Date(s.getDate().getTime()));
-        pstmt.executeUpdate();
-        
+public void addNewSurgery(int patientMRN, Surgeries s) {
+    String q = "INSERT INTO PERFORM_SURGERY (Doctor_ID, Medical_Facility_ID, Patient_SSN, Surgery_ID, Successful, Date) VALUES (" 
+            + s.getDoctorID() + ", " 
+            + s.getMedicalFacilityID() + ", " 
+            + patientMRN + ", " 
+            + s.getSurgeryID() + ", " 
+            + s.isSuccessful() + ", '" 
+            + new java.sql.Date(s.getDate().getTime()) + "')";
+    try {
+        connect();
+        stmt.executeUpdate(q);
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
 }
 
-
-   public void addNewTreatment(int patientMRN, Treatment t) {
-    String query = "INSERT INTO TREATMENT (Treatment_Name, Reason, Start_Date, End_Date, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
-    
-    try (Connection conn = connect();
-         PreparedStatement pstmt = conn.prepareStatement(query)) {
-        
-        pstmt.setString(1, t.getTreatmentName());
-        pstmt.setString(2, t.getReason());
-        pstmt.setDate(3, new java.sql.Date(t.getStartDate().getTime()));
-        pstmt.setDate(4, new java.sql.Date(t.getEndDate().getTime()));
-        pstmt.setInt(5, patientMRN);
-        pstmt.executeUpdate();
-        
+public void addNewTreatment(int patientMRN, Treatment t) {
+    String q = "INSERT INTO TREATMENT (Treatment_Name, Reason, Start_Date, End_Date, Medical_File_ID) VALUES ('" 
+            + t.getTreatmentName() + "', '" 
+            + t.getReason() + "', '" 
+            + new java.sql.Date(t.getStartDate().getTime()) + "', '" 
+            + new java.sql.Date(t.getEndDate().getTime()) + "', " 
+            + patientMRN + ")";
+    try {
+        connect();
+        stmt.executeUpdate(q);
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
 }
 
-
-    public void addNewLabTest(int patientMRN, Lab_Test l) {
-        String query = "INSERT INTO LAB_TEST (Test_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
-        try{
-            
-        }catch(SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
+public void addNewLabTest(int patientMRN, Lab_Test l) {
+    String q = "INSERT INTO LAB_TEST (Test_Name, Date, Report, Reason, Medical_File_ID) VALUES ('" 
+            + l.getTestName() + "', '" 
+            + new java.sql.Date(l.getDate().getTime()) + "', '" 
+            + l.getReport() + "', '" 
+            + l.getReason() + "', " 
+            + patientMRN + ")";
+    try {
+        connect();
+        stmt.executeUpdate(q);
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
+}
 
-
-    public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
-    String query = "SELECT * FROM LAB_TEST WHERE Medical_File_ID = ?";
+public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
+    String q = "SELECT * FROM LAB_TEST WHERE Medical_File_ID = " + patientMRN;
     ArrayList<Lab_Test> labTests = new ArrayList<>();
-    
-    try (Connection conn = connect();
-         PreparedStatement pstmt = conn.prepareStatement(query)) {
-        
-        pstmt.setInt(1, patientMRN);
-        ResultSet rs = pstmt.executeQuery();
-        
+    try {
+        connect();
+        ResultSet rs = stmt.executeQuery(q);
         while (rs.next()) {
             Lab_Test labTest = new Lab_Test();
             labTest.setTestID(rs.getInt("Test_ID"));
@@ -682,17 +669,26 @@ public class DBAccess {
             labTest.setMedicalFileID(rs.getInt("Medical_File_ID"));
             labTests.add(labTest);
         }
-        
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
-    
     return labTests;
 }
 
-    public void updateMedicalFileWithNewPrescriptionUsingMRN(int patientMRN, String toString) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+   public void updateMedicalFileWithNewPrescriptionUsingMRN(int patientMRN, String prescription) {
+    String q = "UPDATE MEDICAL_FILE SET Prescription = '" + prescription + "' WHERE Medical_File_ID = " + patientMRN;
+    try {
+        connect();
+        stmt.executeUpdate(q);
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        close();
     }
+
 
 
 }
