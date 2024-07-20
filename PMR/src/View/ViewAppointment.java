@@ -18,6 +18,7 @@ public class ViewAppointment extends javax.swing.JFrame {
      */
     public ViewAppointment() {
         initComponents();
+        fillAppts(getAppts());
     }
 
     /**
@@ -30,9 +31,7 @@ public class ViewAppointment extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        SSN = new javax.swing.JTextField();
         chooseLabel = new javax.swing.JLabel();
-        InputSSN = new javax.swing.JLabel();
         appts = new javax.swing.JComboBox<>();
         Cancel = new javax.swing.JButton();
         Back = new javax.swing.JButton();
@@ -44,30 +43,10 @@ public class ViewAppointment extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Manage Appointment", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 36), new java.awt.Color(0, 51, 204))); // NOI18N
 
-        SSN.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        SSN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SSNActionPerformed(evt);
-            }
-        });
-
         chooseLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         chooseLabel.setText("Appointments");
 
-        InputSSN.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        InputSSN.setText("SSN");
-
         appts.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        appts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apptsActionPerformed(evt);
-            }
-        });
-        appts.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                apptsKeyPressed(evt);
-            }
-        });
 
         Cancel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         Cancel.setText("Cancel Appointment");
@@ -82,37 +61,26 @@ public class ViewAppointment extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(chooseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(appts, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chooseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(InputSSN, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(appts, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SSN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(152, 152, 152))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(InputSSN, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addContainerGap(84, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(appts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(appts, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(118, 118, 118)
                 .addComponent(Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 44, -1, -1));
@@ -135,25 +103,13 @@ public class ViewAppointment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SSNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SSNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SSNActionPerformed
-
-    private void apptsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apptsKeyPressed
-        fillAppts();
-    }//GEN-LAST:event_apptsKeyPressed
-
-    private void apptsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apptsActionPerformed
-        fillAppts();
-    }//GEN-LAST:event_apptsActionPerformed
-
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         DBAccess d = new DBAccess();
         d.removeApptFromBooked(getChosenAppointment());
         int doc_ID = d.getDocIDFromApptID(getChosenAppointment().getAppointmentId());
         d.addAppttoAvailable(getChosenAppointment(), doc_ID);
         appts.removeAllItems();
-
+        fillAppts(getAppts());
     }//GEN-LAST:event_CancelActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -198,8 +154,6 @@ public class ViewAppointment extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JButton Cancel;
-    private javax.swing.JLabel InputSSN;
-    private javax.swing.JTextField SSN;
     private javax.swing.JComboBox<String> appts;
     private javax.swing.JLabel chooseLabel;
     private javax.swing.JLabel jLabel1;
@@ -207,25 +161,20 @@ public class ViewAppointment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<Appointment> fillAppts() {
-        DBAccess d= new DBAccess();
-        if (SSN.getText() != null && d.exists(Integer.parseInt(SSN.getText().toString()))){
-            appts.removeAllItems();
-            int ssn = Integer.parseInt(SSN.getText().toString());
-            ArrayList<Appointment> appt = d.getApptFromSSN(ssn);
-            for (int i = 0; i < appt.size(); i++)
-                appts.addItem(appt.toString());
-            return appt;
-        }
-        else{
-            this.dispose();
-            throw new IllegalArgumentException("You are not from here");
-        }
+    private void fillAppts(ArrayList<Appointment> appt) {
+        for (Appointment ap : appt){
+            appts.addItem(ap.toString());
+        }       
     }
     
-    public Appointment getChosenAppointment(){
-        int index = appts.getSelectedIndex();
-        Appointment appt = fillAppts().get(index);
-        return appt;
+    public ArrayList<Appointment> getAppts(){
+        DBAccess d= new DBAccess();
+        ArrayList<Appointment> appts = d.getApptFromSSN(d.getSSNFromMRN(patientpage.getMRNOfPatient()));
+       return appts;
     }
+
+    private Appointment getChosenAppointment() {
+        int index = appts.getSelectedIndex();
+        return getAppts().get(index);
+    }   
 }

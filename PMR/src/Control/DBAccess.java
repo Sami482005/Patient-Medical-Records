@@ -3,6 +3,7 @@ package Control;
 import Model.Appointment;
 import Model.Book_Appointment;
 import Model.Doctor;
+import Model.Emergency_Contacts;
 import Model.Insurance_Plan;
 import Model.Lab_Test;
 import Model.Medical_Facility;
@@ -142,9 +143,7 @@ public class DBAccess {
     }
 
     public ArrayList<Appointment> getApptFromSSN(int ssn) {
-        String q = "SELECT * FROM APPOINTMENT NATURAL JOIN BOOK_APPOINTMENT WHERE Patient_SSN = " + ssn + ";";
-        DBAccess d = new DBAccess();
-        Appointment appt = null;
+        String q = "SELECT * FROM APPOINTMENT NATURAL JOIN BOOK_APPOINTMENT WHERE Patient_SSN = " + ssn + ";";        Appointment appt = null;
         ArrayList<Appointment> appts = new ArrayList<>();
         try{
             connect();
@@ -691,6 +690,10 @@ public class DBAccess {
 }
 
     public void updateMedicalFileWithNewPrescriptionUsingMRN(int patientMRN, String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void addEmergencyContactToMRN(Emergency_Contacts ec, int mrnOfPatient) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
