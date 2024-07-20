@@ -584,28 +584,128 @@ public class DBAccess {
     return surgeries;
 }
 
-    public void updateMedicalFileWithNewPrescriptionUsingMRN(int patientMRN, String NewPres) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
+    String query = "INSERT INTO RADIOLOGY (Radiology_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
+    
+    try (Connection conn = connect();
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+        
+        pstmt.setString(1, r.getRadiologyName());
+        pstmt.setDate(2, new java.sql.Date(r.getDate().getTime()));
+        pstmt.setString(3, r.getReport());
+        pstmt.setString(4, r.getReason());
+        pstmt.setInt(5, patientMRN);
+        pstmt.executeUpdate();
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
 
     public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    String query = "INSERT INTO RADIOLOGY (Radiology_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
+    
+    try (Connection conn = connect();
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+        
+        pstmt.setString(1, r.getRadiologyName());
+        pstmt.setDate(2, new java.sql.Date(r.getDate().getTime()));
+        pstmt.setString(3, r.getReport());
+        pstmt.setString(4, r.getReason());
+        pstmt.setInt(5, patientMRN);
+        pstmt.executeUpdate();
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
 
-    public void addNewSurgery(int patientMRN, Surgeries s) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    public void addNewTreatment(int patientMRN, Treatment t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   public void addNewSurgery(int patientMRN, Surgeries s) {
+    String query = "INSERT INTO PERFORM_SURGERY (Doctor_ID, Medical_Facility_ID, Patient_SSN, Surgery_ID, Successful, Date) VALUES (?, ?, ?, ?, ?, ?)";
+    
+    try (Connection conn = connect();
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+        
+        pstmt.setInt(1, s.getDoctorID()); // Assuming Surgeries class has getDoctorID() method
+        pstmt.setInt(2, s.getMedicalFacilityID()); // Assuming Surgeries class has getMedicalFacilityID() method
+        pstmt.setInt(3, patientMRN); // Using patientMRN as Patient_SSN
+        pstmt.setInt(4, s.getSurgeryID());
+        pstmt.setBoolean(5, s.isSuccessful());
+        pstmt.setDate(6, new java.sql.Date(s.getDate().getTime()));
+        pstmt.executeUpdate();
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
+
+
+   public void addNewTreatment(int patientMRN, Treatment t) {
+    String query = "INSERT INTO TREATMENT (Treatment_Name, Reason, Start_Date, End_Date, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
+    
+    try (Connection conn = connect();
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+        
+        pstmt.setString(1, t.getTreatmentName());
+        pstmt.setString(2, t.getReason());
+        pstmt.setDate(3, new java.sql.Date(t.getStartDate().getTime()));
+        pstmt.setDate(4, new java.sql.Date(t.getEndDate().getTime()));
+        pstmt.setInt(5, patientMRN);
+        pstmt.executeUpdate();
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
 
     public void addNewLabTest(int patientMRN, Lab_Test l) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    String query = "INSERT INTO LAB_TEST (Test_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
+    
+    try (Connection conn = connect();
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+        
+        pstmt.setString(1, l.getTestName());
+        pstmt.setDate(2, new java.sql.Date(l.getDate().getTime()));
+        pstmt.setString(3, l.getReport());
+        pstmt.setString(4, l.getReason());
+        pstmt.setInt(5, patientMRN);
+        pstmt.executeUpdate();
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
+
 
     public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    String query = "SELECT * FROM LAB_TEST WHERE Medical_File_ID = ?";
+    ArrayList<Lab_Test> labTests = new ArrayList<>();
+    
+    try (Connection conn = connect();
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+        
+        pstmt.setInt(1, patientMRN);
+        ResultSet rs = pstmt.executeQuery();
+        
+        while (rs.next()) {
+            Lab_Test labTest = new Lab_Test();
+            labTest.setTestID(rs.getInt("Test_ID"));
+            labTest.setTestName(rs.getString("Test_Name"));
+            labTest.setDate(rs.getDate("Date"));
+            labTest.setReport(rs.getString("Report"));
+            labTest.setReason(rs.getString("Reason"));
+            labTest.setMedicalFileID(rs.getInt("Medical_File_ID"));
+            labTests.add(labTest);
+        }
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
     }
+    
+    return labTests;
+}
+
 
 }
