@@ -25,5 +25,3 @@ Perform_Surgery (#Doctor_ID, #Facility_ID, #P_SSN, #Surgery_ID, price, successfu
 hasAvailability (#Doctor_ID, #A_ID)
 
 Has_Emergency_Contacts ( #P_SSN, #EC_phoneNb)
-
-Admits (#P_SSN, #MF_ID)
