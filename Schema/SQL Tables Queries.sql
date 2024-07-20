@@ -143,7 +143,12 @@ CREATE TABLE APPOINTMENT(
     Day DATE,
     Start_Time TIME,
     End_Time TIME,
-    PRIMARY KEY (Appointment_ID)
+    Reason VARCHAR(100),
+    Patient_SSN INTEGER,
+    PRIMARY KEY (Appointment_ID),
+    CONSTRAINT SSN FOREIGN KEY (Patient_SSN) REFERENCES PATIENTS(Patient_SSN)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 
