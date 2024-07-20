@@ -26,14 +26,6 @@ Perform_Surgery (#Doctor_ID, #Facility_ID, #P_SSN, #Surgery_ID, price, successfu
 
 hasAvailability (#Doctor_ID, #Availability_ID)
 
-CoversSurgery (#Surgery_ID, #InsurancePlan_ID, Percentage)
-
-CoversTreatment (#T_ID, #IP_ID, percentage)
-
-CoversRadio (#IP_ID, #R_ID, percentage)
-
-CoversTest (#IP_ID, #LT_ID, percentage)
-
 Has_Emergency_Contacts ( #P_SSN, #EC_phoneNb)
 
 Admits (#IP_ID, #F_ID)
