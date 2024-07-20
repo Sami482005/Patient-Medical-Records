@@ -106,7 +106,6 @@ CREATE TABLE SURGERY(
 
 CREATE TABLE PERFORM_SURGERY(
     Doctor_ID INTEGER,
-    Medical_Facility_ID INTEGER,
     Patient_SSN INTEGER,
     Surgery_ID INTEGER,
     Successful BOOLEAN,

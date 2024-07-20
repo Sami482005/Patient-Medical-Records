@@ -20,6 +20,6 @@ Treatments (T_ID, name, reason, startDate, endDate, #MF_ID)
 
 Appointment (A_ID, day, to, from,#P_SSN,reason)
 
-Perform_Surgery (#Doctor_ID, #Facility_ID, #P_SSN, #Surgery_ID,successful?, Date)
+Perform_Surgery (#Doctor_ID, #P_SSN, #Surgery_ID,successful?, Date)
 
 hasAvailability (#Doctor_ID, #A_ID)

@@ -1,7 +1,6 @@
 package View;
 import Control.DBAccess;
 import Model.Appointment;
-import Model.Book_Appointment;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -74,12 +73,6 @@ public class BookAppoinment extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel5.setText("Reason");
 
-        Reason.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReasonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -151,27 +144,15 @@ public class BookAppoinment extends javax.swing.JFrame {
     }//GEN-LAST:event_AppointmentsKeyPressed
 
     private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
-    Appointment app = getChosenAppt();
-        DBAccess d = new DBAccess();
+        Appointment ap = getChosenAppt();
         
-        d.removeApptFromAvailability(app.getAppointmentId());
-        Book_Appointment ba = new Book_Appointment();
-        ba.setAppointment_ID(app.getAppointmentId());
-        ba.setPatient_SSN(d.getSSNFromMRN(patientpage.getMRNOfPatient()));
-        ba.setReason(Reason.getText().toString());
-        d.addAppttoBookAppt(ba);
-        this.dispose();
     }//GEN-LAST:event_confirmActionPerformed
  
      public Appointment getChosenAppt(){
         int index = Appointments.getSelectedIndex();
         Appointment appt = fillAppts().get(index);
         return appt;
-    }
-    private void ReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReasonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ReasonActionPerformed
-    /**
+    }    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
