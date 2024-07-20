@@ -25,14 +25,12 @@ public class BookAppoinment extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         confirm = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         Specialties = new javax.swing.JComboBox<>();
         DepLabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        Doctors = new javax.swing.JComboBox<>();
-        Appointments = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         Reason = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        appointment = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -49,29 +47,20 @@ public class BookAppoinment extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel2.setText("Doctor");
-
         DepLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         DepLabel.setText("Department");
 
-        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel4.setText("Date and Time");
-
-        Doctors.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DoctorsKeyPressed(evt);
-            }
-        });
-
-        Appointments.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                AppointmentsKeyPressed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel5.setText("Reason");
+
+        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel7.setText("Pick Appointment");
+
+        appointment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                appointmentMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,38 +72,36 @@ public class BookAppoinment extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(85, 85, 85)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DepLabel)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(159, 159, 159)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Reason, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                    .addComponent(Doctors, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Specialties, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Appointments, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addComponent(appointment, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DepLabel))
+                        .addGap(159, 159, 159)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Specialties, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Reason))))
+                .addGap(161, 161, 161))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Specialties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Specialties, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DepLabel))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(Doctors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                    .addComponent(jLabel7)
+                    .addComponent(appointment, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(Appointments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(Reason, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Reason, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(34, 34, 34)
                 .addComponent(confirm)
                 .addGap(21, 21, 21))
@@ -123,36 +110,32 @@ public class BookAppoinment extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 44, -1, -1));
 
         jButton3.setText("Back");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(863, 519, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("HealthTracker");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(798, 6, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/741800-safeimagekit.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 980, 550));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 980, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DoctorsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DoctorsKeyPressed
-        fillDoctors();
-    }//GEN-LAST:event_DoctorsKeyPressed
-
-    private void AppointmentsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AppointmentsKeyPressed
-        fillAppts();
-    }//GEN-LAST:event_AppointmentsKeyPressed
-
     private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
-        Appointment ap = getChosenAppt();
-        
+        Appointment a = getChosenAppt();
+        DBAccess d = new DBAccess();
+        int SSN = d.getSSNFromMRN(patientpage.getMRNOfPatient());
+        a.setPatient_SSN(SSN);
+        a.setReason(Reason.getText().toString());
+//        d.removeApptFromAvailability(a);
     }//GEN-LAST:event_confirmActionPerformed
+
+    private void appointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentMousePressed
+        fillAppts();
+    }//GEN-LAST:event_appointmentMousePressed
  
-     public Appointment getChosenAppt(){
-        int index = Appointments.getSelectedIndex();
-        Appointment appt = fillAppts().get(index);
-        return appt;
-    }    /**
+     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -188,18 +171,16 @@ public class BookAppoinment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Appointments;
     private javax.swing.JLabel DepLabel;
-    private javax.swing.JComboBox<String> Doctors;
     private javax.swing.JTextField Reason;
     private javax.swing.JComboBox<String> Specialties;
+    private javax.swing.JComboBox<String> appointment;
     private javax.swing.JButton confirm;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
      
@@ -223,36 +204,19 @@ public class BookAppoinment extends javax.swing.JFrame {
           String spec = Specialties.getSelectedItem().toString();
           return spec;
       }
-
-      private void fillDoctors() {
-        Doctors.removeAllItems();
-        DBAccess d = new DBAccess();
-          try{
-            ArrayList<String> doc = new ArrayList<>();
-            doc = d.getDoctorsBySpecialty(getChosenSpecialty());
-            for(int i=0; i<doc.size();i++){
-               Doctors.addItem(""+doc.get(i));
-           }
-           }
-           catch (SQLException ex) {
-            System.out.println("error");
-           }
-        }
-        
-    public String getChosenDoctor(){
-        String doc = Doctors.getSelectedItem().toString();
-        return doc;
-    }
-    
-    private ArrayList<Appointment> fillAppts() {
-        Appointments.removeAllItems();
-        DBAccess d = new DBAccess();
-        String[] name = getChosenDoctor().split(" ");
-        ArrayList<Appointment> appts = d.getApptInfoFromDoctor(name[0], name[1]);
-        for (int i = 0; i < appts.size(); i++)
-            Appointments.addItem(appts.get(i).toString());
-        return appts;
-    }
-    
- 
+      
+      public ArrayList<Appointment> fillAppts(){
+          appointment.removeAllItems();
+          DBAccess d = new DBAccess();
+          ArrayList<Appointment> appts = d.getApptsBySpecialty(getChosenSpecialty());
+          for (Appointment a : appts)
+              appointment.addItem(a.toString());
+          return appts;
+      }
+      
+      public Appointment getChosenAppt(){
+          int index = appointment.getSelectedIndex();
+          Appointment a = fillAppts().get(index);
+          return a;
+      }
 }

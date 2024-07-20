@@ -65,22 +65,11 @@ public class AddingANewDoctor extends javax.swing.JFrame {
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 388, 101, 36));
 
         id.setEditable(false);
-        id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idActionPerformed(evt);
-            }
-        });
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 385, 201, 42));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255)), "Create New File ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 102, 255))); // NOI18N
 
         jLabel2.setText("First Name");
-
-        fname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fnameActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Employment Year");
 
@@ -88,38 +77,13 @@ public class AddingANewDoctor extends javax.swing.JFrame {
 
         jLabel5.setText("Medical_Facility");
 
-        med.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male" }));
-        med.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                medActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Email");
 
         jLabel7.setText("Specialty");
 
         jLabel3.setText("Last Name");
 
-        phonenb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phonenbActionPerformed(evt);
-            }
-        });
-
-        date.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dateActionPerformed(evt);
-            }
-        });
-
         jLabel11.setText("Position");
-
-        title.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                titleActionPerformed(evt);
-            }
-        });
 
         Get.setText("Get");
         Get.addActionListener(new java.awt.event.ActionListener() {
@@ -240,29 +204,6 @@ public class AddingANewDoctor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
-    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idActionPerformed
-
-    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fnameActionPerformed
-
-    private void medActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medActionPerformed
-    }//GEN-LAST:event_medActionPerformed
-
-    private void phonenbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phonenbActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_phonenbActionPerformed
-
-    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dateActionPerformed
-
-    private void titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_titleActionPerformed
-
     private void GetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetActionPerformed
         Doctor d = getAllInfo();
         DBAccess dba = new DBAccess();
@@ -347,6 +288,7 @@ public class AddingANewDoctor extends javax.swing.JFrame {
     }
 
     private void fillMedical_Facilities() {
+        med.removeAllItems();
         DBAccess d = new DBAccess();
         ArrayList<Medical_Facility> meds = d.getAllMedicalFacilities();
         for (Medical_Facility me : meds)

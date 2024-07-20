@@ -105,11 +105,10 @@ public class ViewAppointment extends javax.swing.JFrame {
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         DBAccess d = new DBAccess();
-        d.removeApptFromBooked(getChosenAppointment());
-        int doc_ID = d.getDocIDFromApptID(getChosenAppointment().getAppointmentId());
-        d.addAppttoAvailable(getChosenAppointment(), doc_ID);
-        appts.removeAllItems();
-        fillAppts(getAppts());
+        Appointment a = getChosenAppointment();
+        d.updateAppointment(a);
+        int Doc_ID = d.getDocIDFromApptID(a.getAppointmentId());
+        d.addAppttoAvailable(a, Doc_ID);
     }//GEN-LAST:event_CancelActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed

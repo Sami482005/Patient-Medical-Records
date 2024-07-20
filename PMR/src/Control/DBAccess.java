@@ -93,85 +93,18 @@ public class DBAccess {
         return specialties;
     }
     
-    public ArrayList<Appointment> getApptInfoFromDoctor(String fn, String ln){
-        String q = "SELECT * FROM APPOINTMENT WHERE Appointment_ID IN (SELECT Appointment_ID FROM IS_AVAILABLE NATURAL JOIN DOCTOR d WHERE d.First_Name = '" + fn + "', AND Last_Name = '" + ln + "';";
-        Appointment appt = null;
-        ArrayList<Appointment> appts = new ArrayList<>();
-        
-        try {
-            connect();
-            ResultSet res = stmt.executeQuery(q);
-            if (res.next()){
-                appt = new Appointment();
-                appt.setAppointmentId(res.getInt("Appointment_ID"));
-                appt.setDay(res.getString("Day"));
-                appt.setStartTime(res.getString("Start_Time"));
-                appt.setEndTime(res.getString("End_Time"));
-                appts.add(appt);
-            }
-            close();
-        }catch (SQLException ex){
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return appts;
-    }
-
-    public void removeApptFromAvailability(int appointmentId) {
-        String q = "DELETE FROM IS_AVAILABLE WHERE Appointment_ID = " + appointmentId + ";";
-        
-        try{
-            connect();
-            stmt.executeUpdate(q);
-            close();
-        }catch(SQLException ex){
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-    }
-
-    public void addAppttoBookAppt(Book_Appointment a) {
-        String q = "INSERT INTO BOOK_APPOINTMENT VALUES (" + a.getPatient_SSN()
-                + ", " + a.getAppointment_ID() + ", '" + a.getReason() + "';";
-        try{
-            connect();
-            stmt.executeUpdate(q);
-            close();
-        }catch(SQLException ex){
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public ArrayList<Appointment> getApptFromSSN(int ssn) {
-        String q = "SELECT * FROM APPOINTMENT NATURAL JOIN BOOK_APPOINTMENT WHERE Patient_SSN = " + ssn + ";";        Appointment appt = null;
-        ArrayList<Appointment> appts = new ArrayList<>();
-        try{
-            connect();
-            ResultSet res = stmt.executeQuery(q);
-            while (res.next()){
-                appt = new Appointment();
-                appt.setAppointmentId(res.getInt("Appointment_ID"));
-                appt.setDay(res.getString("Day"));
-                appt.setStartTime(res.getString("Start_Time"));
-                appt.setEndTime(res.getString("End_Time"));
-                appts.add(appt);
-            }
-            close();
-        }catch(SQLException ex){
-                Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return appts;
-    }   
-
-    public void removeApptFromBooked(Appointment chosenAppointment) {
-        String q = "DELETE FROM BOOK_APPOINTMENT WHERE Appointment_ID = " + chosenAppointment.getAppointmentId() + ";";
-        try{
-            connect();
-            stmt.executeUpdate(q);
-            close();
-        }catch(SQLException ex){
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public void removeApptFromAvailability(Appointment a) {
+//        String q = "DELETE FROM IS_AVAILABLE WHERE Appointment_ID = " + a.getAppointmentId() + ";";
+//        
+//        try{
+//            connect();
+//            stmt.executeUpdate(q);
+//            close();
+//        }catch(SQLException ex){
+//            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+//
+//        }
+//    }
     
     public boolean exists(int SSN){
         String q = "SELECT * FROM PATIENTS WHERE Patient_SSN = " + SSN + ";";
@@ -338,31 +271,6 @@ public class DBAccess {
         return su;
     }
 
-    public ArrayList<Surgeries> retrieveSurgeriesbyMRN(int mrn) {
-        String q = "SELECT * FROM SURGERY NATURAL JOIN PERFORM_SURGERY NATUAL JOIN PATIENTS WHERE "
-                + "Patient_ID = " + mrn + ";";
-        ArrayList<Surgeries> sur = null;
-        try{
-            connect();
-            ResultSet res = stmt.executeQuery(q);
-            while (res.next()){
-                Surgeries s = new Surgeries();
-                s.setAim(res.getString("Aim"));
-                s.setDate(res.getString("Date"));
-                s.setDoctor_ID(res.getInt("Doctor_ID"));
-                s.setPatient_ID(res.getInt("Patient_ID"));
-                s.setSuccessful(res.getBoolean("Successful"));
-                s.setSurgery_ID(res.getInt("Surgery_ID"));
-                s.setSurgery_Name(res.getString("Surgery_Name"));
-                sur.add(s);
-            }
-            close();
-        }catch(SQLException ex){
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);                                    
-        }
-        return sur;
-    }
-
     public int getMRNFromSSN(Patient p) {
         String q = "SELECT Patient_ID FROM PATIENTS WHERE Patient_SSN = " + p.getPatient_SSN() + ";";
         int MRN = 0;
@@ -378,28 +286,7 @@ public class DBAccess {
         return MRN;
     }
 
-    public ArrayList<Lab_Test> retrieveLabbyMRN(int mrnOfPatient) {
-        String q = "SELECT * FROM LAB_TEST NATURAL JOIN MEDICAL_FILE NATURAL JOIN PATIENTS "
-                + "WHERE Patient_ID = " + mrnOfPatient;
-        ArrayList<Lab_Test> tests = new ArrayList<>();
-        try{
-            connect();
-            ResultSet res = stmt.executeQuery(q);
-            while(res.next()){
-                Lab_Test t = new Lab_Test();
-                t.setDate(res.getString("Date"));
-                t.setTestId(res.getInt("Test_ID"));
-                t.setReason(res.getString("Reason"));
-                t.setReport(res.getString("Report"));
-                t.setTestName(res.getString("Test_Name"));
-                tests.add(t);
-            }
-            close();
-        }catch(SQLException ex){
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);                                                
-        }
-        return tests;
-    }
+    
 
     public ArrayList<Radiology> retrieveRadiologybyMRN(int mrnOfPatient) {
         String q = "SELECT * FROM RADIOLOGY NATURAL JOIN MEDICAL_FILE  WHERE MEDICAL_FILE_ID = " + mrnOfPatient + ";";
@@ -477,7 +364,7 @@ public class DBAccess {
 
     public void createApptInAppointment(Appointment a) {
     String q = "INSERT INTO APPOINTMENT (Day, Start_Time, End_Time) VALUES ('" 
-//            + a.getDay() + "', '" + a.getStartTime() + "', '" + a.getEndTime() + "');";
+            + a.getDay() + "', '" + a.getStartTime() + "', '" + a.getEndTime() + "');";
     try {
         connect();
         stmt.executeUpdate(q);
@@ -665,7 +552,6 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
     return labTests;
 }
 
-
    public void updateMedicalFileWithNewPrescriptionUsingMRN(int patientMRN, String prescription) {
         String q = "UPDATE MEDICAL_FILE SET Prescription = '" + prescription + "' WHERE Medical_File_ID = " + patientMRN;
         try {
@@ -678,13 +564,11 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
    }
 
     public void addEmergencyContactToMRN(Emergency_Contacts ec, int mrnOfPatient) {
-    String q = "INSERT INTO EMERGENCY_CONTACT (First_Name, Last_Name, Phone_Number, Email, Relationship, Medical_File_ID) VALUES ('"
-            + ec.getFirstName() + "', '"
-            + ec.getLastName() + "', '"
+    String q = "INSERT INTO EMERGENCY_CONTACT VALUES ('"
             + ec.getPhoneNumber() + "', '"
-            + ec.getEmail() + "', '"
-            + ec.getRelationship() + "', "
-            + mrnOfPatient + ")";
+            + ec.getName() + "', '"
+            + ec.getRelationship() + ", "
+            + ec.getPatientSSN() + ");";
     try {
         connect();
         stmt.executeUpdate(q);
@@ -694,6 +578,104 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
     } 
 }
 
+    public ArrayList<Appointment> getApptsBySpecialty(String chosenSpecialty) {
+        String q = "SELECT * FROM APPOINTMENT a NATURAL JOIN IS_AVAILABLE NATURAL JOIN DOCTOR"
+                + "WHERE Specialty = '" + chosenSpecialty + "' AND a.Patient_SSN IS NULL;";
+        ArrayList<Appointment> appts = new ArrayList<>();
+        
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            while (res.next()){
+                Appointment a = new Appointment();
+                a.setAppointmentId(res.getInt("Appointment_ID"));
+                a.setDay(res.getString("Day"));
+                a.setEndTime(res.getString("End_Time"));
+                a.setPatient_SSN(res.getInt("Patient_SSN"));
+                a.setReason(res.getString("Reason"));
+                a.setStartTime(res.getString("Start_Time"));
+                appts.add(a);
+            }
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return appts;
+    }
 
+    public ArrayList<Appointment> getApptFromSSN(int SSN) {
+        String q = "SELECT * FROM APPOINTMENT WHERE Patient_SSN = " + SSN + ";";
+        ArrayList<Appointment> aps = null;
+        
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            while (res.next()){
+                Appointment a = new Appointment();
+                a.setAppointmentId(res.getInt("Appointment_ID"));
+                a.setDay(res.getString("Day"));
+                a.setEndTime(res.getString("End_Time"));
+                a.setPatient_SSN(SSN);
+                a.setReason(res.getString("Reason"));
+                a.setStartTime(res.getString("Start_Time"));
+                aps.add(a);
+            }
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return aps;
+    }
 
+    public void updateAppointment(Appointment a) {
+        String q = "UPDATE APPOINTMENT SET Patient_SSN = NULL WHERE Appointment_ID = " + a.getAppointmentId() + ";";
+        try {
+        connect();
+        stmt.executeUpdate(q);
+    close();
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } 
+
+    }
+
+    public ArrayList<Appointment> getBookedAppointments(int DocID) {
+        String q = "SELECT * FROM APPOINTMENT NATURAL JOIN IS_AVAILABLE WHERE"
+                + "Doctor_ID = " + DocID + " AND Patient_SSN IS NOT NULL;";
+        ArrayList<Appointment> appts = new ArrayList<>();
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            while(res.next()){
+                Appointment a = new Appointment();
+                a.setDay(res.getString("Day"));
+                a.setEndTime(res.getString("End_Time"));
+                a.setStartTime(res.getString("Start_Time"));
+                appts.add(a);
+            }
+            close();
+        }catch(SQLException ex){
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+        return appts;
+    }
+
+    public Patient getPatientFromAppt(Appointment ap) {
+        String q = "SELECT * FROM PATIENT WHERE Patient_SSN = (SELECT"
+                + "Patient_SSN FROM APPOINTMENT WHERE Appointment_ID = " + ap.getAppointmentId() + ";";
+        Patient p = null;
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if(res.next()){
+                p = new Patient();
+                p.setLast_Name(res.getString("Last_Name"));
+                p.setFirst_Name(res.getString("First_Name"));
+            }
+            close();
+        }catch(SQLException ex){
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+        return p;
+    }
 }

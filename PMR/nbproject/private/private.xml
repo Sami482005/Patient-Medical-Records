@@ -2,11 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/PMR/src/View/BookAppoinment.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/PMR/src/Control/DBAccess.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/PMR/src/View/DoctorSchedule.java</file>
-            <file>file://wsl.localhost/Ubuntu/home/sami/Patient_Medical_Records/PMR/src/View/ViewAppointment.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

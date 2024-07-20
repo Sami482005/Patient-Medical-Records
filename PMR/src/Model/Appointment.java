@@ -6,20 +6,11 @@ public class Appointment {
     private String day;
     private String startTime;
     private String endTime;
+    private int Patient_SSN;
+    private String reason;
     
     // Constructor
-    public Appointment(int appointmentId, String day, String startTime, String endTime) {
-        this.appointmentId = appointmentId;
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
-
     public Appointment(){
-        this.appointmentId = -3;
-        this.day = null;
-        this.startTime = null;
-        this.endTime = null;
     }
     // Getters and Setters
     public int getAppointmentId() {
@@ -28,6 +19,22 @@ public class Appointment {
 
     public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public int getPatient_SSN() {
+        return Patient_SSN;
+    }
+
+    public void setPatient_SSN(int Patient_SSN) {
+        this.Patient_SSN = Patient_SSN;
     }
 
     public String getDay() {

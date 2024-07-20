@@ -117,6 +117,11 @@ public class doctor_homepage extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, -1));
 
         signout.setText("Sign out");
+        signout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signoutActionPerformed(evt);
+            }
+        });
         jPanel1.add(signout, new org.netbeans.lib.awtextra.AbsoluteConstraints(692, 455, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
@@ -136,7 +141,9 @@ public class doctor_homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_searchActionPerformed
 
     private void scheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleActionPerformed
-        
+        DoctorSchedule ds = new DoctorSchedule();
+        ds.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_scheduleActionPerformed
 
     private void availabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availabilityActionPerformed
@@ -144,6 +151,12 @@ public class doctor_homepage extends javax.swing.JFrame {
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_availabilityActionPerformed
+
+    private void signoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutActionPerformed
+        main_page mp = new main_page();
+        mp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_signoutActionPerformed
 
     /**
      * @param args the command line arguments

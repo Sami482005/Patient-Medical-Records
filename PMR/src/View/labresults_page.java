@@ -160,7 +160,7 @@ public class labresults_page extends javax.swing.JFrame {
     private void addLabofPatients() {
         DBAccess d = new DBAccess();
         patientpage pg = new patientpage();
-        ArrayList<Lab_Test> labs = d.retrieveLabbyMRN(patientpage.getMRNOfPatient());
+        ArrayList<Lab_Test> labs = d.getLabTestsOfPatientsByMRN(patientpage.getMRNOfPatient());
         DefaultTableModel model = (DefaultTableModel) lab.getModel();
         model.setRowCount(0);
 
