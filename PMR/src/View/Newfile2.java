@@ -47,8 +47,10 @@ public class Newfile2 extends javax.swing.JFrame {
         HD = new javax.swing.JCheckBox();
         Cancer = new javax.swing.JCheckBox();
         Hyper = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +58,7 @@ public class Newfile2 extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 577, -1, -1));
 
         create.setText("Create");
         create.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +66,9 @@ public class Newfile2 extends javax.swing.JFrame {
                 createActionPerformed(evt);
             }
         });
+        getContentPane().add(create, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 577, -1, -1));
+
+        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Insurance Plan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
 
@@ -75,36 +81,6 @@ public class Newfile2 extends javax.swing.JFrame {
         jLabel132.setText("Start Date");
 
         jLabel133.setText("End Date");
-
-        ID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDActionPerformed(evt);
-            }
-        });
-
-        company.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                companyActionPerformed(evt);
-            }
-        });
-
-        classs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                classsActionPerformed(evt);
-            }
-        });
-
-        enddate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enddateActionPerformed(evt);
-            }
-        });
-
-        startdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startdateActionPerformed(evt);
-            }
-        });
 
         jLabel9.setText("YYYY-MM-DD");
 
@@ -192,7 +168,7 @@ public class Newfile2 extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,47 +177,19 @@ public class Newfile2 extends javax.swing.JFrame {
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel18.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+
+        getContentPane().add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 41, 920, 240));
 
         jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Disease History", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
 
         Diabetes.setText("Diabetes");
-        Diabetes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DiabetesActionPerformed(evt);
-            }
-        });
 
         Chol.setText("High Cholesterol");
         Chol.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
-        Chol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CholActionPerformed(evt);
-            }
-        });
 
         Asthma.setText("Asthma");
         Asthma.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
-        Asthma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AsthmaActionPerformed(evt);
-            }
-        });
 
         HD.setText("Heart Disease");
         HD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
@@ -251,11 +199,6 @@ public class Newfile2 extends javax.swing.JFrame {
 
         Hyper.setText("Hypertension");
         Hyper.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Diseases", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(51, 51, 255))); // NOI18N
-        Hyper.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HyperActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -295,44 +238,13 @@ public class Newfile2 extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(back)
-                        .addGap(18, 18, 18)
-                        .addComponent(create)
-                        .addGap(21, 21, 21))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(create)
-                    .addComponent(back))
-                .addGap(35, 35, 35))
-        );
+        getContentPane().add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 344, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/741800-safeimagekit.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void HyperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HyperActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_HyperActionPerformed
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         Insurance_Plan ip = addInsuranceFile();
@@ -353,38 +265,6 @@ public class Newfile2 extends javax.swing.JFrame {
         main.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
-
-    private void classsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classsActionPerformed
-        
-    }//GEN-LAST:event_classsActionPerformed
-
-    private void companyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_companyActionPerformed
-
-    private void IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IDActionPerformed
-
-    private void startdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startdateActionPerformed
-
-    private void CholActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CholActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CholActionPerformed
-
-    private void DiabetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiabetesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DiabetesActionPerformed
-
-    private void enddateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enddateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enddateActionPerformed
-
-    private void AsthmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AsthmaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AsthmaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -435,6 +315,7 @@ public class Newfile2 extends javax.swing.JFrame {
     private javax.swing.JTextField company;
     private javax.swing.JButton create;
     private javax.swing.JTextField enddate;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel129;
     private javax.swing.JLabel jLabel130;
