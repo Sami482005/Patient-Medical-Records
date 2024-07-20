@@ -585,21 +585,13 @@ public class DBAccess {
 }
 
     public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
-    String query = "INSERT INTO RADIOLOGY (Radiology_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
-    
-    try (Connection conn = connect();
-         PreparedStatement pstmt = conn.prepareStatement(query)) {
-        
-        pstmt.setString(1, r.getRadiologyName());
-        pstmt.setDate(2, new java.sql.Date(r.getDate().getTime()));
-        pstmt.setString(3, r.getReport());
-        pstmt.setString(4, r.getReason());
-        pstmt.setInt(5, patientMRN);
-        pstmt.executeUpdate();
-        
-    } catch (SQLException ex) {
-        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        String query = "INSERT INTO RADIOLOGY (Radiology_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
+
+        try{
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }
 
     public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
@@ -661,22 +653,13 @@ public class DBAccess {
 
 
     public void addNewLabTest(int patientMRN, Lab_Test l) {
-    String query = "INSERT INTO LAB_TEST (Test_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
-    
-    try (Connection conn = connect();
-         PreparedStatement pstmt = conn.prepareStatement(query)) {
-        
-        pstmt.setString(1, l.getTestName());
-        pstmt.setDate(2, new java.sql.Date(l.getDate().getTime()));
-        pstmt.setString(3, l.getReport());
-        pstmt.setString(4, l.getReason());
-        pstmt.setInt(5, patientMRN);
-        pstmt.executeUpdate();
-        
-    } catch (SQLException ex) {
-        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        String query = "INSERT INTO LAB_TEST (Test_Name, Date, Report, Reason, Medical_File_ID) VALUES (?, ?, ?, ?, ?)";
+        try{
+            
+        }catch(SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-}
 
 
     public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
