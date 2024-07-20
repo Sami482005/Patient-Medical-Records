@@ -1,5 +1,10 @@
 package View;
 
+import Control.DBAccess;
+import Model.Lab_Test;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 public class DoctorLabResults extends javax.swing.JFrame {
 
     /**
@@ -7,6 +12,7 @@ public class DoctorLabResults extends javax.swing.JFrame {
      */
     public DoctorLabResults() {
         initComponents();
+        addLabTestsofPatients(getLabTestsofPatients());
     }
 
     /**
@@ -35,11 +41,16 @@ public class DoctorLabResults extends javax.swing.JFrame {
         UPDATE = new javax.swing.JButton();
         ADD = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tests = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 204));
@@ -58,19 +69,7 @@ public class DoctorLabResults extends javax.swing.JFrame {
 
         label1.setText("ID");
 
-        textField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField5ActionPerformed(evt);
-            }
-        });
-
         label2.setText("Type");
-
-        textField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField1ActionPerformed(evt);
-            }
-        });
 
         DELETE.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         DELETE.setText("DELETE");
@@ -80,6 +79,11 @@ public class DoctorLabResults extends javax.swing.JFrame {
 
         ADD.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         ADD.setText("ADD");
+        ADD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ADDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,9 +146,9 @@ public class DoctorLabResults extends javax.swing.JFrame {
                 .addGap(60, 60, 60))
         );
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tests.setAutoCreateRowSorter(true);
+        tests.setForeground(new java.awt.Color(255, 255, 255));
+        tests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -159,7 +163,7 @@ public class DoctorLabResults extends javax.swing.JFrame {
                 "ID", "Type", "Report", "Reason"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tests);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,13 +214,18 @@ public class DoctorLabResults extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField5ActionPerformed
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        this.dispose();
+        doctor_homepage dh = new doctor_homepage();
+        dh.setVisible(true);
+    }//GEN-LAST:event_BackActionPerformed
 
-    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField1ActionPerformed
+    private void ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDActionPerformed
+        Lab_Test l = new Lab_Test();
+        DBAccess d = new DBAccess();
+        d.addNewLabTest(doctor_homepage.getPatientMRN(), l);
+        addLabTestsofPatients(getLabTestsofPatients());
+    }//GEN-LAST:event_ADDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +261,29 @@ public class DoctorLabResults extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    public void addLabTestsofPatients(ArrayList<Lab_Test> labs){
+        DefaultTableModel model = (DefaultTableModel) tests.getModel();
+        model.setRowCount(0);
+        if (!labs.isEmpty()){
+            for (Lab_Test lt : labs) {
+                Object[] rowData = {
+                    lt.getTestId(),
+                    lt.getTestName(),
+                    lt.getReport(),
+                    lt.getReason()
+                };
+                model.addRow(rowData);
+            }
+        }
+    }
+    
+    public ArrayList<Lab_Test> getLabTestsofPatients(){
+        DBAccess d = new DBAccess();
+        ArrayList<Lab_Test> s = d.getLabTestsOfPatientsByMRN(doctor_homepage.getPatientMRN());
+        return s;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADD;
@@ -263,11 +295,11 @@ public class DoctorLabResults extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label5;
     private java.awt.Label label6;
+    private javax.swing.JTable tests;
     private java.awt.TextField textField1;
     private java.awt.TextField textField3;
     private java.awt.TextField textField5;

@@ -50,6 +50,11 @@ public class DoctorRadiology extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 204));
@@ -262,6 +267,12 @@ public class DoctorRadiology extends javax.swing.JFrame {
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dateActionPerformed
+
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        this.dispose();
+        doctor_homepage dh = new doctor_homepage();
+        dh.setVisible(true);
+    }//GEN-LAST:event_BackActionPerformed
 
     /**
      * @param args the command line arguments

@@ -81,6 +81,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -210,9 +213,6 @@
           </Properties>
         </Component>
         <Component class="java.awt.TextField" name="textField5">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField5ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="java.awt.TextField" name="textField6">
         </Component>
@@ -222,9 +222,6 @@
           </Properties>
         </Component>
         <Component class="java.awt.TextField" name="textField1">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField1ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="DELETE">
           <Properties>
@@ -249,6 +246,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="ADD"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ADDActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -259,7 +259,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable2">
+        <Component class="javax.swing.JTable" name="tests">
           <Properties>
             <Property name="autoCreateRowSorter" type="boolean" value="true"/>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

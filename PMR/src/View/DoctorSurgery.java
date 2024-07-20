@@ -182,15 +182,17 @@ public class DoctorSurgery extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(DELETE)
                                 .addComponent(UPDATE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ADD, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(aim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(ADD, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(aim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 204));
@@ -290,6 +292,12 @@ public class DoctorSurgery extends javax.swing.JFrame {
     private void UPDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPDATEActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UPDATEActionPerformed
+
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        this.dispose();
+        doctor_homepage dh = new doctor_homepage();
+        dh.setVisible(true);
+    }//GEN-LAST:event_BackActionPerformed
 
     /**
      * @param args the command line arguments

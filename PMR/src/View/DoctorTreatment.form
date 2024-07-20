@@ -123,13 +123,11 @@
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="label3" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="name" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
-                      <Component id="id" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
                       <Component id="reason" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -165,42 +163,24 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="label5" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="label1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="id" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="start" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="label2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="name" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="label6" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="end" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="label2" min="-2" max="-2" attributes="0"/>
+                      <Component id="name" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="reason" alignment="0" max="32767" attributes="0"/>
-                          <Component id="label3" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="DELETE" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="UPDATE" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ADD" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="label6" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="end" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="reason" min="-2" max="-2" attributes="0"/>
+                      <Component id="label3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="DELETE" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="UPDATE" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ADD" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -220,16 +200,6 @@
         </Component>
         <Component class="java.awt.TextField" name="name">
         </Component>
-        <Component class="java.awt.Label" name="label1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ID"/>
-          </Properties>
-        </Component>
-        <Component class="java.awt.TextField" name="id">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="java.awt.TextField" name="end">
         </Component>
         <Component class="java.awt.Label" name="label2">
@@ -243,9 +213,6 @@
           </Properties>
         </Component>
         <Component class="java.awt.TextField" name="start">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="DELETE">
           <Properties>
