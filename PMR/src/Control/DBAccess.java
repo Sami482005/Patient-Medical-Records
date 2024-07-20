@@ -690,5 +690,9 @@ public class DBAccess {
     return labTests;
 }
 
+    public void updateMedicalFileWithNewPrescriptionUsingMRN(int patientMRN, String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
 }

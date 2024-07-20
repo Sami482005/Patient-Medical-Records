@@ -254,9 +254,8 @@ public class Newfile2 extends javax.swing.JFrame {
         updateMedicalHistory();
         d.updateMedicalHistory(MRNOfPatient, updateMedicalHistory());
         this.setVisible(false);
-        
-        main_page main = new main_page();
-        main.setVisible(true);
+        Emergency e = new Emergency();
+        e.setVisible(true);
     }//GEN-LAST:event_createActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed

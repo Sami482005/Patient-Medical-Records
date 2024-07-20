@@ -53,12 +53,6 @@ public class DoctorPrescrip extends javax.swing.JFrame {
         label1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         label1.setText("Prescription");
 
-        pres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                presActionPerformed(evt);
-            }
-        });
-
         UPDATE.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         UPDATE.setText("UPDATE");
         UPDATE.addActionListener(new java.awt.event.ActionListener() {
@@ -125,10 +119,6 @@ public class DoctorPrescrip extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void presActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_presActionPerformed
 
     private void UPDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPDATEActionPerformed
         DBAccess d = new DBAccess();

@@ -4,8 +4,10 @@ public class Emergency_Contacts {
     private String phoneNumber;
     private String name;
     private String relationship;
+    private int patientSSN;
 
     // Constructor
+    public Emergency_Contacts(){};
     public Emergency_Contacts(String phoneNumber, String name, String relationship) {
         this.phoneNumber = phoneNumber;
         this.name = name;
@@ -19,6 +21,14 @@ public class Emergency_Contacts {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getPatientSSN() {
+        return patientSSN;
+    }
+
+    public void setPatientSSN(int patientSSN) {
+        this.patientSSN = patientSSN;
     }
 
     public String getName() {
