@@ -4,15 +4,6 @@ import Control.DBAccess;
 import Model.Insurance_Plan;
 import static View.NewFile.MRNOfPatient;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author dalaa
- */
 public class Newfile2 extends javax.swing.JFrame {
 
     /**
@@ -346,7 +337,8 @@ public class Newfile2 extends javax.swing.JFrame {
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         Insurance_Plan ip = addInsuranceFile();
         DBAccess d = new DBAccess();
-        d.createNewInsurancePlan(ip);
+        if (ip != null)
+            d.createNewInsurancePlan(ip);
         updateMedicalHistory();
         d.updateMedicalHistory(MRNOfPatient, updateMedicalHistory());
         this.setVisible(false);
@@ -469,9 +461,9 @@ public class Newfile2 extends javax.swing.JFrame {
             NewFile nf = new NewFile();
             DBAccess d= new DBAccess();
             ip.setPatientSSN(d.getSSNFromMRN(MRNOfPatient));
+            return ip;
         }
-        return ip;        
-
+        return null;
     }
 
     public String updateMedicalHistory() {
