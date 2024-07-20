@@ -23,5 +23,3 @@ Appointment (A_ID, day, to, from,#P_SSN,reason)
 Perform_Surgery (#Doctor_ID, #Facility_ID, #P_SSN, #Surgery_ID, price, successful?, Date)
 
 hasAvailability (#Doctor_ID, #A_ID)
-
-Has_Emergency_Contacts ( #P_SSN, #EC_phoneNb)
