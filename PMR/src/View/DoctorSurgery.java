@@ -298,7 +298,7 @@ public class DoctorSurgery extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) shawn.getModel();
         model.setRowCount(0);
 
-        if (s.size()>0){
+        if (s != null && !s.isEmpty()){
             for (Surgeries surgery : s) {
                 Object[] rowData = {
                     surgery.getSurgery_ID(),
@@ -316,11 +316,8 @@ public class DoctorSurgery extends javax.swing.JFrame {
      public ArrayList<Surgeries> getSurgeriesOfPatients(){
         DBAccess d = new DBAccess();
         int ssn = d.getSSNFromMRN(doctor_homepage.getPatientMRN());
-        ArrayList<Surgeries> s = d.getSurgeriesFromSSN(ssn);
-        for (Surgeries s1 : s)
-            System.out.println(s1);
-        return s;
-    }
+        return d.getSurgeriesFromSSN(ssn);  
+     }
 
     private Surgeries getSurgeryInfo() {
         Surgeries s = new Surgeries();

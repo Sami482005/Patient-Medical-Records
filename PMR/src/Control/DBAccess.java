@@ -142,9 +142,9 @@ public class DBAccess {
         int SSNN = 0;
         try{
             connect();
-            ResultSet id = stmt.executeQuery(q);
-            if (id.next())
-                SSNN = id.getInt("Patient_SSN");
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next())
+                SSNN = res.getInt("Patient_SSN");
             close();
         }catch(SQLException ex){
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
@@ -444,8 +444,8 @@ public ArrayList<Medical_Facility> getAllMedicalFacilities() {
 }
 
 public ArrayList<Surgeries> getSurgeriesFromSSN(int SSnOfPatient) {
-String q = "SELECT * FROM SURGERY NATURAL JOIN PERFORM_SURGERY WHERE Patient_SSN = " + SSnOfPatient + ";";
-    ArrayList<Surgeries> surgeries = new ArrayList<>();
+String q = "SELECT * FROM SURGERY NATURAL JOIN PERFORM_SURGERY  p WHERE p.Patient_SSN = " + SSnOfPatient + ";";
+    ArrayList<Surgeries> surgeries =  new ArrayList<>();
     try {
         connect();
         ResultSet res = stmt.executeQuery(q);
@@ -483,14 +483,17 @@ public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
 }
 
 public void addNewSurgery(int patientMRN, Surgeries s) {
-   String q = "INSERT INTO PERFORM_SURGERY(Doctor_ID, Patient_SSN, Successful, Date) VALUES (" 
-            + s.getDoctor_ID() + ", " 
-            + getSSNFromMRN(patientMRN) + ", " 
-            + s.isSuccessful() + ", '" 
-            + s.getDate() + "');";
-   String q1 = "INSERT INTO SURGERY  VALUES (" + getMaxSurgeryIDFromPerform_Surgery() + ", '"
-            + s.getSurgery_Name() + "', '" 
-            + s.getAim() + "');";
+  String q = "INSERT INTO PERFORM_SURGERY(Doctor_ID, Patient_SSN, Successful, Date) VALUES ("
+            + s.getDoctor_ID() + ", '"
+            + getSSNFromMRN(patientMRN) + "', "
+            + s.isSuccessful() + ", '"
+            + s.getDate() + "')";
+
+    String q1 = "INSERT INTO SURGERY VALUES ("
+            + "(SELECT MAX(Surgery_ID) FROM PERFORM_SURGERY), '"
+            + s.getSurgery_Name() + "', '"
+            + s.getAim() + "')";
+
     try {
         connect();
         stmt.executeUpdate(q);

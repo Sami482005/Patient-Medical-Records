@@ -155,7 +155,7 @@ public class surgeries_page extends javax.swing.JFrame {
     DefaultTableModel model = (DefaultTableModel) surgeries.getModel();
     model.setRowCount(0);
 
-    if (!s.isEmpty()){
+    if (s != null && !s.isEmpty()){
         for (Surgeries surgery : s) {
             Object[] rowData = {
                 surgery.getSurgery_ID(),
