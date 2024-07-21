@@ -93,19 +93,7 @@ public class DBAccess {
         return specialties;
     }
     
-//    public void removeApptFromAvailability(Appointment a) {
-//        String q = "DELETE FROM IS_AVAILABLE WHERE Appointment_ID = " + a.getAppointmentId() + ";";
-//        
-//        try{
-//            connect();
-//            stmt.executeUpdate(q);
-//            close();
-//        }catch(SQLException ex){
-//            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-//
-//        }
-//    }
-    
+
     public boolean exists(int SSN){
         String q = "SELECT * FROM PATIENTS WHERE Patient_SSN = " + SSN + ";";
         try{
