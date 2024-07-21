@@ -107,12 +107,14 @@ public class ViewAppointment extends javax.swing.JFrame {
         DBAccess d = new DBAccess();
         Appointment a = getChosenAppointment();
         d.updateAppointment(a);
-        int Doc_ID = d.getDocIDFromApptID(a.getAppointmentId());
-        d.addAppttoAvailable(a, Doc_ID);
+                fillAppts(getAppts());
+
     }//GEN-LAST:event_CancelActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         this.setVisible(false);
+        patient_homepagee ph = new patient_homepagee();
+        ph.setVisible(true);
     }//GEN-LAST:event_BackActionPerformed
 
     /**
@@ -161,9 +163,11 @@ public class ViewAppointment extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void fillAppts(ArrayList<Appointment> appt) {
+        appts.removeAllItems();
+        if (appt != null){
         for (Appointment ap : appt){
             appts.addItem(ap.toString());
-        }       
+        }       }
     }
     
     public ArrayList<Appointment> getAppts(){

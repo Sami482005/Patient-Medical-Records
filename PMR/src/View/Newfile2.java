@@ -331,8 +331,9 @@ public class Newfile2 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public Insurance_Plan addInsuranceFile() {
+if (!ID.getText().toString().isEmpty()){
         Insurance_Plan ip = new Insurance_Plan();
-        if (ID.getText().toString() != ""){
+        
             ip.setCompanyProvider(company.getText().toString());
             ip.setEndDate(enddate.getText().toString());
             ip.setInsuranceClass(classs.getText().toString());

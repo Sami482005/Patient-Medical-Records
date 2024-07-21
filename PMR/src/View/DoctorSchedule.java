@@ -27,8 +27,8 @@ public class DoctorSchedule extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         appts = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -54,9 +54,6 @@ public class DoctorSchedule extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 22, 780, 470));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/741800-safeimagekit.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 970, 570));
-
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +61,9 @@ public class DoctorSchedule extends javax.swing.JFrame {
             }
         });
         getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 530, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/741800-safeimagekit.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 970, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -118,6 +118,7 @@ public class DoctorSchedule extends javax.swing.JFrame {
         if (!a.isEmpty()){
             for(Appointment ap : a){
                 Patient p = d.getPatientFromAppt(ap);
+                if (p != null){
                 Object[] rowData = {
                     p.getFirst_Name() + " " + p.getLast_Name(),
                     ap.getDay(),
@@ -125,7 +126,7 @@ public class DoctorSchedule extends javax.swing.JFrame {
                     ap.getEndTime()
                 };
                 model.addRow(rowData); 
-            }
+            }}
         }
 
     }

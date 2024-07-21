@@ -285,7 +285,7 @@ public class NewFile extends javax.swing.JFrame {
         int mrn = d.getMRNFromSSN(p);
         MRN.setText("" + mrn);
         MRNOfPatient = mrn;
-        d.createTheirMedicalFile(p);
+        d.createTheirMedicalFile(mrn,p);
     }//GEN-LAST:event_GetActionPerformed
 
     /**

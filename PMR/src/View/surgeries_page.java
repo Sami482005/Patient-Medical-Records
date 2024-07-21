@@ -106,6 +106,8 @@ public class surgeries_page extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
+        patient_homepagee ph = new patient_homepagee();
+        ph.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -144,7 +146,8 @@ public class surgeries_page extends javax.swing.JFrame {
     }
     public ArrayList<Surgeries> getSurgeriesOfPatients(){
         DBAccess d = new DBAccess();
-        ArrayList<Surgeries> s = d.getSurgeriesFromMRN(patientpage.getMRNOfPatient());
+        int SSN = d.getSSNFromMRN(patientpage.getMRNOfPatient());
+        ArrayList<Surgeries> s = d.getSurgeriesFromSSN(SSN);
         return s;
     }
     
@@ -152,7 +155,7 @@ public class surgeries_page extends javax.swing.JFrame {
     DefaultTableModel model = (DefaultTableModel) surgeries.getModel();
     model.setRowCount(0);
 
-    if (s.size()>0){
+    if (!s.isEmpty()){
         for (Surgeries surgery : s) {
             Object[] rowData = {
                 surgery.getSurgery_ID(),

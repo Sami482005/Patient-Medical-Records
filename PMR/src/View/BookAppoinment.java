@@ -31,7 +31,7 @@ public class BookAppoinment extends javax.swing.JFrame {
         Reason = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         appointment = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -109,8 +109,13 @@ public class BookAppoinment extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 44, -1, -1));
 
-        jButton3.setText("Back");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, -1, -1));
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("HealthTracker");
@@ -128,12 +133,18 @@ public class BookAppoinment extends javax.swing.JFrame {
         int SSN = d.getSSNFromMRN(patientpage.getMRNOfPatient());
         a.setPatient_SSN(SSN);
         a.setReason(Reason.getText().toString());
-//        d.removeApptFromAvailability(a);
+        d.bookAppt(a);
     }//GEN-LAST:event_confirmActionPerformed
 
     private void appointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentMousePressed
         fillAppts();
     }//GEN-LAST:event_appointmentMousePressed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        this.setVisible(false);
+        patient_homepagee ph = new patient_homepagee();
+        ph.setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
  
      /**
      * @param args the command line arguments
@@ -175,8 +186,8 @@ public class BookAppoinment extends javax.swing.JFrame {
     private javax.swing.JTextField Reason;
     private javax.swing.JComboBox<String> Specialties;
     private javax.swing.JComboBox<String> appointment;
+    private javax.swing.JButton back;
     private javax.swing.JButton confirm;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

@@ -93,6 +93,8 @@ public class treatment_page extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         this.setVisible(false);
+        patient_homepagee ph = new patient_homepagee();
+        ph.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     /**

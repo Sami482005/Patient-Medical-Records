@@ -120,6 +120,8 @@ public class labresults_page extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        patient_homepagee ph = new patient_homepagee();
        ph.setVisible(true);
+       this.setVisible(false);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

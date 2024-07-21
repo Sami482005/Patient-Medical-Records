@@ -116,6 +116,7 @@ public class DBAccess {
             close();
         }catch(SQLException ex){
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         return true;
     }
@@ -311,7 +312,7 @@ public class DBAccess {
     }
 
     public ArrayList<Treatment> retrieveTreatmentsbyMRN(int mrnOfPatient) {
-        String q = "SELECT * FROM TREATMENT NATURAL JOIN MEDICAL_FILE NATURAL JOIN PATIENTS WHERE Patient_ID = " + mrnOfPatient + ";";
+        String q = "SELECT * FROM TREATMENT NATURAL JOIN MEDICAL_FILE WHERE Medical_File_ID = " + mrnOfPatient + ";";
         ArrayList<Treatment> treat = new ArrayList<>();
         try{
             connect();
@@ -349,9 +350,9 @@ public class DBAccess {
         return s;
     }
 
-    public void createTheirMedicalFile(Patient p) {
-        String q = "INSERT INTO MEDICAL_FILE (Medical_File_ID, Date_Of_Creation, Patient_SSN) " +
-                   "VALUES (" + p.getPatient_ID() + ", '2024-07-22', '" + p.getPatient_SSN() + "');";
+    public void createTheirMedicalFile(int MRN, Patient p) {
+        String q = "INSERT INTO MEDICAL_FILE (Medical_File_ID, Patient_SSN) " +
+                   "VALUES (" + MRN + ", " + p.getPatient_SSN() + ");";
         try{
             connect();
             stmt.executeUpdate(q);
@@ -372,10 +373,22 @@ public class DBAccess {
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
     }
-        
-    
-}
+    }
 
+    public int NewApptID(){
+        String q = "SELECT MAX(Appointment_ID) AS Appointment_ID FROM APPOINTMENT";
+        int ap = 0;
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next())
+                ap = res.getInt("Appointment_ID");
+            close();
+        }catch(SQLException ex){
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+        return ap;
+    }
 public int getDocIDFromApptID(int appointmentId) {
     String q = "SELECT Doctor_ID FROM IS_AVAILABLE WHERE Appointment_ID = " + appointmentId + ";";
     int doctorId = 0;
@@ -392,9 +405,9 @@ public int getDocIDFromApptID(int appointmentId) {
     return doctorId;
 }
 
-public void addAppttoAvailable(Appointment chosen, int doc_ID) {
+public void addAppttoAvailable(int chosen, int doc_ID) {
     String q = "INSERT INTO IS_AVAILABLE (Appointment_ID, Doctor_ID) VALUES (" 
-            + chosen.getAppointmentId() + ", " + doc_ID + ");";
+            + chosen + ", " + doc_ID + ");";
     try {
         connect();
         stmt.executeUpdate(q);
@@ -441,8 +454,8 @@ public ArrayList<Medical_Facility> getAllMedicalFacilities() {
     return facilities;
 }
 
-public ArrayList<Surgeries> getSurgeriesFromMRN(int mrnOfPatient) {
-    String q = "SELECT * FROM SURGERY NATURAL JOIN PERFORM_SURGERY WHERE Patient_SSN = (SELECT Patient_SSN FROM PATIENTS WHERE Patient_ID = " + mrnOfPatient + ")";
+public ArrayList<Surgeries> getSurgeriesFromSSN(int SSnOfPatient) {
+String q = "SELECT * FROM SURGERY NATURAL JOIN PERFORM_SURGERY WHERE Patient_SSN = " + SSnOfPatient + ";";
     ArrayList<Surgeries> surgeries = new ArrayList<>();
     try {
         connect();
@@ -454,7 +467,6 @@ public ArrayList<Surgeries> getSurgeriesFromMRN(int mrnOfPatient) {
             surgery.setAim(res.getString("Aim"));
             surgery.setDate(res.getString("Date"));
             surgery.setDoctor_ID(res.getInt("Doctor_ID"));
-            surgery.setPatient_ID(mrnOfPatient);
             surgery.setSuccessful(res.getBoolean("Successful"));
             surgeries.add(surgery);
         }
@@ -466,12 +478,12 @@ public ArrayList<Surgeries> getSurgeriesFromMRN(int mrnOfPatient) {
 }
 
 public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
-    String q = "INSERT INTO RADIOLOGY VALUES (" + r.getRadiologyId() + ", '"
-            + r.getRadiologyName() + "', '" 
-            + r.getDate() + "', '" 
-            + r.getReport() + "', '" 
-            + r.getReason() + "', " 
-            + patientMRN + ");";
+    String q = "INSERT INTO RADIOLOGY (Radiology_Name, Date, Report, Reason, Medical_File_ID) VALUES ('"
+        + r.getRadiologyName() + "', '" 
+        + r.getDate() + "', '" 
+        + r.getReport() + "', '" 
+        + r.getReason() + "', " 
+        + patientMRN + ");";
     try {
         connect();
         stmt.executeUpdate(q);
@@ -482,15 +494,20 @@ public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
 }
 
 public void addNewSurgery(int patientMRN, Surgeries s) {
-    String q = "INSERT INTO PERFORM_SURGERY VALUES (" 
+   String q = "INSERT INTO PERFORM_SURGERY VALUES (" 
             + s.getDoctor_ID() + ", " 
-            + patientMRN + ", " 
-            + s.getSurgery_ID() + ", '" 
-            + s.isSuccessful() + "', '" 
+            + getSSNFromMRN(patientMRN) + ", " 
+            + s.getSurgery_ID() + ", " 
+            + s.isSuccessful() + ", '" 
             + s.getDate() + "');";
+    String q1 = "INSERT INTO SURGERY VALUES ("
+            + s.getSurgery_ID() + ", '"
+            + s.getSurgery_Name() + "', '" 
+            + s.getAim() + "');";
     try {
         connect();
         stmt.executeUpdate(q);
+        stmt.executeUpdate(q1);
         close();
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
@@ -564,11 +581,11 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
    }
 
     public void addEmergencyContactToMRN(Emergency_Contacts ec, int mrnOfPatient) {
-    String q = "INSERT INTO EMERGENCY_CONTACT VALUES ('"
+    String q = "INSERT INTO EMERGENCY_CONTACTS VALUES ('"
             + ec.getPhoneNumber() + "', '"
             + ec.getName() + "', '"
-            + ec.getRelationship() + ", "
-            + ec.getPatientSSN() + ");";
+            + ec.getRelationship() + "', "
+            + getSSNFromMRN(mrnOfPatient) + ");";
     try {
         connect();
         stmt.executeUpdate(q);
@@ -579,8 +596,11 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
 }
 
     public ArrayList<Appointment> getApptsBySpecialty(String chosenSpecialty) {
-        String q = "SELECT * FROM APPOINTMENT a NATURAL JOIN IS_AVAILABLE NATURAL JOIN DOCTOR"
-                + "WHERE Specialty = '" + chosenSpecialty + "' AND a.Patient_SSN IS NULL;";
+        String q = "SELECT * FROM APPOINTMENT a "
+               + "NATURAL JOIN IS_AVAILABLE "
+               + "NATURAL JOIN DOCTOR "
+               + "WHERE Specialty = '" + chosenSpecialty + "' "
+               + "AND a.Patient_SSN IS NULL;";
         ArrayList<Appointment> appts = new ArrayList<>();
         
         try{
@@ -611,6 +631,7 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
             connect();
             ResultSet res = stmt.executeQuery(q);
             while (res.next()){
+                aps = new ArrayList<>();
                 Appointment a = new Appointment();
                 a.setAppointmentId(res.getInt("Appointment_ID"));
                 a.setDay(res.getString("Day"));
@@ -628,7 +649,7 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
     }
 
     public void updateAppointment(Appointment a) {
-        String q = "UPDATE APPOINTMENT SET Patient_SSN = NULL WHERE Appointment_ID = " + a.getAppointmentId() + ";";
+        String q = "UPDATE APPOINTMENT SET Patient_SSN = NULL, REASON = NULL WHERE Appointment_ID = " + a.getAppointmentId() + ";";
         try {
         connect();
         stmt.executeUpdate(q);
@@ -640,8 +661,10 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
     }
 
     public ArrayList<Appointment> getBookedAppointments(int DocID) {
-        String q = "SELECT * FROM APPOINTMENT NATURAL JOIN IS_AVAILABLE WHERE"
-                + "Doctor_ID = " + DocID + " AND Patient_SSN IS NOT NULL;";
+        String q = "SELECT * " +
+                    "FROM APPOINTMENT " +
+                    "NATURAL JOIN IS_AVAILABLE " +
+                    "WHERE Doctor_ID = " + DocID + " AND Patient_SSN IS NOT NULL;";
         ArrayList<Appointment> appts = new ArrayList<>();
         try{
             connect();
@@ -651,6 +674,7 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
                 a.setDay(res.getString("Day"));
                 a.setEndTime(res.getString("End_Time"));
                 a.setStartTime(res.getString("Start_Time"));
+                a.setAppointmentId(res.getInt("Appointment_ID"));
                 appts.add(a);
             }
             close();
@@ -661,14 +685,17 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
     }
 
     public Patient getPatientFromAppt(Appointment ap) {
-        String q = "SELECT * FROM PATIENT WHERE Patient_SSN = (SELECT"
-                + "Patient_SSN FROM APPOINTMENT WHERE Appointment_ID = " + ap.getAppointmentId() + ";";
+        String q = "SELECT p.First_Name, p.Last_Name, p.Patient_ID " +
+               "FROM PATIENTS p " +
+               "NATURAL JOIN APPOINTMENT a " +
+               "WHERE a.Appointment_ID = " + ap.getAppointmentId() + ";";
         Patient p = null;
         try{
             connect();
             ResultSet res = stmt.executeQuery(q);
             if(res.next()){
                 p = new Patient();
+                p.setPatient_ID(res.getInt("Patient_ID"));
                 p.setLast_Name(res.getString("Last_Name"));
                 p.setFirst_Name(res.getString("First_Name"));
             }
@@ -677,5 +704,80 @@ public ArrayList<Lab_Test> getLabTestsOfPatientsByMRN(int patientMRN) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);            
         }
         return p;
+    }
+
+    public boolean EnsureEmail(int iDofDoctor, String email) {
+        String q = "SELECT email FROM DOCTOR WHERE Doctor_ID = " + iDofDoctor + ";";
+        String em = "";
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next()){
+                em = res.getString("email");
+            }
+            close();
+        }catch(SQLException ex){
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);                        
+        }
+        return em.equals(email);
+    }
+
+    public boolean EnsureEmailofPatient(int parseInt, String email) {
+String q = "SELECT email FROM PATIENTS WHERE Patient_ID = " + parseInt + ";";
+        String em = "";
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next()){
+                em = res.getString("email");
+            }
+            close();
+        }catch(SQLException ex){
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);                        
+        }
+        return em.equals(email);
+    }
+
+    public void bookAppt(Appointment a) {
+        String q = "UPDATE APPOINTMENT SET Patient_SSN = " + a.getPatient_SSN() + ", REASON = '" + a.getReason() + "' WHERE  Appointment_ID = " + a.getAppointmentId();
+           try {
+        connect();
+        stmt.executeUpdate(q);
+    close();
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } 
+    }
+
+    public ArrayList<Doctor> getDoctors() {
+        String query = "SELECT * FROM DOCTOR;";
+        ArrayList<Doctor> DIDList = new ArrayList<>();
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()){
+                Doctor d = new Doctor();
+                d.setDoctorId(res.getInt("Doctor_ID"));
+                d.setFirstName(res.getString("First_Name"));
+                d.setLastName(res.getString("Last_Name")); 
+                DIDList.add(d);
+            }
+            close();
+        }catch(SQLException ex){
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return DIDList;
+    }
+
+    public void addDRtoMedicalFile(int mrnOfPatient, int chosenDR) {
+        String q = "UPDATE MEDICAL_FILE SET Doctor_ID = " + chosenDR 
+               + " WHERE Medical_File_ID = " + mrnOfPatient + ";";
+        try {
+        connect();
+        stmt.executeUpdate(q);
+    close();
+    } catch (SQLException ex) {
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+    } 
     }
 }

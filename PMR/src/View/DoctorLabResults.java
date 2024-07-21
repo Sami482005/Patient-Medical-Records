@@ -37,8 +37,6 @@ public class DoctorLabResults extends javax.swing.JFrame {
         textField6 = new java.awt.TextField();
         label2 = new java.awt.Label();
         textField1 = new java.awt.TextField();
-        DELETE = new javax.swing.JButton();
-        UPDATE = new javax.swing.JButton();
         ADD = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tests = new javax.swing.JTable();
@@ -77,12 +75,6 @@ public class DoctorLabResults extends javax.swing.JFrame {
 
         label2.setText("Type");
 
-        DELETE.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        DELETE.setText("DELETE");
-
-        UPDATE.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        UPDATE.setText("UPDATE");
-
         ADD.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         ADD.setText("ADD");
         ADD.addActionListener(new java.awt.event.ActionListener() {
@@ -116,10 +108,6 @@ public class DoctorLabResults extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addComponent(ADD)
-                .addGap(18, 18, 18)
-                .addComponent(UPDATE)
-                .addGap(18, 18, 18)
-                .addComponent(DELETE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,10 +133,7 @@ public class DoctorLabResults extends javax.swing.JFrame {
                             .addComponent(label6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ADD)
-                    .addComponent(UPDATE)
-                    .addComponent(DELETE))
+                .addComponent(ADD)
                 .addGap(27, 27, 27))
         );
 
@@ -255,8 +240,6 @@ public class DoctorLabResults extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADD;
     private javax.swing.JButton Back;
-    private javax.swing.JButton DELETE;
-    private javax.swing.JButton UPDATE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

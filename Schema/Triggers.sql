@@ -4,7 +4,7 @@ CREATE TRIGGER PhoneNumber
 BEFORE INSERT ON emergency_contacts 
 FOR EACH ROW 
 BEGIN
-  IF NEW.Phone_Number NOT LIKE '+961--------' THEN
+  IF NEW.Phone_Number NOT LIKE '+961________' THEN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid phone number format';
   END IF;
 END;

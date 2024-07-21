@@ -37,8 +37,6 @@ public class DoctorTreatment extends javax.swing.JFrame {
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         start = new java.awt.TextField();
-        DELETE = new javax.swing.JButton();
-        UPDATE = new javax.swing.JButton();
         ADD = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -54,7 +52,7 @@ public class DoctorTreatment extends javax.swing.JFrame {
                 BackActionPerformed(evt);
             }
         });
-        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 771, -1, -1));
+        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 770, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 204));
@@ -77,12 +75,6 @@ public class DoctorTreatment extends javax.swing.JFrame {
         label2.setText("Name");
 
         label3.setText("Reason");
-
-        DELETE.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        DELETE.setText("DELETE");
-
-        UPDATE.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        UPDATE.setText("UPDATE");
 
         ADD.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         ADD.setText("ADD");
@@ -119,11 +111,7 @@ public class DoctorTreatment extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ADD)
-                        .addGap(23, 23, 23)
-                        .addComponent(UPDATE)
-                        .addGap(16, 16, 16)
-                        .addComponent(DELETE)
-                        .addContainerGap())))
+                        .addGap(250, 250, 250))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,10 +129,7 @@ public class DoctorTreatment extends javax.swing.JFrame {
                     .addComponent(reason, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DELETE)
-                    .addComponent(UPDATE)
-                    .addComponent(ADD))
+                .addComponent(ADD)
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -181,7 +166,7 @@ public class DoctorTreatment extends javax.swing.JFrame {
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         this.dispose();
-        doctor_homepage dh = new doctor_homepage();
+        doctortopatient dh = new doctortopatient();
         dh.setVisible(true);
     }//GEN-LAST:event_BackActionPerformed
 
@@ -229,11 +214,11 @@ public class DoctorTreatment extends javax.swing.JFrame {
     
     private void addTreatmentsofPatients() {
         DBAccess d = new DBAccess();
-        ArrayList<Treatment> tr = d.retrieveTreatmentsbyMRN(patientpage.getMRNOfPatient());
+        ArrayList<Treatment> tr = d.retrieveTreatmentsbyMRN(doctor_homepage.getPatientMRN());
         DefaultTableModel model = (DefaultTableModel) treatment.getModel();
         model.setRowCount(0);
 
-        if (tr.size()>0){
+        if (!tr.isEmpty()){
             for (Treatment t : tr) {
                 Object[] rowData = {
                     t.getTreatmentId(),
@@ -254,8 +239,6 @@ public class DoctorTreatment extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADD;
     private javax.swing.JButton Back;
-    private javax.swing.JButton DELETE;
-    private javax.swing.JButton UPDATE;
     private java.awt.TextField end;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -280,6 +263,7 @@ public class DoctorTreatment extends javax.swing.JFrame {
         t.setMedicalFileId(doctor_homepage.getPatientMRN());
         t.setReason(reason.getText().toString());
         t.setStartDate(start.getText().toString());
+        t.setTreatmentName(name.getText().toString());
         return t;
     }
     

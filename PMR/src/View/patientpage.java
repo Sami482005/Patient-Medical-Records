@@ -1,4 +1,7 @@
 package View;
+
+import Control.DBAccess;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -72,7 +75,7 @@ public class patientpage extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(jLabel3)))
-                .addContainerGap(460, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,10 +90,10 @@ public class patientpage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(EMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 32, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 32, 800, 410));
 
         next.setText("Next");
         next.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +101,7 @@ public class patientpage extends javax.swing.JFrame {
                 nextActionPerformed(evt);
             }
         });
-        getContentPane().add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(831, 425, -1, -1));
+        getContentPane().add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 460, -1, -1));
 
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -106,19 +109,25 @@ public class patientpage extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(741, 425, -1, -1));
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 460, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/741800-safeimagekit.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 460));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        patient_homepagee ph = new patient_homepagee();
+        DBAccess d = new DBAccess();
+        getMRNFromSignin();
+        if (d.EnsureEmailofPatient(Integer.parseInt(MRNS.getText().toString()), EMAIL.getText().toString())){
+            patient_homepagee ph = new patient_homepagee();
         getMRNFromSignin();
         ph.setVisible(true);
         this.setVisible(false);
+        }
+        
+        
     }//GEN-LAST:event_nextActionPerformed
 
     private void MRNSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MRNSActionPerformed
@@ -127,6 +136,8 @@ public class patientpage extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         this.setVisible(false);
+        main_page mp = new main_page();
+        mp.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     /**

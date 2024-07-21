@@ -153,7 +153,7 @@ public class UpdateInsurance extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 59, -1, -1));
+        getContentPane().add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, 260));
 
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -206,8 +206,9 @@ public class UpdateInsurance extends javax.swing.JFrame {
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         Insurance_Plan ip = addInsuranceFile();
         DBAccess d= new DBAccess();
+        if (ip != null)
         d.UpdateInsurancePlan(ip);
-        patient_homepagee hp = new patient_homepagee();
+        UpdateEmergency hp = new UpdateEmergency();
         hp.setVisible(true);
     }//GEN-LAST:event_createActionPerformed
 
@@ -247,7 +248,9 @@ public class UpdateInsurance extends javax.swing.JFrame {
     }
 
     public Insurance_Plan addInsuranceFile() {
+        if (!ID.getText().toString().isEmpty()){
         Insurance_Plan ip = new Insurance_Plan();
+        
         ip.setCompanyProvider(company.getText().toString());
         ip.setEndDate(enddate.getText().toString());
         ip.setInsuranceClass(classs.getText().toString());
@@ -256,6 +259,8 @@ public class UpdateInsurance extends javax.swing.JFrame {
         DBAccess d= new DBAccess();
         ip.setPatientSSN(d.getSSNFromMRN(patientpage.getMRNOfPatient()));
         return ip;
+        }
+        return null;
     }
     
     
@@ -280,11 +285,12 @@ public class UpdateInsurance extends javax.swing.JFrame {
     private void fillInsuranceInfo() {
         DBAccess d = new DBAccess();
         Insurance_Plan ip = d.getInsuranceInfoFromMRN(patientpage.getMRNOfPatient());
+        if (ip != null){
         ID.setText(""+ip.getInsurancePlanId());
         classs.setText(ip.getInsuranceClass().toString());
         company.setText(ip.getCompanyProvider());
         enddate.setText(ip.getEndDate());
         startdate.setText(ip.getIssuingDate());
-        
+        }
     }
 }

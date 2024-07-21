@@ -1,7 +1,9 @@
 package View;
 
 import Control.DBAccess;
+import Model.Doctor;
 import Model.Emergency_Contacts;
+import java.util.ArrayList;
 
 public class Emergency extends javax.swing.JFrame {
 
@@ -10,6 +12,7 @@ public class Emergency extends javax.swing.JFrame {
      */
     public Emergency() {
         initComponents();
+        fillDoctors();
     }
 
     /**
@@ -31,6 +34,8 @@ public class Emergency extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         next = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        doctor = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,7 +64,7 @@ public class Emergency extends javax.swing.JFrame {
                     .addComponent(phnb, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                     .addComponent(name)
                     .addComponent(rel))
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,7 +81,7 @@ public class Emergency extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(rel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 76, -1, -1));
@@ -87,7 +92,7 @@ public class Emergency extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(745, 432, -1, -1));
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 670, -1, -1));
 
         next.setText("Next");
         next.addActionListener(new java.awt.event.ActionListener() {
@@ -95,14 +100,26 @@ public class Emergency extends javax.swing.JFrame {
                 nextActionPerformed(evt);
             }
         });
-        getContentPane().add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(829, 432, -1, -1));
+        getContentPane().add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 670, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel9.setText("HealthTracker");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(727, 14, -1, -1));
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255)), "Choose Your Doctor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(0, 51, 204))); // NOI18N
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        doctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorActionPerformed(evt);
+            }
+        });
+        jPanel2.add(doctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 56, 417, 81));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, 790, 200));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/741800-safeimagekit.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 490));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -118,9 +135,15 @@ public class Emergency extends javax.swing.JFrame {
         Emergency_Contacts ec = getEmergencyInfo();
         DBAccess d = new DBAccess();
         d.addEmergencyContactToMRN(ec, patientpage.getMRNOfPatient());
+        d.addDRtoMedicalFile(patientpage.getMRNOfPatient(), getChosenDR());
         main_page main = new main_page();
         main.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_nextActionPerformed
+
+    private void doctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_doctorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,12 +182,14 @@ public class Emergency extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JComboBox<String> doctor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField name;
     private javax.swing.JButton next;
     private javax.swing.JTextField phnb;
@@ -180,5 +205,21 @@ public class Emergency extends javax.swing.JFrame {
         int SSN = d.getSSNFromMRN(patientpage.getMRNOfPatient());
         e.setPatientSSN(SSN);
         return e;
+    }
+
+    private ArrayList<Doctor> fillDoctors() {
+        DBAccess d = new DBAccess();
+        ArrayList<Doctor> drs =  d.getDoctors();
+        doctor.removeAllItems();
+        for (Doctor dr : drs)
+            doctor.addItem(dr.toString());
+        return drs;
+    }
+    public int getChosenDR(){
+        ArrayList<Doctor> drs = fillDoctors();
+        int index = doctor.getSelectedIndex();
+        Doctor d = drs.get(index);
+        int id = d.getDoctorId();
+        return id;
     }
 }

@@ -140,10 +140,10 @@ public class patient_homepagee extends javax.swing.JFrame {
                     .addComponent(radiology, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(appointments)
                     .addComponent(labresult))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 74, -1, -1));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 74, -1, 490));
 
         signout.setText("Sign out");
         signout.addActionListener(new java.awt.event.ActionListener() {
@@ -151,10 +151,10 @@ public class patient_homepagee extends javax.swing.JFrame {
                 signoutActionPerformed(evt);
             }
         });
-        jPanel2.add(signout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1196, 565, -1, -1));
+        jPanel2.add(signout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 610, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/741800-safeimagekit.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 590));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 640));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,12 +174,15 @@ public class patient_homepagee extends javax.swing.JFrame {
         // TODO add your handling code here:
         surgeries_page surgeries = new surgeries_page();
         surgeries.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_surgeryActionPerformed
 
     private void treatmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_treatmentActionPerformed
         // TODO add your handling code here:
         treatment_page treatments = new treatment_page();
         treatments.setVisible(true);
+                this.setVisible(false);
+
     }//GEN-LAST:event_treatmentActionPerformed
 
     private void labresultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labresultActionPerformed
@@ -193,18 +196,24 @@ public class patient_homepagee extends javax.swing.JFrame {
         // TODO add your handling code here:
         radio_page radiology = new radio_page();
         radiology.setVisible(true);
+                this.setVisible(false);
+
     }//GEN-LAST:event_radiologyActionPerformed
 
     private void appointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentsActionPerformed
         // TODO add your handling code here:
         appoint_page appoint = new appoint_page();
         appoint.setVisible(true);
+                this.setVisible(false);
+
     }//GEN-LAST:event_appointmentsActionPerformed
 
     private void perscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perscriptionActionPerformed
         // TODO add your handling code here:
         prescription p = new prescription();
         p.setVisible(true);
+                this.setVisible(false);
+
     }//GEN-LAST:event_perscriptionActionPerformed
 
     private void signoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutActionPerformed

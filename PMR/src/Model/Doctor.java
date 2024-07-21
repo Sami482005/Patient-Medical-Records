@@ -98,4 +98,10 @@ public class Doctor {
     public void setMedicalFacilityId(int medicalFacilityId) {
         this.medicalFacilityId = medicalFacilityId;
     }
+    
+    @Override
+    public String toString(){
+        String s = getFirstName() + " " + getLastName();
+        return s;
+    }
 }

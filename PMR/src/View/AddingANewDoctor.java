@@ -279,7 +279,7 @@ public class AddingANewDoctor extends javax.swing.JFrame {
         d.setEmail(email.getText().toString());
         d.setFirstName(fname.getText().toString());
         d.setLastName(lname.getText().toString());
-        d.setMedicalFacilityId(Integer.parseInt(med.getSelectedItem().toString()));
+        d.setMedicalFacilityId(med.getSelectedIndex());
         d.setPhoneNumber(phonenb.getText().toString());
         d.setSpecialty(spec.getText().toString());
         d.setStartingYear(Integer.parseInt(date.getText().toString()));
