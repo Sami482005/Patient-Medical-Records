@@ -8,7 +8,7 @@ InsurancePlan (IP_ID, class, company_provider, issuing_date, end_date, #P_SSN)
 
 EmergencyContacts (phone_nb, name, relationship, #Patient_SSN)
 
-Medical_File (MF_ID,#P_SSN, #Doctor-ID, prescription, desc, date)
+Medical_File (MF_ID,#P_SSN, #Doctor-ID, prescription)
 
 LabTest (LT_ID, report, name, date, reason, #MF_ID)
 

@@ -63,8 +63,6 @@ CREATE TABLE MEDICAL_FILE(
     Patient_SSN INTEGER UNIQUE,
     Doctor_ID INTEGER,
     Prescription VARCHAR(500),
-    Description VARCHAR(500),
-    Update_Date DATE, 
     PRIMARY KEY (Medical_File_ID, Patient_SSN),
     CONSTRAINT SSN FOREIGN KEY (Patient_SSN) REFERENCES PATIENTS(Patient_SSN)
     ON DELETE SET NULL,

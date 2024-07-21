@@ -10,6 +10,7 @@ public class Emergency extends javax.swing.JFrame {
     /**
      * Creates new form Emergency
      */
+    private ArrayList<Doctor> doctorsList;
     public Emergency() {
         initComponents();
         fillDoctors();
@@ -135,7 +136,10 @@ public class Emergency extends javax.swing.JFrame {
         Emergency_Contacts ec = getEmergencyInfo();
         DBAccess d = new DBAccess();
         d.addEmergencyContactToMRN(ec, patientpage.getMRNOfPatient());
-        d.addDRtoMedicalFile(patientpage.getMRNOfPatient(), getChosenDR());
+        int chosenDoctorId = getChosenDR();
+        if (chosenDoctorId != -1) {
+            d.addDRtoMedicalFile(patientpage.getMRNOfPatient(), chosenDoctorId);
+        }
         main_page main = new main_page();
         main.setVisible(true);
         this.dispose();
@@ -207,19 +211,19 @@ public class Emergency extends javax.swing.JFrame {
         return e;
     }
 
-    private ArrayList<Doctor> fillDoctors() {
+    private void fillDoctors() {
         DBAccess d = new DBAccess();
-        ArrayList<Doctor> drs =  d.getDoctors();
+        doctorsList =  d.getDoctors();
         doctor.removeAllItems();
-        for (Doctor dr : drs)
+        for (Doctor dr : doctorsList)
             doctor.addItem(dr.toString());
-        return drs;
+       
     }
     public int getChosenDR(){
-        ArrayList<Doctor> drs = fillDoctors();
         int index = doctor.getSelectedIndex();
-        Doctor d = drs.get(index);
-        int id = d.getDoctorId();
-        return id;
+        Doctor d = doctorsList.get(index);
+        d.getDoctorId();
+        System.out.println(d.toString());
+        return d.getDoctorId();
     }
 }
