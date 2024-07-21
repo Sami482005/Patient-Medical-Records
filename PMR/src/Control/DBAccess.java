@@ -302,6 +302,7 @@ public class DBAccess {
                 r.setRadiologyName(res.getString("Radiology_Name"));
                 r.setReport(res.getString("Report"));
                 r.setReason(res.getString("Reason"));
+                r.setDate(res.getString("Date"));
                 rads.add(r);
             }
             close();
@@ -494,14 +495,12 @@ public void createNewRadiologyOnMedicalFile(int patientMRN, Radiology r) {
 }
 
 public void addNewSurgery(int patientMRN, Surgeries s) {
-   String q = "INSERT INTO PERFORM_SURGERY VALUES (" 
+   String q = "INSERT INTO PERFORM_SURGERY(Doctor_ID, Patient_SSN, Successful, Date) VALUES (" 
             + s.getDoctor_ID() + ", " 
             + getSSNFromMRN(patientMRN) + ", " 
-            + s.getSurgery_ID() + ", " 
             + s.isSuccessful() + ", '" 
             + s.getDate() + "');";
-    String q1 = "INSERT INTO SURGERY VALUES ("
-            + s.getSurgery_ID() + ", '"
+   String q1 = "INSERT INTO SURGERY  VALUES (" + getMaxSurgeryIDFromPerform_Surgery() + ", '"
             + s.getSurgery_Name() + "', '" 
             + s.getAim() + "');";
     try {
@@ -511,7 +510,7 @@ public void addNewSurgery(int patientMRN, Surgeries s) {
         close();
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-    } 
+    }
 }
 
 public void addNewTreatment(int patientMRN, Treatment t) {
@@ -531,7 +530,7 @@ public void addNewTreatment(int patientMRN, Treatment t) {
 }
 
 public void addNewLabTest(int patientMRN, Lab_Test l) {
-    String q = "INSERT INTO LAB_TEST VALUES (" + l.getTestId() + ", '"
+    String q = "INSERT INTO LAB_TEST (Test_Name, Date, Report, Reason, Medical_File_ID) VALUES ('"
             + l.getTestName() + "', '" 
             + l.getDate() + "', '" 
             + l.getReport() + "', '" 
@@ -779,5 +778,20 @@ String q = "SELECT email FROM PATIENTS WHERE Patient_ID = " + parseInt + ";";
     } catch (SQLException ex) {
         Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
     } 
+    }
+
+    private int getMaxSurgeryIDFromPerform_Surgery() {
+        String q = "SELECT MAX(Surgery_ID) AS ID FROM PERFORM_SURGERY;";
+        int id = -1;
+        try{
+            connect();
+            ResultSet res = stmt.executeQuery(q);
+            if (res.next())
+                id = res.getInt("ID");
+            close();
+        }catch(SQLException ex){
+        Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+        return id;
     }
 }

@@ -39,6 +39,11 @@ public class DoctorPrescrip extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
         getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(718, 738, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
@@ -130,6 +135,12 @@ public class DoctorPrescrip extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_UPDATEActionPerformed
+
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        doctortopatient dh = new doctortopatient();
+        dh.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BackActionPerformed
 
     /**
      * @param args the command line arguments

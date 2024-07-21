@@ -110,7 +110,7 @@ CREATE TABLE SURGERY(
 CREATE TABLE PERFORM_SURGERY(
     Doctor_ID INTEGER,
     Patient_SSN INTEGER,
-    Surgery_ID INTEGER,
+    Surgery_ID INTEGER AUTO_INCREMENT,
     Successful BOOLEAN,
     Date DATE,
     PRIMARY KEY (Doctor_ID, Patient_SSN, Surgery_ID),
