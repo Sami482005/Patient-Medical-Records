@@ -134,6 +134,7 @@ public class BookAppoinment extends javax.swing.JFrame {
         a.setPatient_SSN(SSN);
         a.setReason(Reason.getText().toString());
         d.bookAppt(a);
+        fillAppts();
     }//GEN-LAST:event_confirmActionPerformed
 
     private void appointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentMousePressed

@@ -229,7 +229,7 @@ public class DoctorSurgery extends javax.swing.JFrame {
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         this.dispose();
-        doctor_homepage dh = new doctor_homepage();
+        doctortopatient dh = new doctortopatient();
         dh.setVisible(true);
     }//GEN-LAST:event_BackActionPerformed
 

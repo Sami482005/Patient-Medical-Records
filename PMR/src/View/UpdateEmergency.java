@@ -117,7 +117,10 @@ public class UpdateEmergency extends javax.swing.JFrame {
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         Emergency_Contacts ec = getEmergencyInfo();
         DBAccess d = new DBAccess();
+        if (ec != null){
         d.addEmergencyContactToMRN(ec, patientpage.getMRNOfPatient());
+        
+        }
         main_page main = new main_page();
         main.setVisible(true);
     }//GEN-LAST:event_nextActionPerformed
@@ -173,6 +176,7 @@ public class UpdateEmergency extends javax.swing.JFrame {
 
     private Emergency_Contacts getEmergencyInfo() {
         Emergency_Contacts e = new Emergency_Contacts();
+        if (!name.getText().toString().isEmpty()){
         e.setName(name.getText().toString());
         e.setPhoneNumber(phnb.getText().toString());
         e.setRelationship(rel.getText().toString());
@@ -180,6 +184,7 @@ public class UpdateEmergency extends javax.swing.JFrame {
         int SSN = d.getSSNFromMRN(patientpage.getMRNOfPatient());
         e.setPatientSSN(SSN);
         return e;
-
+        }
+return null;
     }
 }
