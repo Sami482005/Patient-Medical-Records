@@ -21,7 +21,7 @@ Includes all the frames created in Java that will represent the interface that t
 ###### If they are a patient:
 They can book an appointment or they can simply look at the prescription, lab radiology and surgery reports.
 ###### If they are a doctor:
-They can see their schedule, they can adjust it (saying I am free for this hour or I am not free this hour)
+They can see their schedule, they can adjust it (saying I am free for this hour or I am not free this hour) and they can add surgeries, lab tests, radiologies... 
 
 
 ### Control
@@ -44,8 +44,3 @@ Includes all the internal information representation.
 get*Type*(): to extract the info into the correct type from a **ResultSet**
 
 **this.dispose()** #makes a tab close without killing the program
-
-
-# Doctor Page:
-The doctor logs in
-A combo bo
