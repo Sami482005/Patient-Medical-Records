@@ -1,6 +1,6 @@
 # Introduction
 This repository includes all the codes needed to create a patient medical record in a hospital.
-This repository was created for the purpose of collecting code from the four contributors to this project completed at Lebanese American University for Database Management Systems (BIF/CSC375).
+This repository was created for the purpose of collecting code from the four contributors to this project completed at Lebanese American University for Database Management Systems (BIF375/CSC375).
 
 # Dependencies
 MySQl server installed from Wamp Server.
@@ -11,7 +11,7 @@ Add [JDBC](/home/sami/Patient_Medical_Records/mysql-connector-j-9.0.0.jar) to th
 # Explaining the Repository
 ### Schema
 Includes the [Entity-Relationship Diagram](/Schema/Picture1.png).
-Includes the translated [Relational Model](/Schema/Relational%20Model.docx), although it is missing the Primary Keys. (Foreign keys represented by #)
+Includes the translated [Relational Model](/Schema/RelationalModel.docx)
 Includes [The Queries Purposes](/Schema/Queries.docx): The queries expected to work in the project 
 ###### <span style="color:red">Note: Some of the queries are available but not in that file</span>
 
