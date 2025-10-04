@@ -159,32 +159,12 @@ One-click / cross-platform notes
 - Appointment booking & scheduling: patients can view available doctor times and book appointments; doctors can mark availability.
 - Doctor workflows: view schedule, add lab/radiology/surgery/treatment records, prescriptions.
 
-## Important implementation notes and known issues
-
-- SQL construction: `DBAccess.java` uses java.sql.Statement with string concatenation to build SQL queries. This is vulnerable to SQL injection and data formatting bugs. Recommended improvement: replace these with PreparedStatement and parameterized queries.
-- Database name: the existing connection string uses a database name with spaces (`patient medical records`). Many tools and connectors don't handle spaces well. Rename the database to `patient_medical_records` (or another single-token name) and update the connection string.
-- Error handling: DBAccess logs exceptions but often swallows them; consider returning/propagating errors to the caller and adding user-friendly error dialogs in the UI.
-- Resource handling: ensure ResultSet/Statement/Connection are closed in finally blocks or use try-with-resources to avoid leaks.
-
-## Developer checklist / next improvements
-
-- Migrate all SQL to PreparedStatement to prevent SQL injection.
-- Add a configuration file (properties / .env) for DB connection instead of hard-coded strings in `DBAccess.java`.
-- Add unit tests for the DB layer (mock the DB or use a test database).
-- Improve logging and show helpful UI messages for DB errors.
-- Provide an installer or an executable JAR with a bundled or documented setup.
-
 ## Where to look in the code
 
 - Database access: `src/Control/DBAccess.java` (connection string, SQL queries used by the UI).
 - Models: `src/Model/` (entity classes and getters/setters used across the app).
 - Views: `src/View/` (NetBeans forms and frame implementations used to interact with the user).
 - SQL / schema: `Schema/SQL_Queries.sql`, `Schema/Triggers.sql` (create tables, relations, triggers and seed data if present).
-
-## How to contribute
-
-- Fork the repository, create a feature branch, and open a pull request describing your change.
-- For DB-related changes, include migration instructions and update this README with any special steps.
 
 ## License & authors
 
