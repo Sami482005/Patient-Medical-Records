@@ -22,8 +22,32 @@ public class DBAccess {
     private Statement stmt;
     
     private void connect() throws SQLException{
-        con= DriverManager.getConnection("jdbc:mysql://localhost/patient medical records", "root", "");
-        stmt=con.createStatement();
+        // Load DB configuration from config.properties (repo root) or environment variables.
+        String url = null;
+        String user = null;
+        String pass = null;
+        java.util.Properties props = new java.util.Properties();
+        java.io.File cfg = new java.io.File("config.properties");
+        if (cfg.exists()) {
+            try (java.io.FileInputStream fis = new java.io.FileInputStream(cfg)) {
+                props.load(fis);
+            } catch (java.io.IOException ex) {
+                Logger.getLogger(DBAccess.class.getName()).log(Level.WARNING, "Failed to read config.properties", ex);
+            }
+        }
+
+        // Priority: config.properties -> environment variables -> hardcoded defaults
+        String host = props.getProperty("db.host", System.getenv().getOrDefault("DB_HOST", "localhost"));
+        String port = props.getProperty("db.port", System.getenv().getOrDefault("DB_PORT", "3306"));
+        String dbname = props.getProperty("db.name", System.getenv().getOrDefault("DB_NAME", "patient_medical_records"));
+        user = props.getProperty("db.user", System.getenv().getOrDefault("DB_USER", "root"));
+        pass = props.getProperty("db.pass", System.getenv().getOrDefault("DB_PASS", ""));
+
+        // Build JDBC URL
+        url = "jdbc:mysql://" + host + ":" + port + "/" + dbname + "?serverTimezone=UTC";
+
+        con = DriverManager.getConnection(url, user, pass);
+        stmt = con.createStatement();
     }
     
     private void close() throws SQLException{
